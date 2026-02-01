@@ -5,7 +5,7 @@
 
 body {
   min-height: 100vh;
-  background-color: #a99ed3;
+  background-color: #5064ff;
   --fluid: clamp(1rem, 1rem + 3vw, 2rem);
   font-size: round(down, var(--fluid), 2px);
   font-family: "Aboreto", system-ui;
@@ -56,7 +56,7 @@ body {
 .mouth {
   width: 3rem;
   height: 2rem;
-  border-bottom: 1rem solid #c65555;
+  border-bottom: 1rem solid #f97c7c;
   border-radius: 50%;
   rotate: -15deg;
 }
