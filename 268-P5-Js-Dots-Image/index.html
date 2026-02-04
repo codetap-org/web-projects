@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <title>p5.js + Dots Image</title>
-    
+<head>
+  <meta charset="UTF-8">
+  <title>p5.js + Dots Image | CodeTap</title>
+  <link rel="apple-touch-icon" href="https://codetap.org/assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://codetap.org/assets/img/favicon.png">
+</head>
 
-  </head>
-    
-  <body>
+<body>
   <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <title>Force Field Magnifier</title>
@@ -26,12 +27,14 @@
         align-items: center;
         height: 100vh;
         overflow: hidden;
-        user-select:none;
+        user-select: none;
       }
+
       canvas {
         display: block;
         border: 1px solid #000;
       }
+
       #loading {
         position: absolute;
         font-size: 10px;
@@ -39,6 +42,7 @@
       }
     </style>
   </head>
+
   <body>
     <div id="loading">Loading...</div>
     <script>
@@ -212,7 +216,7 @@
         let mx = magnifierX;
         let my = magnifierY;
 
-        applyForceField(mx, my); 
+        applyForceField(mx, my);
 
         img.loadPixels();
         noFill();
@@ -228,8 +232,8 @@
           let brightness = img.pixels[index];
 
           let condition = params.invertWireframe
-          ? brightness < params.threshold
-          : brightness > params.threshold;
+            ? brightness < params.threshold
+            : brightness > params.threshold;
 
           if (condition) {
             let shadeIndex = int(map(brightness, 0, 255, 0, palette.length - 1));
@@ -255,8 +259,9 @@
       }
     </script>
   </body>
-</html>
-    
-  </body>
-  
+
+  </html>
+
+</body>
+
 </html>
