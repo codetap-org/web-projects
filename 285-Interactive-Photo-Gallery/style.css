@@ -1,0 +1,39 @@
+body { margin: 0; overflow: hidden; background-color: #000; }
+        canvas { display: block; }
+
+        /* Lightbox styles */
+        #lightbox {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #lightbox.active {
+            display: flex; /* Use flex to center content */
+            opacity: 1;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;  
+        }
+
+        #close-btn {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            font-family: sans-serif;
+            user-select: none;
+        }
