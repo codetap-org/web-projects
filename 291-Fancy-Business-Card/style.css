@@ -1,0 +1,180 @@
+:root {
+  --bg: #1a0f0c;
+  --card-bg: rgba(255, 255, 255, 0.04);
+  --text: rgba(255, 245, 230, 0.95);
+  --muted: rgba(255, 230, 210, 0.7);
+  --accent-gradient: linear-gradient(135deg, #ff7b6b, #ffb86b);
+}
+
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* BACKGROUND COLOR BLOBS */
+.bg {
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(circle at 20% 30%, #ff7b6b, transparent 35%),
+    radial-gradient(circle at 75% 65%, #ffb86b, transparent 40%);
+  filter: blur(140px);
+  opacity: 0.25;
+}
+
+/* CARD */
+.card {
+  position: relative;
+  width: 440px;
+  padding: 48px 42px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+/* NOISE */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* NAME */
+.name {
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -1px;
+}
+.name span {
+  display: block;
+  background: linear-gradient(120deg, #fff2cc, #ffd699, #fff2cc);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ROLE */
+.role {
+  margin-top: 12px;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* DIVIDER + DOT */
+.divider {
+  margin: 32px 0 18px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #fff, transparent);
+  opacity: 0.2;
+}
+.accent-dot {
+  width: 6px;
+  height: 6px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  opacity: 0.7;
+}
+
+/* INFO */
+.info {
+  display: grid;
+  gap: 16px;
+}
+.item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 14px;
+  color: var(--muted);
+  cursor: default;
+}
+.icon {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: url(#accent-gradient);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.65;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+}
+.item span {
+  position: relative;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+.item span::before {
+  content: "—";
+  position: absolute;
+  left: -20px;
+  opacity: 0;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: opacity 0.3s ease;
+}
+.item:hover .icon {
+  opacity: 0;
+}
+.item:hover span::before {
+  opacity: 1;
+}
+.item:hover span {
+  color: #fff;
+}
+
+/* WATERMARK */
+.watermark {
+  position: absolute;
+  bottom: -30px;
+  right: -20px;
+  font-size: 130px;
+  font-weight: 900;
+  letter-spacing: -8px;
+  color: rgba(255, 255, 255, 0.035);
+  transform: rotate(-8deg);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* COLOR SPLASH RIGHT TOP */
+.color-splash {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #ff7b6b,
+    #ffb86b 60%,
+    transparent 70%
+  );
+  opacity: 0.35;
+  filter: blur(60px);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}

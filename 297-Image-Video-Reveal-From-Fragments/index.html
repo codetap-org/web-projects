@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Image/Video Reveal from Fragments – Three.js</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div id="container"></div>
+<video id="sourceVideo" loop muted playsinline crossOrigin="anonymous"></video>
+<input type="file" id="fileInput" accept="image/png, image/jpeg, image/jpg, video/mp4, video/webm, video/quicktime">
+
+<script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+            "gsap": "https://unpkg.com/gsap@3.12.5/index.js",
+            "lil-gui": "https://unpkg.com/lil-gui@0.19.1/dist/lil-gui.esm.js",
+            "d3-delaunay": "https://cdn.jsdelivr.net/npm/d3-delaunay@6/+esm"
+        }
+    }
+</script>
+    <script type="module" src="./script.js"></script>
+
+  </body>
+  
+</html>

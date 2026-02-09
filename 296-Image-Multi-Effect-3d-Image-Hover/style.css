@@ -1,0 +1,396 @@
+@font-face {
+  font-family: "PP Supply Mono";
+  src: url("https://assets.codepen.io/7558/PPSupplyMono-Variable.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  /* 3D deck tuning */
+  --depth-step: 36px;
+  --scale-3d: 0.07;
+  --tilt-max: 45;
+  --pan-max: 88px;
+  --stack-scale: 1;
+  --opacity-falloff: 0.1;
+  --idle-rotY: 0;
+  --idle-rotX: 0;
+  --move-amplify: 0.54;
+  --tilt-boost: 1.25;
+  --pan-boost: 1.25;
+  --depth-boost: 1.15;
+  --scale-boost: 0.96;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: #fff;
+  font-family: system-ui, -apple-system, sans-serif;
+  gap: 30px;
+  position: relative;
+  background-image: url("data:image/svg+xml,%3csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3cpattern id='dot' patternUnits='userSpaceOnUse' width='20' height='20'%3e%3ccircle cx='10' cy='10' r='1' fill='%23222'/%3e%3c/pattern%3e%3c/defs%3e%3crect width='100%25' height='100%25' fill='url(%23dot)'/%3e%3c/svg%3e");
+}
+
+.image-container {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.image-container.is-3d {
+  perspective: 1600px;
+  perspective-origin: 50% 50%;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.image-stack {
+  position: absolute;
+  inset: 0;
+  transform-style: flat;
+  will-change: transform;
+}
+
+.image-container.is-3d .image-stack {
+  transform-style: preserve-3d;
+}
+
+.image-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url("https://assets.codepen.io/7558/portrait-fashion-009.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.image-layer:not(:first-child) {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.image-layer.rectangle {
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.image-layer.circle {
+  -webkit-clip-path: circle(45% at 50% 50%);
+          clip-path: circle(45% at 50% 50%);
+}
+
+.image-layer.diamond {
+  -webkit-clip-path: polygon(50% 0%, 14.1% 50%, 50% 100%, 85.9% 50%);
+          clip-path: polygon(50% 0%, 14.1% 50%, 50% 100%, 85.9% 50%);
+}
+
+.image-layer.hexagon {
+  -webkit-clip-path: polygon(
+    25% 6.7%,
+    75% 6.7%,
+    100% 50%,
+    75% 93.3%,
+    25% 93.3%,
+    0% 50%
+  );
+          clip-path: polygon(
+    25% 6.7%,
+    75% 6.7%,
+    100% 50%,
+    75% 93.3%,
+    25% 93.3%,
+    0% 50%
+  );
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 600px;
+  position: relative;
+}
+
+.shape-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.shape-btn {
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.shape-btn:hover {
+  opacity: 0.8;
+}
+
+.shape-btn.active {
+  opacity: 1;
+}
+
+.shape-btn:not(.active) {
+  opacity: 0.5;
+}
+
+.shape-btn[data-shape="circle"] {
+  border-radius: 50%;
+}
+
+.shape-btn[data-shape="diamond"] {
+  transform: rotate(45deg);
+  width: 14px;
+  height: 14px;
+}
+
+.shape-btn[data-shape="hexagon"] {
+  -webkit-clip-path: polygon(
+    25% 6.7%,
+    75% 6.7%,
+    100% 50%,
+    75% 93.3%,
+    25% 93.3%,
+    0% 50%
+  );
+          clip-path: polygon(
+    25% 6.7%,
+    75% 6.7%,
+    100% 50%,
+    75% 93.3%,
+    25% 93.3%,
+    0% 50%
+  );
+  width: 19px;
+  height: 19px;
+}
+
+.toggle-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  position: relative;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  font-family: "PP Supply Mono", monospace;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease;
+}
+
+.toggle-btn:hover {
+  color: #fff;
+}
+
+.toggle-btn.active {
+  color: #4ade80;
+}
+
+.toggle-btn:disabled {
+  color: #555;
+  cursor: not-allowed;
+}
+
+.credit {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "PP Supply Mono", monospace;
+  font-size: 0.75em;
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: opacity 0.2s ease;
+}
+
+.credit:hover {
+  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .image-container {
+    width: 400px;
+    height: 400px;
+  }
+
+  .controls {
+    width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .controls {
+    width: 300px;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .toggle-controls {
+    align-items: center;
+  }
+
+  .credit {
+    bottom: 10px;
+    font-size: 0.65em;
+  }
+}
+
+.settings-3d {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.8s ease;
+  z-index: 1000;
+}
+
+.settings-3d.active {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.settings-3d .tuner-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  justify-content: flex-end;
+}
+
+.settings-3d.active .tuner-row:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+
+.settings-3d.active .tuner-row:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.15s;
+}
+
+.settings-3d.active .tuner-row:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+.settings-3d.active .tuner-row:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.25s;
+}
+
+.settings-3d:not(.active) .tuner-row:nth-child(1) {
+  transition-delay: 0.25s;
+}
+
+.settings-3d:not(.active) .tuner-row:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.settings-3d:not(.active) .tuner-row:nth-child(3) {
+  transition-delay: 0.15s;
+}
+
+.settings-3d:not(.active) .tuner-row:nth-child(4) {
+  transition-delay: 0.1s;
+}
+
+.tuner-label {
+  width: 50px;
+  font-family: "PP Supply Mono", monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9ca3af;
+  text-align: right;
+}
+
+.tuner-slider {
+  width: 80px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.tuner-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 8px;
+  height: 8px;
+  background: #4ade80;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.tuner-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+}
+
+.tuner-slider::-moz-range-thumb {
+  width: 8px;
+  height: 8px;
+  background: #4ade80;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.tuner-value {
+  width: 35px;
+  font-family: "PP Supply Mono", monospace;
+  font-size: 0.6rem;
+  color: #4ade80;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}

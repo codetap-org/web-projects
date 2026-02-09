@@ -1,0 +1,538 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+
+
+@property --channel {
+    syntax: "*";
+    inherits: false;
+    initial-value: calc((((r * .299) + (g * .587) + (b * .114)) - 128) * -1000);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box!important;
+}
+
+html, body {
+    font-family: Avenir, sans-serif;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0px;
+}
+
+body {
+
+    --selectColor: attr(data-chosen type(<color>));
+    --selectColorText: attr(data-chosen);
+    --bgSelectColor: color-mix(in srgb, var(--selectColor), transparent 40%);
+    --contrast-SelectColor: color(from var(--selectColor) xyz clamp(0, (.36 / y - 1) * infinity, 1) clamp(0, (.36 / y - 1) * infinity, 1) clamp(0, (.36 / y - 1) * infinity, 1) / 1 );
+
+    --bgSelectColor2c: color-mix(in srgb, var(--selectColor), var(--bgSelectColor) 30%);
+    --bgSelectColor2b: color-mix(in srgb, var(--bgSelectColor2c), var(--contrast-SelectColor) 30%);
+    --bgSelectColor2: color-mix(in srgb, var(--bgSelectColor2b), #000000 40%);
+
+    --contrast-SelectShadow: color-mix(in srgb, var(--contrast-SelectColor), transparent 50%);
+    --contrast-SelectShadow2: color-mix(in srgb, var(--contrast-SelectColor), transparent 85%);
+
+    background: var(--selectColor);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    color: #FFFFFF;
+    overflow: hidden;
+
+
+}
+
+.bgWrapper {
+
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+
+    &#bgWrapper2 {
+        z-index: 39;
+        mask: url(#outerMask);
+        backdrop-filter: url(#glass);
+    }
+    &#bgWrapper {
+        z-index: 40;
+        filter:
+        drop-shadow( 0px 0px 1px var(--contrast-SelectColor) )
+        drop-shadow( 0px 0px 6px var(--contrast-SelectShadow) );
+        clip-path: url(#outerClip);
+
+        #bg {
+            z-index: 40;
+            background-color: var(--bgSelectColor);
+            mask: url(#outerMask);
+        }
+
+    }
+    &#bgWrapper4 {
+        z-index: 49;
+        background-color: var(--selectColor);
+        mask: url(#innerMask);
+    }
+    &#bgWrapper3 {
+        z-index: 50;
+        filter:
+        drop-shadow( 0px 0px 1px var(--contrast-SelectShadow) )
+        drop-shadow( 0px 0px 6px var(--contrast-SelectShadow2) );
+
+        #bg3 {
+            z-index: 5000;
+            background-color: var(--selectColor);
+            mask: url(#innerMask);
+            opacity: 1;
+        }
+
+    }
+    &#bgWrapper6 {
+        z-index: 59;
+        mask: url(#ringrMask);
+    }
+    &#bgWrapper5 {
+        z-index: 60;
+        filter:
+        drop-shadow( 0px 0px 1px var(--contrast-SelectShadow) )
+        drop-shadow( 0px 0px 6px var(--contrast-SelectShadow2) );
+        clip-path: url(#oringClip);
+
+        #bg5 {
+            z-index: 60;
+            background-color: var(--selectColor);
+            mask: url(#ringMask);
+        }
+
+    }
+
+}
+
+#gsapBody {
+
+    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: var(--contrast-SelectColor);
+    fill: var(--contrast-SelectColor);
+
+
+    select#customSelect {
+        
+        z-index: 100;
+
+        option {
+
+            --color: attr(value type(<color>));
+            --colorText: attr(value);
+            --contrast-color: color(from var(--color) xyz clamp(0, (.36 / y - 1) * infinity, 1) clamp(0, (.36 / y - 1) * infinity, 1) clamp(0, (.36 / y - 1) * infinity, 1) / 1 );
+
+            --bgColor: color-mix(in srgb, var(--color), transparent 30%);
+            --bgColor2c: color-mix(in srgb, var(--color), var(--bgSelectColor) 30%);
+            --bgColor2b: color-mix(in srgb, var(--bgColor2c), var(--contrast-color) 70%);
+            --bgColor2: color-mix(in srgb, var(--bgColor2b), transparent 80%);
+
+            --contrast-shadow: color-mix(in srgb, var(--contrast-color), transparent 80%);
+            --contrast-shadow2: color-mix(in srgb, var(--contrast-color), transparent 60%);
+
+         }
+
+    }
+
+
+
+    @supports (appearance: base-select) {
+      
+        select#customSelect {
+
+            --rotation: 2600deg;
+            --width: 36px;
+            --verticalMax: 90px;
+
+            appearance: none;
+            color: var(--contrast-SelectColor);
+            background-color: none!important;
+            background: none!important;
+            border: none;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &, &::picker(select) { appearance: base-select; }
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10000;
+            width: 300px;
+            height: 300px;
+
+            &::picker-icon { display: none; }
+
+            &:before{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                z-index: 20000;
+                width: 165px;
+                height: 165px;
+                border: solid 4px var(--contrast-SelectColor);
+                content: "";
+                border-radius: 50%;
+                opacity: 0.35;
+            }
+
+            &:after {
+
+                display: flex;
+                position: absolute;
+                display: block;
+                z-index: 20002;
+                width: 140px;
+                padding: 5px;
+                padding-right: 0px;
+                font-size: 14px;
+                font-weight: 600;
+                content: var(--selectColorText);
+                overflow-wrap: break-word;
+                hyphens: auto;
+                border-bottom: solid 3px color-mix(in srgb, var(--contrast-SelectColor), transparent 65%);
+
+            }
+
+            #optionsWrapper {
+
+                --wrapperOpacity: 0;
+
+                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                overflow: visible;
+                word-break: break-all;
+                color: var(--contrast-SelectColor);
+
+                #optionsCap {
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    z-index: 20001;
+                    width: 300px;
+                    height: 300px;
+                    background-color: var(--selectColor);
+                    mask: url(#innerMask);
+                    clip-path: url(#innerClip2);
+                    overflow: visible;
+
+                    &:before{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: absolute;
+                        z-index: 20000;
+                        width: 165px;
+                        height: 165px;
+                        border: solid 4px var(--contrast-SelectColor);
+                        content: "";
+                        border-radius: 50%;
+                        opacity: 0.35;
+                    }
+
+                    &:after {
+
+                        display: flex;
+                        position: absolute;
+                        display: block;
+                        z-index: 20003;
+                        display: block;
+                        width: 140px;
+                        padding: 5px;
+                        padding-right: 0px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        content: var(--selectColorText);
+                        overflow-wrap: break-word;
+                        hyphens: auto;
+                        border-bottom: solid 3px color-mix(in srgb, var(--contrast-SelectColor), transparent 65%);
+
+                    }
+                }
+
+            }
+
+            option {
+
+                --siblingRatio: calc( sibling-index() / sibling-count() );
+                --vertical: 0px;
+                --verticalStart: 0px;
+                --height: 160px;
+                --opacity: 1;
+
+                display: block;
+                position: absolute;
+                
+                background-color: var(--bgColor);
+                border: solid 1px var(--contrast-shadow);
+                &:hover {
+                    background: linear-gradient(0deg, #FFF3 25%, var(--color) calc( 100% - 30px ));
+                }
+
+                transform:
+                rotate( calc( var(--rotation) * var(--siblingRatio) ) )
+                translateY( calc( var(--verticalStart) + ( -2 * var(--vertical) * var(--siblingRatio) ) ) );
+
+                z-index: calc( sibling-count() - sibling-index() );                  
+                width: calc( 30px + ( var(--width) * var(--siblingRatio) ) );
+                clip-path: shape(from 0% 1.5%,curve by 100% 0% with 30% -2%/73.33% -2%,line to 56.67% 100%,hline by -13.33%,close);
+               
+                height: var(--height);
+                opacity: 1;
+                padding: 2px;
+                border: none;
+                outline: solid 1px #FFFFFF;
+                background: linear-gradient(0deg, #FFF0 25%, var(--bgColor2) calc( 100% - 30px ));
+                backdrop-filter: url(#glass);
+                cursor: pointer;
+                text-align: left;
+                overflow: clip;
+                outline: none;
+							
+                &:before {
+                    display: block;
+                    height: 23px;
+                    background-color: var(--bgColor);
+                    clip-path: shape(from 50% 0%,curve by -50% 11.11% with -17.86% 0%/-32.14% 5.56%,line to 3.57% 100%,curve by 46.43% -5.56% with 14.29% -5.56%/32.14% -5.56%,curve by 42.86% 5.56% with 14.29% 0%/28.57% 0%,line by 7.14% -88.89%,curve to 50% 0% with 78.57% 5.56%/67.86% 0%,close);
+                    content: " ";
+                    margin: 0px;
+                    padding: 0px;
+                }
+
+
+            }
+
+            &:open {
+
+                #optionsWrapper {
+                    animation: fadeInOptionWrapper;
+                    animation-duration: 2s;
+                    animation-fill-mode: forwards;
+                }
+
+                option {
+                    animation: fadeInOption;
+                    animation-duration: 1s;
+                    animation-fill-mode: forwards;
+                    animation-delay: calc( 0.5s * var(--siblingRatio) );
+                }
+    
+                ::checkmark { display: none; }
+
+                
+                &::picker {
+                    position: absolute;
+                    position: relative;
+                    z-index: -1;
+                }
+                &::picker * { height: 400px; }
+
+                &::picker(select) {
+                    display: block;
+                    background: transparent;
+                    opacity: 0;
+                    width: 300px;
+                    height: 300px;
+                    overflow: visible;
+                    border: none!important;
+                }
+
+                &:open, &:open * {
+                    opacity: 1;
+                    @starting-style { opacity: 0; }
+                }
+                &:open::picker(select) {
+                    transform: translateY( -150px );
+                    opacity: 1;
+                }
+
+            }
+
+            #optionsToolTip { display: none; }
+
+
+        }
+        
+        #browserSupport { display: none; }
+
+    }
+
+
+    
+    @supports not (appearance: base-select) {
+
+        select#customSelect {
+            position: absolute;
+            z-index: 100;
+            width: 170px;
+            padding: 0px;
+            padding-right: 15px;
+            padding-bottom: 10px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            color: var(--contrast-SelectColor);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            appearance: none;
+            background-repeat: no-repeat;
+            background-position: right top;
+            border-bottom: solid 3px color-mix(in srgb, var(--contrast-SelectColor), transparent 65%);
+
+            &.whiteText {
+                background-image: url('data:image/svg+xml,<svg width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><path fill="%23FFFFFF" stroke="none" d="M 5,7 12,18 19,7 Z" /></svg>');
+            }
+            &:not(.whiteText) {
+                background-image: url('data:image/svg+xml,<svg width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><path fill="%23000000" stroke="none" d="M 5,7 12,18 19,7 Z" /></svg>');
+            }
+            
+            option {
+                cursor: pointer;
+                &:hover {
+                    padding: 5px;
+                    background-color: inherit;
+                    color: inherit;
+                }
+            }
+        }
+
+        #browserSupport {
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            position: relative;
+            z-index: 150;
+            width: 100%;
+            max-width: 576px;
+            margin: 15px;
+            margin-top: 300px;
+            padding: 20px;
+            padding-left: 110px;
+            border-radius: 25px;
+            border: solid 2px var(--selectColor);
+            background-color: var(--bgSelectColor);
+            backdrop-filter: url(#glass);
+            color: var(--contrast-SelectColor);
+            box-shadow: 0px 0px 4px var(--contrast-SelectShadow);
+
+            svg#face {
+                position: absolute;
+                left: -25px;
+                top: 0px;
+                width: 150px;
+                height: 100px;
+                fill: var(--contrast-SelectColor);
+                color: var(--contrast-SelectColor);
+            }
+
+            h1, h2, h3 { margin: 0px; padding: 0px; padding-bottom: 10px; }
+
+            h1 {
+                font-size: 20px;
+                font-weight: 900;
+            }
+            h2 { font-size: 16px; }
+            h3 { font-size: 14px; }
+					
+            #close {
+                position: absolute;
+                right: 20px;
+                top: 10px;
+                font-size: 20px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            #icons {
+
+                display: inline-block;
+                position: absolute;
+                left: 6px;
+                top: 97px;
+                width: 94px;
+                height: 28px;
+                cursor: pointer;
+                padding: 2px;
+                text-decoration: none;
+                overflow: hidden;
+
+                img {
+
+                    float: left;
+                    width: 20px;
+                    height: 20px;
+                    margin: 4px;
+
+                }
+            }
+
+        }
+
+    }
+
+
+}
+
+@keyframes fadeInOptionWrapper {
+    0% { --wrapperOpacity: 0; }
+    100% { --wrapperOpacity: 0.4; }
+}
+@keyframes fadeInOption {
+    0% { --vertical: 0px; --verticalStart: 0px; --height: 160px; }
+    100% { --vertical: var(--verticalMax); --verticalStart: -25px; --height: 200px; }
+}
+
+
+.bgImg {
+    display: block;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: -2;
+
+    &.active { z-index: 0; }
+    &.sub { z-index: -1; }
+
+}
+
+#focusInput {
+    display: block;
+    position: fixed;
+    width: 50px;
+    top: 50px;
+    right: -60px;
+}

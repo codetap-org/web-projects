@@ -1,0 +1,61 @@
+body {
+  height: 2000px;
+  display: grid;
+  place-items: center;
+  --shadow-x: calc((var(--mouse-x, 50%) / 100vw) * -20px + 10px);
+}
+
+@media (min-width: 1500px) {
+  body {
+    height: 4000px;
+  }
+}
+
+.shadow-pal {
+  display: block;
+  width: 250px;
+  height: 250px;
+  position: relative;
+  background: #efefef;
+  animation-name: shadow;
+  animation-direction: alternate;
+  animation-fill-mode: both;
+  animation-duration: 1ms;
+  animation-timing-function: linear;
+  animation-timeline: scroll();
+  animation-range: calc(var(--start) * 1px - var(--mouse-y, 50%))
+    calc(var(--end) * 1px - var(--mouse-y, 50%));
+}
+
+.light-source {
+  width: 100px;
+  height: 100px;
+  font-size: 100px;
+  position: fixed;
+  top: calc(var(--mouse-y, 50%) - 50px);
+  left: calc(var(--mouse-x, 50%) - 50px);
+  pointer-events: none;
+
+  /*   animation: move-across linear forwards;
+  animation-timeline: scroll();
+  animation-duration: 1ms; */
+}
+
+@keyframes shadow {
+  from {
+    box-shadow: var(--shadow-x, 0px) 10px 20px rgba(0 0 0 / 0.5);
+  }
+  to {
+    box-shadow: var(--shadow-x, 0px) -10px 20px rgba(0 0 0 / 0.5);
+  }
+}
+
+/* Define the movement as keyframes */
+@keyframes move-across {
+  0% {
+    transform: translateX(-100%); /* Start position */
+  }
+  100% {
+    transform: translateX(calc(100vw)); /* End position after full scroll */
+  }
+}
