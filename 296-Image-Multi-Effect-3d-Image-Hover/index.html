@@ -1,70 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <title>[gsap/image] ❍ Multi-Effect 3D Image Hover</title>
-    <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
-<link rel="stylesheet" href="./style.css">
+<head>
+  <meta charset="UTF-8">
+  <title>[gsap/image] ❍ Multi-Effect 3D Image Hover</title>
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="apple-touch-icon" href="https://codetap.org/assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://codetap.org/assets/img/favicon.png">
+</head>
 
-  </head>
-    
-  <body>
+<body>
   <div class="image-container" data-image-hover>
-  <div class="image-layer rectangle"></div>
-  <div class="image-layer rectangle"></div>
-  <div class="image-layer rectangle"></div>
-  <div class="image-layer rectangle"></div>
-  <div class="image-layer rectangle"></div>
-  <div class="image-layer rectangle"></div>
-  <div class="image-layer rectangle"></div>
-  <div class="image-layer rectangle"></div>
-  <div class="image-layer rectangle"></div>
-  <div class="image-layer rectangle"></div>
-</div>
-<div class="controls">
-  <div class="shape-controls" data-shape-controls>
-    <button class="shape-btn active" data-shape="rectangle" aria-label="Rectangle"></button>
-    <button class="shape-btn" data-shape="circle" aria-label="Circle"></button>
-    <button class="shape-btn" data-shape="diamond" aria-label="Diamond"></button>
-    <button class="shape-btn" data-shape="hexagon" aria-label="Hexagon"></button>
+    <div class="image-layer rectangle"></div>
+    <div class="image-layer rectangle"></div>
+    <div class="image-layer rectangle"></div>
+    <div class="image-layer rectangle"></div>
+    <div class="image-layer rectangle"></div>
+    <div class="image-layer rectangle"></div>
+    <div class="image-layer rectangle"></div>
+    <div class="image-layer rectangle"></div>
+    <div class="image-layer rectangle"></div>
+    <div class="image-layer rectangle"></div>
   </div>
-  <div class="toggle-controls">
-    <button class="toggle-btn" data-rotation-toggle>rotation</button>
-    <button class="toggle-btn" data-blur-toggle>blur</button>
-    <button class="toggle-btn" data-color-toggle>color</button>
-    <button class="toggle-btn" data-opacity-toggle>opacity</button>
-    <button class="toggle-btn" data-parallax-toggle>parallax</button>
-    <button class="toggle-btn" data-3d-toggle>3d</button>
-    <div class="settings-3d" id="settings3d">
-      <div class="tuner-row">
-        <label class="tuner-label" for="tiltRange">tilt</label>
-        <input class="tuner-slider" id="tiltRange" type="range" min="1" max="50" step="1">
-        <span class="tuner-value" id="tiltVal"></span>
-      </div>
-      <div class="tuner-row">
-        <label class="tuner-label" for="panRange">pan</label>
-        <input class="tuner-slider" id="panRange" type="range" min="1" max="200" step="1">
-        <span class="tuner-value" id="panVal"></span>
-      </div>
-      <div class="tuner-row">
-        <label class="tuner-label" for="depthRange">depth</label>
-        <input class="tuner-slider" id="depthRange" type="range" min="1" max="100" step="1">
-        <span class="tuner-value" id="depthVal"></span>
-      </div>
-      <div class="tuner-row">
-        <label class="tuner-label" for="ampRange">amp</label>
-        <input class="tuner-slider" id="ampRange" type="range" min="1" max="300" step="1">
-        <span class="tuner-value" id="ampVal"></span>
+  <div class="controls">
+    <div class="shape-controls" data-shape-controls>
+      <button class="shape-btn active" data-shape="rectangle" aria-label="Rectangle"></button>
+      <button class="shape-btn" data-shape="circle" aria-label="Circle"></button>
+      <button class="shape-btn" data-shape="diamond" aria-label="Diamond"></button>
+      <button class="shape-btn" data-shape="hexagon" aria-label="Hexagon"></button>
+    </div>
+    <div class="toggle-controls">
+      <button class="toggle-btn" data-rotation-toggle>rotation</button>
+      <button class="toggle-btn" data-blur-toggle>blur</button>
+      <button class="toggle-btn" data-color-toggle>color</button>
+      <button class="toggle-btn" data-opacity-toggle>opacity</button>
+      <button class="toggle-btn" data-parallax-toggle>parallax</button>
+      <button class="toggle-btn" data-3d-toggle>3d</button>
+      <div class="settings-3d" id="settings3d">
+        <div class="tuner-row">
+          <label class="tuner-label" for="tiltRange">tilt</label>
+          <input class="tuner-slider" id="tiltRange" type="range" min="1" max="50" step="1">
+          <span class="tuner-value" id="tiltVal"></span>
+        </div>
+        <div class="tuner-row">
+          <label class="tuner-label" for="panRange">pan</label>
+          <input class="tuner-slider" id="panRange" type="range" min="1" max="200" step="1">
+          <span class="tuner-value" id="panVal"></span>
+        </div>
+        <div class="tuner-row">
+          <label class="tuner-label" for="depthRange">depth</label>
+          <input class="tuner-slider" id="depthRange" type="range" min="1" max="100" step="1">
+          <span class="tuner-value" id="depthVal"></span>
+        </div>
+        <div class="tuner-row">
+          <label class="tuner-label" for="ampRange">amp</label>
+          <input class="tuner-slider" id="ampRange" type="range" min="1" max="300" step="1">
+          <span class="tuner-value" id="ampVal"></span>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<a href="https://codepen.io/blacklead-studio/pen/QwjGRmo" target="_blank" class="credit">
-  ORIGINAL IDEA BY BL/S®
-</a>
-    <script src='https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js'></script><script  src="./script.js"></script>
+  <a href="https://codepen.io/blacklead-studio/pen/QwjGRmo" target="_blank" class="credit">
+    ORIGINAL IDEA BY BL/S®
+  </a>
+  <script src='https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js'></script>
+  <script src="./script.js"></script>
 
-  </body>
-  
+</body>
+
 </html>

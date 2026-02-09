@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <title>SVG gradient</title>
-    <link rel="stylesheet" href="./style.css">
+<head>
+  <meta charset="UTF-8">
+  <title>SVG gradient</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="apple-touch-icon" href="https://codetap.org/assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://codetap.org/assets/img/favicon.png">
+</head>
 
-  </head>
-    
-  <body>
+<body>
   <script type="module">
-  import { svg } from 'https://esm.sh/css-doodle/generator'
-  
-  document.body.appendChild(svg.element(`
+    import { svg } from 'https://esm.sh/css-doodle/generator'
+
+    document.body.appendChild(svg.element(`
     svg {
       viewBox: -5 -5 10 10;
       ellipse*100 {
@@ -25,8 +26,8 @@
       }
     }
   `));
-</script>
-    
-  </body>
-  
+  </script>
+
+</body>
+
 </html>

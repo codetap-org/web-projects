@@ -1,56 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>Stopwatch</title>
     <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
-<link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="apple-touch-icon" href="https://codetap.org/assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="https://codetap.org/assets/img/favicon.png">
+</head>
 
-  </head>
-    
-  <body>
-  <div class="app">
-    <header>
-        <h1>Stopwatch</h1>
-    </header>
-    <main>
-        <section class="display-section" id="display" aria-live="polite">
-            <div class="display-deco">
-                <div class="time-group">
-                    <span class="time minutes">00</span>
-                    <span class="label">MIN</span>
+<body>
+    <div class="app">
+        <header>
+            <h1>Stopwatch</h1>
+        </header>
+        <main>
+            <section class="display-section" id="display" aria-live="polite">
+                <div class="display-deco">
+                    <div class="time-group">
+                        <span class="time minutes">00</span>
+                        <span class="label">MIN</span>
+                    </div>
+                    <span class="divider">:</span>
+                    <div class="time-group">
+                        <span class="time seconds">00</span>
+                        <span class="label">SEC</span>
+                    </div>
+                    <span class="divider">.</span>
+                    <div class="time-group">
+                        <span class="time milliseconds">00</span>
+                        <span class="label">MS</span>
+                    </div>
                 </div>
-                <span class="divider">:</span>
-                <div class="time-group">
-                    <span class="time seconds">00</span>
-                    <span class="label">SEC</span>
-                </div>
-                <span class="divider">.</span>
-                <div class="time-group">
-                    <span class="time milliseconds">00</span>
-                    <span class="label">MS</span>
-                </div>
-            </div>
+            </section>
+            <nav class="controls">
+                <button class="lap-btn" id="lap-btn" type="button" aria-label="Save laptime" disabled>
+                    Lap
+                </button>
+                <button class="toggle-btn" type="button" aria-pressed="false" aria-label="Start timer">
+                </button>
+                <button class="reset-btn" type="button" aria-label="Reset timer" disabled>
+                    Reset
+                </button>
+            </nav>
+        </main>
+        <section class="laps-section" aria-labelledby="laps-title">
+            <h2 class="laps-title" id="laps-title">laptime</h2>
+            <ol class="laps" aria-live="polite"></ol>
         </section>
-        <nav class="controls">
-            <button class="lap-btn" id="lap-btn" type="button" aria-label="Save laptime" disabled>
-                Lap
-            </button>
-            <button class="toggle-btn" type="button" aria-pressed="false" aria-label="Start timer">
-            </button>
-            <button class="reset-btn" type="button" aria-label="Reset timer" disabled>
-                Reset
-            </button>
-        </nav>
-    </main>
-    <section class="laps-section" aria-labelledby="laps-title">
-        <h2 class="laps-title" id="laps-title">laptime</h2>
-        <ol class="laps" aria-live="polite"></ol>
-    </section>
-</div>
-    <script  src="./script.js"></script>
+    </div>
+    <script src="./script.js"></script>
 
-  </body>
-  
+</body>
+
 </html>

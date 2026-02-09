@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <title>3D Dices</title>
-    <link rel="stylesheet" href="./style.css">
+<head>
+  <meta charset="UTF-8">
+  <title>3D Dices</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="apple-touch-icon" href="https://codetap.org/assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://codetap.org/assets/img/favicon.png">
+</head>
 
-  </head>
-    
-  <body>
+<body>
   <script type="importmap">
         {
             "imports": {
@@ -18,32 +19,32 @@
             }
         }
     </script>
-<div id="ui-container">
-  <div class="top-bar">
-    <p class="bar-text">DICE COUNT</p>
-    <label class="select">
-      <select id="diceCount">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3" selected>3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="10">10</option>
-        <option value="20">20</option>
-      </select>
-    </label>
+  <div id="ui-container">
+    <div class="top-bar">
+      <p class="bar-text">DICE COUNT</p>
+      <label class="select">
+        <select id="diceCount">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3" selected>3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+      </label>
+    </div>
+
+    <div id="result-board">
+      <span id="total-score">0</span>
+      <span class="sub-text" id="detail-score"></span>
+    </div>
+
+    <div class="hint">Click anywhere to roll</div>
   </div>
+  <script type="module" src="./script.js"></script>
 
-  <div id="result-board">
-    <span id="total-score">0</span>
-    <span class="sub-text" id="detail-score"></span>
-  </div>
+</body>
 
-  <div class="hint">Click anywhere to roll</div>
-</div>
-    <script type="module" src="./script.js"></script>
-
-  </body>
-  
 </html>

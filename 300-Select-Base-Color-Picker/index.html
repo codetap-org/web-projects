@@ -1,290 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title>Named Colors -  custom select ( base-select ) color picker with fallback</title>
-    <body data-chosen="AliceBlue"><link rel="stylesheet" href="./style.css">
+    <title>Named Colors - custom select ( base-select ) color picker with fallback</title>
 
-  </head>
-    
-  <body>
-  <div id="gsapBody">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="apple-touch-icon" href="https://codetap.org/assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="https://codetap.org/assets/img/favicon.png">
+</head>
 
-    <div id="bgWrapper6" class="bgWrapper"></div>
-    <div id="bgWrapper5" class="bgWrapper">
-        <div id="bg5" class="bgWrapper"></div>
-    </div>
+<body>
+    <div id="gsapBody" data-chosen="AliceBlue">
 
-    <div id="bgWrapper2" class="bgWrapper"></div>
-    <div id="bgWrapper" class="bgWrapper">
-        <div id="bg" class="bgWrapper"></div>
-    </div>
-
-    <div id="bgWrapper4" class="bgWrapper"></div>
-    <div id="bgWrapper3" class="bgWrapper">
-        <div id="bg3" class="bgWrapper"></div>
-    </div>
-
-
-    <select id="customSelect" name="customSelect" onchange="document.body.dataset.chosen = this.value;">
-
-
-        <div id="optionsWrapper">
-
-            <option value="AliceBlue"></option>
-            <option value="AntiqueWhite"></option>
-            <option value="Aqua"></option>
-            <option value="Aquamarine"></option>
-            <option value="Azure"></option>
-            <option value="Beige"></option>
-            <option value="Bisque"></option>
-            <option value="Black"></option>
-            <option value="BlanchedAlmond"></option>
-            <option value="Blue"></option>
-            <option value="BlueViolet"></option>
-            <option value="Brown"></option>
-            <option value="BurlyWood"></option>
-            <option value="CadetBlue"></option>
-            <option value="Chartreuse"></option>
-            <option value="Chocolate"></option>
-            <option value="Coral"></option>
-            <option value="CornflowerBlue"></option>
-            <option value="Cornsilk"></option>
-            <option value="Crimson"></option>
-            <option value="Cyan"></option>
-            <option value="DarkBlue"></option>
-            <option value="DarkCyan"></option>
-            <option value="DarkGoldenRod"></option>
-            <option value="DarkGray"></option>
-            <option value="DarkGrey"></option>
-            <option value="DarkGreen"></option>
-            <option value="DarkKhaki"></option>
-            <option value="DarkMagenta"></option>
-            <option value="DarkOliveGreen"></option>
-            <option value="DarkOrange"></option>
-            <option value="DarkOrchid"></option>
-            <option value="DarkRed"></option>
-            <option value="DarkSalmon"></option>
-            <option value="DarkSeaGreen"></option>
-            <option value="DarkSlateBlue"></option>
-            <option value="DarkSlateGray"></option>
-            <option value="DarkSlateGrey"></option>
-            <option value="DarkTurquoise"></option>
-            <option value="DarkViolet"></option>
-            <option value="DeepPink"></option>
-            <option value="DeepSkyBlue"></option>
-            <option value="DimGray"></option>
-            <option value="DimGrey"></option>
-            <option value="DodgerBlue"></option>
-            <option value="FireBrick"></option>
-            <option value="FloralWhite"></option>
-            <option value="ForestGreen"></option>
-            <option value="Fuchsia"></option>
-            <option value="Gainsboro"></option>
-            <option value="GhostWhite"></option>
-            <option value="Gold"></option>
-            <option value="GoldenRod"></option>
-            <option value="Gray"></option>
-            <option value="Grey"></option>
-            <option value="Green"></option>
-            <option value="GreenYellow"></option>
-            <option value="HoneyDew"></option>
-            <option value="HotPink"></option>
-            <option value="IndianRed"></option>
-            <option value="Indigo"></option>
-            <option value="Ivory"></option>
-            <option value="Khaki"></option>
-            <option value="Lavender"></option>
-            <option value="LavenderBlush"></option>
-            <option value="LawnGreen"></option>
-            <option value="LemonChiffon"></option>
-            <option value="LightBlue"></option>
-            <option value="LightCoral"></option>
-            <option value="LightCyan"></option>
-            <option value="LightGoldenRodYellow"></option>
-            <option value="LightGray"></option>
-            <option value="LightGrey"></option>
-            <option value="LightGreen"></option>
-            <option value="LightPink"></option>
-            <option value="LightSalmon"></option>
-            <option value="LightSeaGreen"></option>
-            <option value="LightSkyBlue"></option>
-            <option value="LightSlateGray"></option>
-            <option value="LightSlateGrey"></option>
-            <option value="LightSteelBlue"></option>
-            <option value="LightYellow"></option>
-            <option value="Lime"></option>
-            <option value="LimeGreen"></option>
-            <option value="Linen"></option>
-            <option value="Magenta"></option>
-            <option value="Maroon"></option>
-            <option value="MediumAquaMarine"></option>
-            <option value="MediumBlue"></option>
-            <option value="MediumOrchid"></option>
-            <option value="MediumPurple"></option>
-            <option value="MediumSeaGreen"></option>
-            <option value="MediumSlateBlue"></option>
-            <option value="MediumSpringGreen"></option>
-            <option value="MediumTurquoise"></option>
-            <option value="MediumVioletRed"></option>
-            <option value="MidnightBlue"></option>
-            <option value="MintCream"></option>
-            <option value="MistyRose"></option>
-            <option value="Moccasin"></option>
-            <option value="NavajoWhite"></option>
-            <option value="Navy"></option>
-            <option value="OldLace"></option>
-            <option value="Olive"></option>
-            <option value="OliveDrab"></option>
-            <option value="Orange"></option>
-            <option value="OrangeRed"></option>
-            <option value="Orchid"></option>
-            <option value="PaleGoldenRod"></option>
-            <option value="PaleGreen"></option>
-            <option value="PaleTurquoise"></option>
-            <option value="PaleVioletRed"></option>
-            <option value="PapayaWhip"></option>
-            <option value="PeachPuff"></option>
-            <option value="Peru"></option>
-            <option value="Pink"></option>
-            <option value="Plum"></option>
-            <option value="PowderBlue"></option>
-            <option value="Purple"></option>
-            <option value="RebeccaPurple"></option>
-            <option value="Red"></option>
-            <option value="RosyBrown"></option>
-            <option value="RoyalBlue"></option>
-            <option value="SaddleBrown"></option>
-            <option value="Salmon"></option>
-            <option value="SandyBrown"></option>
-            <option value="SeaGreen"></option>
-            <option value="SeaShell"></option>
-            <option value="Sienna"></option>
-            <option value="Silver"></option>
-            <option value="SkyBlue"></option>
-            <option value="SlateBlue"></option>
-            <option value="SlateGray"></option>
-            <option value="SlateGrey"></option>
-            <option value="Snow"></option>
-            <option value="SpringGreen"></option>
-            <option value="SteelBlue"></option>
-            <option value="Tan"></option>
-            <option value="Teal"></option>
-            <option value="Thistle"></option>
-            <option value="Tomato"></option>
-            <option value="Turquoise"></option>
-            <option value="Violet"></option>
-            <option value="Wheat"></option>
-            <option value="White"></option>
-            <option value="WhiteSmoke"></option>
-            <option value="Yellow"></option>
-            <option value="YellowGreen"></option>
-    
-            <div id="optionsCap" class="bgWrapper"></div>
-            
-            <div id="optionsToolTip"></div>
-
+        <div id="bgWrapper6" class="bgWrapper"></div>
+        <div id="bgWrapper5" class="bgWrapper">
+            <div id="bg5" class="bgWrapper"></div>
         </div>
 
-    </select>
+        <div id="bgWrapper2" class="bgWrapper"></div>
+        <div id="bgWrapper" class="bgWrapper">
+            <div id="bg" class="bgWrapper"></div>
+        </div>
+
+        <div id="bgWrapper4" class="bgWrapper"></div>
+        <div id="bgWrapper3" class="bgWrapper">
+            <div id="bg3" class="bgWrapper"></div>
+        </div>
 
 
-    <input id="focusInput" />
+        <select id="customSelect" name="customSelect" onchange="document.body.dataset.chosen = this.value;">
+
+
+            <div id="optionsWrapper">
+
+                <option value="AliceBlue"></option>
+                <option value="AntiqueWhite"></option>
+                <option value="Aqua"></option>
+                <option value="Aquamarine"></option>
+                <option value="Azure"></option>
+                <option value="Beige"></option>
+                <option value="Bisque"></option>
+                <option value="Black"></option>
+                <option value="BlanchedAlmond"></option>
+                <option value="Blue"></option>
+                <option value="BlueViolet"></option>
+                <option value="Brown"></option>
+                <option value="BurlyWood"></option>
+                <option value="CadetBlue"></option>
+                <option value="Chartreuse"></option>
+                <option value="Chocolate"></option>
+                <option value="Coral"></option>
+                <option value="CornflowerBlue"></option>
+                <option value="Cornsilk"></option>
+                <option value="Crimson"></option>
+                <option value="Cyan"></option>
+                <option value="DarkBlue"></option>
+                <option value="DarkCyan"></option>
+                <option value="DarkGoldenRod"></option>
+                <option value="DarkGray"></option>
+                <option value="DarkGrey"></option>
+                <option value="DarkGreen"></option>
+                <option value="DarkKhaki"></option>
+                <option value="DarkMagenta"></option>
+                <option value="DarkOliveGreen"></option>
+                <option value="DarkOrange"></option>
+                <option value="DarkOrchid"></option>
+                <option value="DarkRed"></option>
+                <option value="DarkSalmon"></option>
+                <option value="DarkSeaGreen"></option>
+                <option value="DarkSlateBlue"></option>
+                <option value="DarkSlateGray"></option>
+                <option value="DarkSlateGrey"></option>
+                <option value="DarkTurquoise"></option>
+                <option value="DarkViolet"></option>
+                <option value="DeepPink"></option>
+                <option value="DeepSkyBlue"></option>
+                <option value="DimGray"></option>
+                <option value="DimGrey"></option>
+                <option value="DodgerBlue"></option>
+                <option value="FireBrick"></option>
+                <option value="FloralWhite"></option>
+                <option value="ForestGreen"></option>
+                <option value="Fuchsia"></option>
+                <option value="Gainsboro"></option>
+                <option value="GhostWhite"></option>
+                <option value="Gold"></option>
+                <option value="GoldenRod"></option>
+                <option value="Gray"></option>
+                <option value="Grey"></option>
+                <option value="Green"></option>
+                <option value="GreenYellow"></option>
+                <option value="HoneyDew"></option>
+                <option value="HotPink"></option>
+                <option value="IndianRed"></option>
+                <option value="Indigo"></option>
+                <option value="Ivory"></option>
+                <option value="Khaki"></option>
+                <option value="Lavender"></option>
+                <option value="LavenderBlush"></option>
+                <option value="LawnGreen"></option>
+                <option value="LemonChiffon"></option>
+                <option value="LightBlue"></option>
+                <option value="LightCoral"></option>
+                <option value="LightCyan"></option>
+                <option value="LightGoldenRodYellow"></option>
+                <option value="LightGray"></option>
+                <option value="LightGrey"></option>
+                <option value="LightGreen"></option>
+                <option value="LightPink"></option>
+                <option value="LightSalmon"></option>
+                <option value="LightSeaGreen"></option>
+                <option value="LightSkyBlue"></option>
+                <option value="LightSlateGray"></option>
+                <option value="LightSlateGrey"></option>
+                <option value="LightSteelBlue"></option>
+                <option value="LightYellow"></option>
+                <option value="Lime"></option>
+                <option value="LimeGreen"></option>
+                <option value="Linen"></option>
+                <option value="Magenta"></option>
+                <option value="Maroon"></option>
+                <option value="MediumAquaMarine"></option>
+                <option value="MediumBlue"></option>
+                <option value="MediumOrchid"></option>
+                <option value="MediumPurple"></option>
+                <option value="MediumSeaGreen"></option>
+                <option value="MediumSlateBlue"></option>
+                <option value="MediumSpringGreen"></option>
+                <option value="MediumTurquoise"></option>
+                <option value="MediumVioletRed"></option>
+                <option value="MidnightBlue"></option>
+                <option value="MintCream"></option>
+                <option value="MistyRose"></option>
+                <option value="Moccasin"></option>
+                <option value="NavajoWhite"></option>
+                <option value="Navy"></option>
+                <option value="OldLace"></option>
+                <option value="Olive"></option>
+                <option value="OliveDrab"></option>
+                <option value="Orange"></option>
+                <option value="OrangeRed"></option>
+                <option value="Orchid"></option>
+                <option value="PaleGoldenRod"></option>
+                <option value="PaleGreen"></option>
+                <option value="PaleTurquoise"></option>
+                <option value="PaleVioletRed"></option>
+                <option value="PapayaWhip"></option>
+                <option value="PeachPuff"></option>
+                <option value="Peru"></option>
+                <option value="Pink"></option>
+                <option value="Plum"></option>
+                <option value="PowderBlue"></option>
+                <option value="Purple"></option>
+                <option value="RebeccaPurple"></option>
+                <option value="Red"></option>
+                <option value="RosyBrown"></option>
+                <option value="RoyalBlue"></option>
+                <option value="SaddleBrown"></option>
+                <option value="Salmon"></option>
+                <option value="SandyBrown"></option>
+                <option value="SeaGreen"></option>
+                <option value="SeaShell"></option>
+                <option value="Sienna"></option>
+                <option value="Silver"></option>
+                <option value="SkyBlue"></option>
+                <option value="SlateBlue"></option>
+                <option value="SlateGray"></option>
+                <option value="SlateGrey"></option>
+                <option value="Snow"></option>
+                <option value="SpringGreen"></option>
+                <option value="SteelBlue"></option>
+                <option value="Tan"></option>
+                <option value="Teal"></option>
+                <option value="Thistle"></option>
+                <option value="Tomato"></option>
+                <option value="Turquoise"></option>
+                <option value="Violet"></option>
+                <option value="Wheat"></option>
+                <option value="White"></option>
+                <option value="WhiteSmoke"></option>
+                <option value="Yellow"></option>
+                <option value="YellowGreen"></option>
+
+                <div id="optionsCap" class="bgWrapper"></div>
+
+                <div id="optionsToolTip"></div>
+
+            </div>
+
+        </select>
+
+
+        <input id="focusInput" />
 
 
 
-    <!--
+        <!--
     Browser support ( is not Chrome, Opera or Edge )
     https://caniuse.com/mdn-css_properties_appearance_base-select
     -->
 
-    <section id="browserSupport">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" id="face" version="1.1" width="125" height="125" viewBox="0 0 400 400">
-            <g fill="currentColor" fill-opacity="1" stroke="none">
-                <path id="head" d="M 105,87.3 C 98.6,93 92.6,99.2 87.2,105.9 39.35,165.19 44.44,249.25 94.35,302.68 99.83,308.55 105.85,314.05 112.4,319.1 c 59.31,45.78 144.6,41.1 198.4,-13.2 6.2,-6.3 11.9,-13.1 16.9,-20.3 37.5,-54.2 35.4,-127.9 -7,-180.1 C 315.4,99 309.6,92.9 303.2,87.4 246.7,37.7 161.5,37.7 105,87.4 Z m 192.7,6.3 c 6,5.2 11.5,11 16.5,17.1 40,49.2 42.1,118.8 6.6,170 -4.8,6.9 -10.1,13.3 -16,19.2 C 254,351.1 173.41,355.59 117.5,312.4 110.5,306.99 104.14,301.04 98.43,294.66 53.32,244.16 49.32,166.33 93.8,111.2 c 5.09,-6.31 10.7,-12.2 16.8,-17.5 53.3,-46.9 133.8,-46.9 187.1,0 z" />
-                <path id="lEye" d="m 159,166 c 0,0 -0,1 -0,1 -0,9 -8,16 -17,16 -9,0 -17,-7 -17,-16 -0,-0 -0,-1 -0,-1 0,-9 8,-17 17,-17 9,0 17,8 17,17 z" />
-                <path id="rEye" d="m 290,166 c 0,0 -0,0 -0,1 -0,9 -8,17 -17,17 -9,0 -17,-7 -17,-16 -0,-0 -0,-0 -0,-1 0,-9 8,-17 17,-17 9,0 17,8 17,17 z" />
-                <path id="mouth" d="m 204,221 c -27,1 -52,13 -67,35 -7,12 9,22 19,10 13,-16 31,-22 50,-22 C 226,243 247,251 261,269 c 8,9 22,1 19,-10 -17,-25 -46,-40 -76,-38 z" />
-            </g>
-        </svg>
-        <h1>We're sorry,</h1>
-        <h2>but your browser isn't supported.</h2>
-        <h3>To view our website in its full glory, please switch to a supporting browser.</h3>
-        <a id="close">x</a>
-        <a href="https://caniuse.com/mdn-css_properties_appearance_base-select" target="_blank" id="icons">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/48px-Google_Chrome_icon_%28February_2022%29.svg.png" alt="Google Chrome" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Opera_2015_icon.svg/250px-Opera_2015_icon.svg.png" alt="Opera Browser" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Microsoft_Edge_logo_%282019%29.svg/250px-Microsoft_Edge_logo_%282019%29.svg.png" alt="Microsoft Edge" />
-        </a>
-    </section>
+        <section id="browserSupport">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" id="face" version="1.1"
+                width="125" height="125" viewBox="0 0 400 400">
+                <g fill="currentColor" fill-opacity="1" stroke="none">
+                    <path id="head"
+                        d="M 105,87.3 C 98.6,93 92.6,99.2 87.2,105.9 39.35,165.19 44.44,249.25 94.35,302.68 99.83,308.55 105.85,314.05 112.4,319.1 c 59.31,45.78 144.6,41.1 198.4,-13.2 6.2,-6.3 11.9,-13.1 16.9,-20.3 37.5,-54.2 35.4,-127.9 -7,-180.1 C 315.4,99 309.6,92.9 303.2,87.4 246.7,37.7 161.5,37.7 105,87.4 Z m 192.7,6.3 c 6,5.2 11.5,11 16.5,17.1 40,49.2 42.1,118.8 6.6,170 -4.8,6.9 -10.1,13.3 -16,19.2 C 254,351.1 173.41,355.59 117.5,312.4 110.5,306.99 104.14,301.04 98.43,294.66 53.32,244.16 49.32,166.33 93.8,111.2 c 5.09,-6.31 10.7,-12.2 16.8,-17.5 53.3,-46.9 133.8,-46.9 187.1,0 z" />
+                    <path id="lEye"
+                        d="m 159,166 c 0,0 -0,1 -0,1 -0,9 -8,16 -17,16 -9,0 -17,-7 -17,-16 -0,-0 -0,-1 -0,-1 0,-9 8,-17 17,-17 9,0 17,8 17,17 z" />
+                    <path id="rEye"
+                        d="m 290,166 c 0,0 -0,0 -0,1 -0,9 -8,17 -17,17 -9,0 -17,-7 -17,-16 -0,-0 -0,-0 -0,-1 0,-9 8,-17 17,-17 9,0 17,8 17,17 z" />
+                    <path id="mouth"
+                        d="m 204,221 c -27,1 -52,13 -67,35 -7,12 9,22 19,10 13,-16 31,-22 50,-22 C 226,243 247,251 261,269 c 8,9 22,1 19,-10 -17,-25 -46,-40 -76,-38 z" />
+                </g>
+            </svg>
+            <h1>We're sorry,</h1>
+            <h2>but your browser isn't supported.</h2>
+            <h3>To view our website in its full glory, please switch to a supporting browser.</h3>
+            <a id="close">x</a>
+            <a href="https://caniuse.com/mdn-css_properties_appearance_base-select" target="_blank" id="icons">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/48px-Google_Chrome_icon_%28February_2022%29.svg.png"
+                    alt="Google Chrome" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Opera_2015_icon.svg/250px-Opera_2015_icon.svg.png"
+                    alt="Opera Browser" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Microsoft_Edge_logo_%282019%29.svg/250px-Microsoft_Edge_logo_%282019%29.svg.png"
+                    alt="Microsoft Edge" />
+            </a>
+        </section>
 
 
-</div>
+    </div>
 
 
 
 
-<!-- background images -->
-<div id="bg137" class="bgImg active" style="background-image: url(https://picsum.photos/id/137/1500?grayscale); opacity: 0.5"></div>
-<div id="bg524" class="bgImg"></div>
-<div id="bg679" class="bgImg"></div>
-<div id="bg893" class="bgImg"></div>
-<div id="bg924" class="bgImg"></div>
+    <!-- background images -->
+    <div id="bg137" class="bgImg active"
+        style="background-image: url(https://picsum.photos/id/137/1500?grayscale); opacity: 0.5"></div>
+    <div id="bg524" class="bgImg"></div>
+    <div id="bg679" class="bgImg"></div>
+    <div id="bg893" class="bgImg"></div>
+    <div id="bg924" class="bgImg"></div>
 
 
-<!-- SVG paths and filters -->
+    <!-- SVG paths and filters -->
 
-<svg xmlns="http://www.w3.org/2000/svg" role="none" width="0" width="0" viewBox="0 0 0 0" preserveAspectRatio='none'>
+    <svg xmlns="http://www.w3.org/2000/svg" role="none" width="0" width="0" viewBox="0 0 0 0"
+        preserveAspectRatio='none'>
 
-    <defs>
+        <defs>
 
-        <clipPath id="ringClip"><use fill="#FFFFFF" href="#ringPath" /></clipPath>
-        <mask id="ringMask"><path fill="#FFFFFF" d="M 0,0H 300V 300H 0Z" /><use fill="#000000" href="#ringPath" /></mask>
-        <path id="ringPath" d="M -5,-5V 305H 305V -5ZM 178,8c 30,6 58,21 79,44l -16,3C 225,39 204,27 181,22Zm -60,1 -2,14C 85,31 58,50 40,77L 26,75C 47,41 80,17 118,9Zm 164,141h 13c 0,24 -12,56 -14,61l -11,-9c 8,-16 12,-34 12,-52zM 5,162 37,176c 12,53 59,90 113,90v 29C 58,295 10,218 5,162Z" />
+            <clipPath id="ringClip">
+                <use fill="#FFFFFF" href="#ringPath" />
+            </clipPath>
+            <mask id="ringMask">
+                <path fill="#FFFFFF" d="M 0,0H 300V 300H 0Z" />
+                <use fill="#000000" href="#ringPath" />
+            </mask>
+            <path id="ringPath"
+                d="M -5,-5V 305H 305V -5ZM 178,8c 30,6 58,21 79,44l -16,3C 225,39 204,27 181,22Zm -60,1 -2,14C 85,31 58,50 40,77L 26,75C 47,41 80,17 118,9Zm 164,141h 13c 0,24 -12,56 -14,61l -11,-9c 8,-16 12,-34 12,-52zM 5,162 37,176c 12,53 59,90 113,90v 29C 58,295 10,218 5,162Z" />
 
-        <clipPath id="outerClip"><use fill="#FFFFFF" href="#outerPath" /></clipPath>
-        <mask id="outerMask">
-					<path fill="#FFFFFF" d="M 0,0H 300V 300H 0Z" />
-        <path fill="#000000" d="M -5,-5V 305H 305V -5ZM 150,5c 80,0 145,65 145,145 0,80 -65,145 -145,145C 70,295 5,230 5,150 5,70 70,5 150,5Zm 0,21C 74,26 23,89 26,161l 9,3C 27,106 71,34 150,34c 152,0 155,221 9,232v 8C 315,263 310,26 150,26Z" />
-				</mask>
-        <path id="outerPath" fill="#000000" d="M -5,-5V 305H 305V -5ZM 150,5c 80,0 145,65 145,145 0,80 -65,145 -145,145C 70,295 5,230 5,150 5,70 70,5 150,5Zm 0,21C 74,26 23,89 26,161l 9,3C 27,106 71,34 150,34c 152,0 155,221 9,232v 8C 315,263 310,26 150,26Z" />
+            <clipPath id="outerClip">
+                <use fill="#FFFFFF" href="#outerPath" />
+            </clipPath>
+            <mask id="outerMask">
+                <path fill="#FFFFFF" d="M 0,0H 300V 300H 0Z" />
+                <path fill="#000000"
+                    d="M -5,-5V 305H 305V -5ZM 150,5c 80,0 145,65 145,145 0,80 -65,145 -145,145C 70,295 5,230 5,150 5,70 70,5 150,5Zm 0,21C 74,26 23,89 26,161l 9,3C 27,106 71,34 150,34c 152,0 155,221 9,232v 8C 315,263 310,26 150,26Z" />
+            </mask>
+            <path id="outerPath" fill="#000000"
+                d="M -5,-5V 305H 305V -5ZM 150,5c 80,0 145,65 145,145 0,80 -65,145 -145,145C 70,295 5,230 5,150 5,70 70,5 150,5Zm 0,21C 74,26 23,89 26,161l 9,3C 27,106 71,34 150,34c 152,0 155,221 9,232v 8C 315,263 310,26 150,26Z" />
 
-        <clipPath id="innerClip"><use fill="#FFFFFF" href="#innerPath" /></clipPath>
-        <mask id="innerMask"><path fill="#FFFFFF" d="M 0,0H 300V 300H 0Z" /><use fill="#000000" href="#innerPath" /></mask>
-        <path id="innerPath" fill="#000000" d="M -5,-5V 305H 305V -5Zm 155,54c 27,0 56,11 77,35l -2,11c 25,33 25,82 -6,117l 6,15c -14,13 -31,23 -50,27l -12,-12c -3,1 -33,5 -61,-13 -4,3 -9,6 -14,9 -26,-18 -42,-47 -45,-78 5,-4 9,-7 14,-11 0,-38 24,-72 59,-86l 7,-10c 9,-3 17,-4 27,-4z" />
+            <clipPath id="innerClip">
+                <use fill="#FFFFFF" href="#innerPath" />
+            </clipPath>
+            <mask id="innerMask">
+                <path fill="#FFFFFF" d="M 0,0H 300V 300H 0Z" />
+                <use fill="#000000" href="#innerPath" />
+            </mask>
+            <path id="innerPath" fill="#000000"
+                d="M -5,-5V 305H 305V -5Zm 155,54c 27,0 56,11 77,35l -2,11c 25,33 25,82 -6,117l 6,15c -14,13 -31,23 -50,27l -12,-12c -3,1 -33,5 -61,-13 -4,3 -9,6 -14,9 -26,-18 -42,-47 -45,-78 5,-4 9,-7 14,-11 0,-38 24,-72 59,-86l 7,-10c 9,-3 17,-4 27,-4z" />
 
-        <clipPath id="innerClip2"><use href="#innerPath2" /></clipPath>
-        <path id="innerPath2" d="M 123,53 116,63c -35,14 -59,48 -59,86 -5,4 -9,7 -14,11 3,31 19,60 45,78C 93,235 98,232 102,229c 28,18 58,14 61,13l 12,12c 19,-4 36,-14 50,-27C 223,222 221,217 219,212c 31,-35 31,-84 6,-117l 2,-11C 199,52 157,43 123,53Z" />
+            <clipPath id="innerClip2">
+                <use href="#innerPath2" />
+            </clipPath>
+            <path id="innerPath2"
+                d="M 123,53 116,63c -35,14 -59,48 -59,86 -5,4 -9,7 -14,11 3,31 19,60 45,78C 93,235 98,232 102,229c 28,18 58,14 61,13l 12,12c 19,-4 36,-14 50,-27C 223,222 221,217 219,212c 31,-35 31,-84 6,-117l 2,-11C 199,52 157,43 123,53Z" />
 
-        <path id="selectInnerWrapper2160" d="m 162,49 c 0,4 2,5 5,6 145,28 90,240 -53,202 C -13,223 12,17 163,28 c 1,0 4,1 3,3" />
-        <path id="selectInnerWrapper7000" d="m 216,70 c -2,3 -2,4 -0,7 C 312,169 183,320 73,220 -5,130 95,-8 218,63 c 1,1 3,3 1,4" />
-        <path id="selectInnerWrapper" d="" />
+            <path id="selectInnerWrapper2160"
+                d="m 162,49 c 0,4 2,5 5,6 145,28 90,240 -53,202 C -13,223 12,17 163,28 c 1,0 4,1 3,3" />
+            <path id="selectInnerWrapper7000"
+                d="m 216,70 c -2,3 -2,4 -0,7 C 312,169 183,320 73,220 -5,130 95,-8 218,63 c 1,1 3,3 1,4" />
+            <path id="selectInnerWrapper" d="" />
 
-        <path id="selectInner" d="m 243,150 a 93,93 0 0 1 -93,93 93,93 0 0 1 -93,-93 93,93 0 0 1 93,-93 93,93 0 0 1 93,93 z" />
-        <path id="selectOption" fill="#000000" stroke="none" d="M 0,2 C 9,-0 22,-0 30,2 L 26,200 H 4 Z" />
+            <path id="selectInner"
+                d="m 243,150 a 93,93 0 0 1 -93,93 93,93 0 0 1 -93,-93 93,93 0 0 1 93,-93 93,93 0 0 1 93,93 z" />
+            <path id="selectOption" fill="#000000" stroke="none" d="M 0,2 C 9,-0 22,-0 30,2 L 26,200 H 4 Z" />
 
-        <path id="head1b" d="M 68 50 C 59 50 52 57 52 66 L 52 339 C 52 348 59 355 68 355 L 338 355 C 347 355 354 348 354 339 L 354 66 C 354 57 347 50 338 50 L 68 50 z M 75 57 L 332 57 C 340 57 347 64 347 73 L 347 333 C 347 341 340 348 332 348 L 75 348 C 66 348 59 341 59 333 L 59 73 C 59 64 66 57 75 57 z" />
-        <path id="head2b" d="M 105,87.3 C 98.6,93 92.6,99.2 87.2,105.9 39.35,165.19 44.44,249.25 94.35,302.68 99.83,308.55 105.85,314.05 112.4,319.1 c 59.31,45.78 144.6,41.1 198.4,-13.2 6.2,-6.3 11.9,-13.1 16.9,-20.3 37.5,-54.2 35.4,-127.9 -7,-180.1 C 315.4,99 309.6,92.9 303.2,87.4 246.7,37.7 161.5,37.7 105,87.4 Z m 192.7,6.3 c 6,5.2 11.5,11 16.5,17.1 40,49.2 42.1,118.8 6.6,170 -4.8,6.9 -10.1,13.3 -16,19.2 C 254,351.1 173.41,355.59 117.5,312.4 110.5,306.99 104.14,301.04 98.43,294.66 53.32,244.16 49.32,166.33 93.8,111.2 c 5.09,-6.31 10.7,-12.2 16.8,-17.5 53.3,-46.9 133.8,-46.9 187.1,0 z" />
-        <path id="lEye1b" d="m 159,166 c 0,0 -0,1 -0,1 -0,9 -8,16 -17,16 -9,0 -17,-7 -17,-16 -0,-0 -0,-1 -0,-1 0,-9 8,-17 17,-17 9,0 17,8 17,17 z" />
-        <path id="lEye2b" d="m 159,161 v 11 c 0,9 -8,16 -17,16 -9,0 -17,-7 -17,-16 v -11 c 0,-9 8,-17 17,-17 9,0 17,8 17,17 z" />
-        <path id="rEye1b" d="m 290,166 c 0,0 -0,0 -0,1 -0,9 -8,17 -17,17 -9,0 -17,-7 -17,-16 -0,-0 -0,-0 -0,-1 0,-9 8,-17 17,-17 9,0 17,8 17,17 z" />
-        <path id="rEye2b" d="m 290,173 c 0,9 -8,17 -17,17 -9,0 -17,-7 -17,-16 v -11 c 0,-9 8,-17 17,-17 9,0 17,7 17,16 z" />
-        <path id="mouth1b" d="m 204,221 c -27,1 -52,13 -67,35 -7,12 9,22 19,10 13,-16 31,-22 50,-22 C 226,243 247,251 261,269 c 8,9 22,1 19,-10 -17,-25 -46,-40 -76,-38 z" />
-        <path id="mouth2b" d="M 147,234 H 207 268 c 14,0 14,22 0,22 H 207 147 c -14,0 -14,-22 0,-22 z" />
-        <path id="mouth3b" d="m 204,273 c -27,-1 -52,-13 -67,-35 -7,-12 9,-22 19,-10 13,16 31,22 50,22 20,1 41,-7 55,-25 8,-9 22,-1 19,10 -17,25 -46,40 -76,38 z" />        
+            <path id="head1b"
+                d="M 68 50 C 59 50 52 57 52 66 L 52 339 C 52 348 59 355 68 355 L 338 355 C 347 355 354 348 354 339 L 354 66 C 354 57 347 50 338 50 L 68 50 z M 75 57 L 332 57 C 340 57 347 64 347 73 L 347 333 C 347 341 340 348 332 348 L 75 348 C 66 348 59 341 59 333 L 59 73 C 59 64 66 57 75 57 z" />
+            <path id="head2b"
+                d="M 105,87.3 C 98.6,93 92.6,99.2 87.2,105.9 39.35,165.19 44.44,249.25 94.35,302.68 99.83,308.55 105.85,314.05 112.4,319.1 c 59.31,45.78 144.6,41.1 198.4,-13.2 6.2,-6.3 11.9,-13.1 16.9,-20.3 37.5,-54.2 35.4,-127.9 -7,-180.1 C 315.4,99 309.6,92.9 303.2,87.4 246.7,37.7 161.5,37.7 105,87.4 Z m 192.7,6.3 c 6,5.2 11.5,11 16.5,17.1 40,49.2 42.1,118.8 6.6,170 -4.8,6.9 -10.1,13.3 -16,19.2 C 254,351.1 173.41,355.59 117.5,312.4 110.5,306.99 104.14,301.04 98.43,294.66 53.32,244.16 49.32,166.33 93.8,111.2 c 5.09,-6.31 10.7,-12.2 16.8,-17.5 53.3,-46.9 133.8,-46.9 187.1,0 z" />
+            <path id="lEye1b"
+                d="m 159,166 c 0,0 -0,1 -0,1 -0,9 -8,16 -17,16 -9,0 -17,-7 -17,-16 -0,-0 -0,-1 -0,-1 0,-9 8,-17 17,-17 9,0 17,8 17,17 z" />
+            <path id="lEye2b"
+                d="m 159,161 v 11 c 0,9 -8,16 -17,16 -9,0 -17,-7 -17,-16 v -11 c 0,-9 8,-17 17,-17 9,0 17,8 17,17 z" />
+            <path id="rEye1b"
+                d="m 290,166 c 0,0 -0,0 -0,1 -0,9 -8,17 -17,17 -9,0 -17,-7 -17,-16 -0,-0 -0,-0 -0,-1 0,-9 8,-17 17,-17 9,0 17,8 17,17 z" />
+            <path id="rEye2b"
+                d="m 290,173 c 0,9 -8,17 -17,17 -9,0 -17,-7 -17,-16 v -11 c 0,-9 8,-17 17,-17 9,0 17,7 17,16 z" />
+            <path id="mouth1b"
+                d="m 204,221 c -27,1 -52,13 -67,35 -7,12 9,22 19,10 13,-16 31,-22 50,-22 C 226,243 247,251 261,269 c 8,9 22,1 19,-10 -17,-25 -46,-40 -76,-38 z" />
+            <path id="mouth2b" d="M 147,234 H 207 268 c 14,0 14,22 0,22 H 207 147 c -14,0 -14,-22 0,-22 z" />
+            <path id="mouth3b"
+                d="m 204,273 c -27,-1 -52,-13 -67,-35 -7,-12 9,-22 19,-10 13,16 31,22 50,22 20,1 41,-7 55,-25 8,-9 22,-1 19,10 -17,25 -46,40 -76,38 z" />
 
-        <filter id="glass" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">  
-            <feDisplacementMap in="SourceGraphic" scale="40" xChannelSelector="A" yChannelSelector="R" result="goo" />
-            <feGaussianBlur in="goo" stdDeviation="6" />
-        </filter>
+            <filter id="glass" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+                <feDisplacementMap in="SourceGraphic" scale="40" xChannelSelector="A" yChannelSelector="R"
+                    result="goo" />
+                <feGaussianBlur in="goo" stdDeviation="6" />
+            </filter>
 
-    </defs>
+        </defs>
 
-</svg>
+    </svg>
     <script src='https://unpkg.com/gsap@3/dist/gsap.min.js'></script>
-<script src='https://unpkg.com/gsap@3/dist/MorphSVGPlugin.min.js'></script><script type="module" src="./script.js"></script>
+    <script src='https://unpkg.com/gsap@3/dist/MorphSVGPlugin.min.js'></script>
+    <script type="module" src="./script.js"></script>
 
-  </body>
-  
+</body>
+
 </html>
