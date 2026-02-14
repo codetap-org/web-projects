@@ -1,0 +1,64 @@
+body{
+   background-color: #111;
+  height: 700svh;
+  margin: 0;
+  font-family: system-ui, display;
+  padding: 2rem;  
+}
+@property --focus{
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+.wrapper{
+  position: fixed;
+  container-type: size;
+  inset: 0;
+  margin: auto;
+  width: min(80vw, 900px);
+  display: grid;
+  place-content: center;
+
+  > div{
+    /* for timing */
+    --item-slot: calc(100% / sibling-count());
+    --item-entry: calc((sibling-index() - 1) * var(--item-slot));
+    --item-exit: calc(var(--item-entry) + var(--item-slot)  * 2.5 - 20%); /* staggered entry and exits with a final offset to allow the last element to return to their original position */
+
+    /* for animations */
+    --focus: 0;
+    --item-x: calc(
+      (sibling-index() - (sibling-count() + 1) / 2)  /*  offsets */
+      * (100cqw / sibling-count())                   /* equal spacing */
+      * (1 - var(--focus))                           /* collapse to center when focused */
+    );
+
+  
+    grid-area: 1/1; 
+    width: calc(100cqw / sibling-count() * 2);
+    aspect-ratio: 4/6;
+    border: 1px solid var(--clr-lines);
+    background: dodgerblue;
+    border-radius: 10px;
+    
+
+    /* properties that will animate */
+    scale: calc(0.4 + var(--focus) * 0.8);
+    opacity: calc(0.22 + var(--focus) * 0.8);
+    z-index: calc(1 + var(--focus) * 100);
+    translate: var(--item-x) 0;
+
+    /* view animation */
+    animation-name: item-focus;
+    animation-timeline: scroll();
+    animation-range: var(--item-entry) var(--item-exit);
+    animation-fill-mode: both;
+		animation-timing-function: ease-in-out;
+  }
+}
+@keyframes item-focus {
+  0%   		{  --focus: 0; }
+  25%,75% {  --focus: 1; /*background-color: hotpink;*/}
+  100% 		{  --focus: 0; }
+}

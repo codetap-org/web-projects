@@ -1,0 +1,9 @@
+body { margin: 0; overflow: hidden; background-color: #111; }
+        canvas { display: block; }
+        #gui-container { position: absolute; bottom: 20px; right: 20px; z-index: 100; }
+        #info {
+            position: absolute; top: 20px; left: 20px;
+            color: #aaa; font-family: monospace; pointer-events: none;
+            background: rgba(0,0,0,0.6); padding: 5px 10px; border-radius: 4px;
+        }
+        #fileInput { display: none; }
