@@ -4,7 +4,13 @@
 @layer demo {
   body{
     font-family: 'Crushed', display;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100svh;
+    overflow: hidden;
+    margin: 0;
+    background-color: black;
   }
 .wrapper {
   --card-trans-duration: 1000ms;
