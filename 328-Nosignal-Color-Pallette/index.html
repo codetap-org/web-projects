@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>nosignal: color pallette using only named colors</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="tv">
+
+	<div class="knob" onclick="toggleTV()"></div>
+
+	<div id="screen">
+		<div class="palette-container">
+			<div class="color-swatch color-1"></div>
+			<div class="color-swatch color-2"></div>
+			<div class="color-swatch color-3"></div>
+			<div class="color-swatch color-4"></div>
+			<div class="color-swatch color-5"></div>
+			<div class="color-swatch color-6"></div>
+			<div class="color-swatch color-7"></div>
+		</div>
+		<div class="palette-container-2">
+
+			<div class="color-swatch color-8"></div>
+			<div class="color-swatch color-9"></div>
+			<div class="color-swatch color-10"></div>
+			<div class="color-swatch color-11"></div>
+			<div class="color-swatch color-12"></div>
+			<div class="color-swatch color-13"></div>
+			<div class="color-swatch color-14"></div>
+		</div>
+	</div>
+</div>
+
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<filter id="scanline-displacement">
+
+			<feTurbulence type="fractalNoise" baseFrequency="5555.05 55555555.5" numOctaves="1" result="noise">
+
+				<animate attributeName="baseFrequency" dur="1s" values="22.05 .5; 22.04 .5; 22.05 .5" repeatCount="indefinite" />
+			</feTurbulence>
+
+			<feDisplacementMap in="SourceGraphic" in2="noise" scale="50" xChannelSelector="R" yChannelSelector="B" />
+		</filter>
+	</defs>
+
+	<!-- Add something to actually see the filter -->
+
+</svg>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

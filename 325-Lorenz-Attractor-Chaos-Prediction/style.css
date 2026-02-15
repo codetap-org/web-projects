@@ -1,0 +1,46 @@
+html, body {
+		margin: 0;
+		padding: 0;
+		background: #111525;
+		color: #ccc;
+		font-family: monospace;
+		overflow: hidden;
+	}
+	#info {
+		position: fixed;
+		top: 10px;
+		left: 10px;
+		max-width: 420px;
+		font-size: 12px;
+		line-height: 1.4;
+		opacity: 0.85;
+	}
+	#controls {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    left: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #222;
+    border-radius: 6px;
+    text-align: right;
+}
+    #controls button {
+    align-self: flex-end;
+}
+
+     #controls input[type="range"] {
+    width: 160px;
+}
+
+	button, input {
+		background: #111;
+		color: #ccc;
+		border: 1px solid #333;
+		padding: 4px;
+		margin: 2px;
+	}

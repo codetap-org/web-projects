@@ -1,0 +1,24 @@
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: url(#filter);
+  background: radial-gradient(circle, #dd7878 30%, #f81d09 50%);
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, sans-serif;
+  overflow: hidden;
+}
+
+#img-svg {
+  height: 50vh;
+}
+
+#svg-path {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}

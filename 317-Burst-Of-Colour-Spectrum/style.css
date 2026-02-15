@@ -1,0 +1,8 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+body {
+  background: conic-gradient(from 0.25turn at 50% 75%, transparent 60%, oklch(0.5 0.3 0), oklch(0.6 0.5 30), oklch(1 0.3 60), oklch(0.7 0.3 90), oklch(0.6 0.3 160), oklch(0.9 0.3 330), oklch(0.3 0.3 300), oklch(0.4 0.3 270), transparent 90%), linear-gradient(to right, transparent 49.9%, white 0 50.1%, transparent 0) black;
+}

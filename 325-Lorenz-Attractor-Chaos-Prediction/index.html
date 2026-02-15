@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>🌌  Lorenz Attractor – Chaos &amp; Prediction</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <canvas id="c"></canvas>
+
+<div id="info">
+<b>Lorenz Attractor</b><br><br>
+dx/dt = σ(y − x)<br>
+dy/dt = x(ρ − z) − y<br>
+dz/dt = xy − βz<br><br>
+
+• Deterministic system<br>
+• Unpredictable outcomes<br>
+• Sensitive to initial conditions<br><br>
+
+Conceptual particles: <b>2.36 million</b><br>
+Rendered particles: <span id="count"></span><br><br>
+
+Infinity here means:<br>
+continuous state space,<br>
+never repeating trajectories,<br>
+unbounded informational complexity.
+</div>
+
+<div id="controls">
+Particles:
+<input type="range" min="1000" max="200000" step="1000" value="50000" id="slider">
+<button onclick="reset()">Reset</button>
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

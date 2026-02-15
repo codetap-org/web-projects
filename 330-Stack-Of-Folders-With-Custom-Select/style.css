@@ -1,0 +1,151 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: system-ui;
+  font-size: 15pt;
+  padding: 3rem;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%),
+    radial-gradient(circle at top left, #ff9ff3, #a855f7, #48dbfb);
+  background-blend-mode: multiply;
+}
+
+@supports not (appearance: base-select) {
+  body::before {
+    content: "Your browser doesn't support customizable selects.";
+    display: block;
+    background: #0001;
+    padding: .5rem;
+    inline-size: max-content;
+    border-radius: .25rem;
+  }
+}
+
+/* Opt-in to customizable select */
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+/* Hide default dropdown arrow */
+select::picker-icon {
+  display: none;
+}
+
+select,
+option span {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 0;
+}
+
+/* Glassmorphism button styling */
+select {
+  background: linear-gradient(
+    135deg,
+    rgba(40, 40, 50, 0.4) 0%,
+    rgba(60, 60, 70, 0.25) 50%,
+    rgba(50, 50, 60, 0.35) 100%
+  );
+  backdrop-filter: blur(12px) saturate(180%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  min-inline-size: 12rem;
+}
+
+/* Add folder emoji before selected text */
+select::before {
+  content: "📂";
+}
+
+/* Picker (dropdown) - transparent so option cards are visible */
+::picker(select) {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
+}
+
+/* Fan animation using sibling-index() for staggered timing */
+option {
+  --stagger-delay: 0.01s;
+  --rotation-offset: 4deg;
+  transform-origin: right calc(sibling-index() * -1.5rem);
+  rotate: 0deg;
+  opacity: 0;
+  transition: opacity 0.3s ease-out,
+    rotate 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: calc((sibling-index() - 1) * var(--stagger-delay));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  option {
+    transition: none;
+  }
+}
+
+/* Fan out when open */
+select:open option {
+  opacity: 1;
+  /* Each option rotates to its final position based on its index */
+  rotate: calc(sibling-index() * -1 * var(--rotation-offset));
+}
+
+@starting-style {
+  select:open option {
+    opacity: 0;
+    rotate: 0deg;
+  }
+}
+
+option span {
+  align-self: center;
+}
+
+/* Folder/file icons via ::before (now usable since ::checkmark exists) */
+option::before {
+  content: "📁";
+  display: block;
+  font-size: 2.5rem;
+  align-self: center;
+  filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.3));
+}
+
+option:checked::before {
+  content: "📂";
+}
+
+option:hover {
+  background: none;
+}
+
+option:hover span {
+  background: #eee;
+}
+
+option:checked span {
+  background: #222;
+  color: white;
+}
+
+/* Custom checkmark */
+option::checkmark {
+  content: "●";
+  color: #222;
+}
+
+option:focus-visible {
+  outline: none;
+}
+
+option:focus-visible span {
+  outline: 2px solid black;
+  outline-offset: 2px;
+}

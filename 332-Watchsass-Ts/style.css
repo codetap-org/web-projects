@@ -1,0 +1,322 @@
+/**
+ * ** Mixins for positions
+ * ** --------------------**/
+/**
+ * ** Mixins for sizes
+ * ** ----------------**/
+/**
+ * ** Mixins for colors
+ * ** -----------------**/
+/**
+ * ** Mixins for flex display
+ * ** -----------------------**/
+:root {
+  --watch-size: 20rem;
+  --hours-needle-angle: 0deg;
+  --minutes-needle-angle: 0deg;
+  --seconds-needle-angle: 0deg;
+  --hours-needle-width: 0.3rem;
+  --hours-needle-height: 28%;
+  --minutes-needle-width: 0.3rem;
+  --minutes-needle-height: 36%;
+  --seconds-needle-width: 0.16rem;
+  --seconds-needle-height: 42%;
+  --needles-color: #222;
+  --needles-radius: 100% 100% 50% 50%;
+  --number-width: 5rem;
+  --number-height: 44%;
+  --number-color: #222;
+  --grad-color: #222;
+  --grad-width: .5rem;
+  --grad-radius: 100% 100% 50% 50%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+  margin: 0;
+  gap: 3rem;
+  background-color: #333;
+}
+
+.watch {
+  position: relative;
+  width: var(--watch-size);
+  height: var(--watch-size);
+  background-color: #ccc;
+  border-radius: 50%;
+  box-shadow: 0 0 1.6rem 0.3rem #222 inset, 0 0 1.6rem 0.3rem #222;
+}
+.watch:before {
+  position: absolute;
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  top: calc(50% - .5rem);
+  left: calc(50% - .5rem);
+  background-color: #111;
+  border-radius: 50%;
+  box-shadow: 0 0 0.3rem 0rem #ccc inset;
+}
+
+.hours-needle {
+  position: absolute;
+  top: calc(50% - var(--hours-needle-height));
+  left: calc(50% - var(--hours-needle-width) / 2);
+  width: var(--hours-needle-width);
+  height: var(--hours-needle-height);
+  background-color: var(--needles-color);
+  transform-origin: bottom center;
+  transform: rotateZ(var(--hours-needle-angle));
+  border-radius: var(--needles-radius);
+  box-shadow: inset #ccc 0 0 0.1rem 0;
+  z-index: 5;
+}
+
+.minutes-needle {
+  position: absolute;
+  top: calc(50% - var(--minutes-needle-height));
+  left: calc(50% - var(--minutes-needle-width) / 2);
+  width: var(--minutes-needle-width);
+  height: var(--minutes-needle-height);
+  background-color: var(--needles-color);
+  transform-origin: bottom center;
+  transform: rotateZ(var(--minutes-needle-angle));
+  border-radius: var(--needles-radius);
+  box-shadow: inset #ccc 0 0 0.1rem 0;
+  z-index: 5;
+}
+
+.seconds-needle {
+  position: absolute;
+  top: calc(50% - var(--seconds-needle-height));
+  left: calc(50% - var(--seconds-needle-width) / 2);
+  width: var(--seconds-needle-width);
+  height: var(--seconds-needle-height);
+  background-color: var(--needles-color);
+  transform-origin: bottom center;
+  transform: rotateZ(var(--seconds-needle-angle));
+  border-radius: var(--needles-radius);
+  box-shadow: inset #ccc 0 0 0.1rem 0;
+  z-index: 5;
+}
+
+.numbers {
+  position: absolute;
+  width: var(--number-width);
+  height: var(--number-height);
+  top: calc(50% - var(--number-height));
+  left: calc(50% - var(--number-width) / 2);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--number-color);
+  text-align: center;
+  transform-origin: bottom center;
+}
+
+.graduation {
+  --grad-height: 8%;
+  position: absolute;
+  width: var(--grad-width);
+  height: 50%;
+  top: 0;
+  left: calc(50% - var(--grad-width) / 2);
+  background: linear-gradient(0, transparent 0 calc(100% - var(--grad-height)), var(--grad-color) calc(100% - var(--grad-height)) 100%);
+  transform-origin: bottom center;
+  border-radius: var(--grad-radius);
+  pointer-events: none;
+}
+.graduation.big {
+  --grad-height: 12%;
+}
+
+.watch:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  -webkit-backdrop-filter: blur(0.3rem);
+          backdrop-filter: blur(0.3rem);
+  border-radius: 50%;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+.watch:hover:after {
+  opacity: 0.6;
+}
+
+.mecanical {
+  --grad-color: #ccc;
+  --number-height: 51%;
+  --hours-needle-width: 0.5rem;
+  --hours-needle-height: 34%;
+  --minutes-needle-width: 0.5rem;
+  --minutes-needle-height: 45%;
+  --seconds-needle-width: 0.3rem;
+  --seconds-needle-height: 48%;
+}
+.mecanical:before {
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #111 0%, #111 5%, #ccc 5%, #ccc 51%, #111 51%, #111 56%, #ccc 56%, #ccc 67%, #111 67%, #111 100%);
+  pointer-events: none;
+}
+.mecanical .graduation {
+  --grad-height: 2%;
+}
+.mecanical .graduation.big {
+  --grad-height: 4%;
+}
+.mecanical .numbers {
+  font-size: 0;
+}
+.mecanical .number-1::after {
+  content: "I";
+  font-size: 3rem;
+  color: #111;
+}
+.mecanical .number-2::after {
+  content: "I";
+  font-size: 3rem;
+  color: #111;
+}
+.mecanical .number-3::after {
+  content: "III";
+  font-size: 3rem;
+  color: #111;
+}
+.mecanical .number-4::after {
+  content: "I";
+  font-size: 3rem;
+  color: #111;
+}
+.mecanical .number-5::after {
+  content: "I";
+  font-size: 3rem;
+  color: #111;
+}
+.mecanical .number-6::after {
+  content: "VI";
+  font-size: 3rem;
+  color: #111;
+}
+.mecanical .number-7::after {
+  content: "I";
+  font-size: 3rem;
+  color: #111;
+}
+.mecanical .number-8::after {
+  content: "I";
+  font-size: 3rem;
+  color: #111;
+}
+.mecanical .number-9::after {
+  content: "IX";
+  font-size: 3rem;
+  color: #111;
+}
+.mecanical .number-10::after {
+  content: "I";
+  font-size: 3rem;
+  color: #111;
+}
+.mecanical .number-11::after {
+  content: "I";
+  font-size: 3rem;
+  color: #111;
+}
+.mecanical .number-12::after {
+  content: "XII";
+  font-size: 3rem;
+  color: #111;
+}
+
+.open-heart {
+  position: absolute;
+  width: 40%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  box-shadow: inset 0 0 1rem rgba(0, 0, 0, 0.6);
+}
+.open-heart:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 1.5rem rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
+.plate {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, #555 0%, #333 60%, #222 100%), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0px, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 3px);
+  mix-blend-mode: overlay;
+}
+
+.gear {
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, #999 0 40%, transparent 41%), conic-gradient(from 0deg, #aaa 0deg 10deg, #666 10deg 20deg);
+  background: radial-gradient(circle, #999 0 45%, transparent 46%), repeating-conic-gradient(#888 0deg 4deg, #444 4deg 8deg);
+  -webkit-animation: spin 12s linear infinite;
+          animation: spin 12s linear infinite;
+}
+.gear.small {
+  width: 40%;
+  animation: spin 6s linear infinite reverse;
+}
+.gear.large {
+  width: 70%;
+  -webkit-animation: spin 12s linear infinite;
+          animation: spin 12s linear infinite;
+}
+
+.gear:nth-child(1) {
+  top: 50%;
+  left: 60%;
+  width: 70%;
+  animation: spin linear infinite 12s reverse;
+}
+
+.gear:nth-child(2) {
+  top: 30%;
+  left: 30%;
+  width: 40%;
+  -webkit-animation: spin linear infinite 8s;
+          animation: spin linear infinite 8s;
+}
+
+.gear:nth-child(3) {
+  top: 20%;
+  left: 20%;
+  width: 20%;
+  animation: spin linear infinite 6s reverse;
+}
+
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

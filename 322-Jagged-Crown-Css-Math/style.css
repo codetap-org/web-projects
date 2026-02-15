@@ -1,0 +1,51 @@
+div {
+  transform-style: preserve-3d;
+  box-sizing: padding-box;
+}
+
+.grad {
+  --r: 80vmin;
+  position: relative;
+  width: var(--r);
+  aspect-ratio: 1;
+  border-radius: 100vmax;
+  animation: z360 30s linear infinite;
+}
+
+.grad .card {
+  position: absolute;
+  offset-path: border-box;
+  offset-distance: calc(sibling-index() / sibling-count() * 100%);
+  transform: rotatex(90deg);
+  border: 1px solid #F5F5F0;
+  border-width: 5px 0px;
+  width: 1rem;
+  width: calc(2 * pi * var(--r) / sibling-count());
+  height: 2rem;
+  display: grid;
+  place-content: center;
+  background: hsl(calc(sibling-index() * 360 / sibling-count()), 75%, 75%);
+  border-radius: 50%;
+  corner-shape: bevel;
+}
+
+body {
+  background: #1f2020;
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+@keyframes z360 {
+  0% {
+    transform: rotatex(-125deg) rotatez(0deg);
+  }
+  50% {
+    transform: rotatex(-60deg) rotatez(-180deg);
+  }
+  100% {
+    transform: rotatex(-125deg) rotatez(-360deg);
+  }
+}
