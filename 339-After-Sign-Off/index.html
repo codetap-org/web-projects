@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>After Sign Off | CodeTap</title>
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- 
+  CodeTap
+  https://codetap.org
+  -->
+  <link rel="apple-touch-icon" href="https://codetap.org/assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://codetap.org/assets/img/favicon.png">
+</head>
+
+<body>
+  <div class="tv-wrap">
+    <div class="tv-cabinet">
+      <div class="tv-bezel">
+        <div class="tv-screen" id="tvScreen" tabindex="0">
+          <canvas id="screen"></canvas>
+          <div class="scanlines"></div>
+          <div class="phosphor-glow" id="glow"></div>
+          <div class="screen-glass"></div>
+        </div>
+      </div>
+
+      <div class="tv-controls">
+        <div class="tv-brand">Petrichor</div>
+        <div class="indicator-row">
+          <div class="led"></div>
+          <span
+            style="font-family:'VT323',monospace;font-size:14px;color:rgba(200,191,173,0.3);letter-spacing:0.1em;">ON
+            AIR</span>
+        </div>
+        <div class="knobs">
+          <div class="knob" id="prevKnob" title="Previous channel"></div>
+          <div class="knob ch-knob" id="nextKnob" title="Next channel"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="channel-strip" id="channelStrip"></div>
+    <div class="hint">click knob or channel buttons to switch · space / arrow keys work too</div>
+
+  </div>
+  <script src="./script.js"></script>
+</body>
+
+</html>

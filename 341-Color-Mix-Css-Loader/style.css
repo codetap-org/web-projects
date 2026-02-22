@@ -1,0 +1,99 @@
+body {
+  background: #0e0f0e;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+.holder {
+  position: relative;
+  transform: rotate(45deg);
+  border: 1.5px solid #fff;
+  width: 120px;
+  height: 120px;
+  isolation: isolate;
+  box-shadow: 0 0 2px 2px rgba(0,0,0,0.125),
+              inset 0 0 1px 1px rgba(0,0,0,0.125);
+  -webkit-animation: holderStep 1.85s linear infinite alternate;
+          animation: holderStep 1.85s linear infinite alternate;
+  -webkit-animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+          animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+#b1,
+#b2,
+#b3,
+#b4 {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  opacity: 0.85;
+}
+
+#b1 {
+  top: 3.75px;
+  left: 3.75px;
+  -webkit-animation: m1 1s .75s linear infinite alternate,
+             colorShift 4s 1s linear infinite;
+          animation: m1 1s .75s linear infinite alternate,
+             colorShift 4s 1s linear infinite;
+}
+
+#b2 {
+  top: 3.75px;
+  right: 3.75px;
+  -webkit-animation: m2 1s 1.75s linear infinite alternate,
+             colorShift 4s 2s linear infinite;
+          animation: m2 1s 1.75s linear infinite alternate,
+             colorShift 4s 2s linear infinite;
+}
+
+#b4 {
+  bottom: 3.75px;
+  right: 3.75px;
+  -webkit-animation: m4 1s 2.75s linear infinite alternate,
+             colorShift 4s 3s linear infinite;
+          animation: m4 1s 2.75s linear infinite alternate,
+             colorShift 4s 3s linear infinite;
+}
+
+#b3 {
+  bottom: 3.75px;
+  left: 3.75px;
+  -webkit-animation: m3 1s 3.75s linear infinite alternate,
+             colorShift 4s 4s linear infinite;
+          animation: m3 1s 3.75s linear infinite alternate,
+             colorShift 4s 4s linear infinite;
+}
+
+@-webkit-keyframes holderStep {
+  0% { transform: rotate(45deg); }
+  100% { transform: rotate(-90deg); }
+}
+
+@keyframes holderStep {
+  0% { transform: rotate(45deg); }
+  100% { transform: rotate(-90deg); }
+}
+
+@-webkit-keyframes m1 { to { top: 31.25px; left: 31.25px; } }
+
+@keyframes m1 { to { top: 31.25px; left: 31.25px; } }
+@-webkit-keyframes m2 { to { top: 31.25px; right: 31.25px; } }
+@keyframes m2 { to { top: 31.25px; right: 31.25px; } }
+@-webkit-keyframes m3 { to { bottom: 31.25px; left: 31.25px; } }
+@keyframes m3 { to { bottom: 31.25px; left: 31.25px; } }
+@-webkit-keyframes m4 { to { bottom: 31.25px; right: 31.25px; } }
+@keyframes m4 { to { bottom: 31.25px; right: 31.25px; } }
+
+@-webkit-keyframes colorShift {
+  0%   { background: color-mix(in srgb, #f07 60%, #fff 25%); }
+  50%  { background: color-mix(in srgb, #07f 60%, #fff 25%); }
+  100% { background: color-mix(in srgb, #0c6 60%, #fff 25%); }
+}
+
+@keyframes colorShift {
+  0%   { background: color-mix(in srgb, #f07 60%, #fff 25%); }
+  50%  { background: color-mix(in srgb, #07f 60%, #fff 25%); }
+  100% { background: color-mix(in srgb, #0c6 60%, #fff 25%); }
+}

@@ -1,0 +1,128 @@
+@import url(https://fonts.bunny.net/css?family=jura:300,500);
+@layer base, demo;
+
+@layer demo {
+
+  /* demo code goes here */
+  .wrapper{
+    --circle-size: 50vw;
+    --dot-size: 3vw;
+    --duration: 3s;
+		--dot-bg-color: deeppink;
+		--dot-first-bg-color: dodgerblue; /* to show first dot with different color */
+    
+    border-radius: 9in;
+    border:1px solid var(--clr-lines);
+    width:var(--circle-size);
+    aspect-ratio: 1;
+  	position: relative;
+    anchor-name: --circle;
+    div{
+      --count: sibling-count();
+      --i: calc(sibling-index() - 1);
+			
+			@supports not (selector(:sibling-index(0))) { 
+
+				--count:13;
+				&:nth-child(1){ --i: 0;}
+				&:nth-child(2){ --i: 1;}
+				&:nth-child(3){ --i: 2;}
+				&:nth-child(4){ --i: 3;}
+				&:nth-child(5){ --i: 4;}
+				&:nth-child(6){ --i: 5;}
+				&:nth-child(7){ --i: 6;}
+				&:nth-child(8){ --i: 7;}
+				&:nth-child(9){ --i: 8;}
+				&:nth-child(10){ --i: 9;}
+				&:nth-child(11){ --i: 10;}
+				&:nth-child(12){ --i: 11;}
+				&:nth-child(13){ --i: 12;}
+			}
+			
+			
+			
+      --delay: calc(var(--i) * (var(--duration) / var(--count)));
+
+      --angle: calc(360deg / var(--count) * var(--i));
+      --radius: calc(var(--circle-size) / 2);
+      --diameter: calc(var(--radius) * 2);
+
+
+      
+      position: absolute;
+      width: var(--dot-size);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--dot-bg-color);
+      opacity: 0;
+      
+      offset-anchor: 50% 50%;
+      offset-path: circle(var(--radius) at 50% 50%);
+      offset-distance: calc(var(--i) / var(--count) * 100%);
+      offset-rotate: 0deg;
+
+      animation-name: --cross, --fade-in;
+      animation-duration: var(--duration);
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: both,forwards;
+      animation-iteration-count:infinite, 1;
+      animation-delay: var(--delay), calc(var(--duration) / 2 * var(--i) + var(--delay));
+
+      
+      &:first-child{
+        background-color: var(--dot-first-bg-color);
+      }
+      
+    }
+  }
+
+@keyframes --cross {
+  50% {
+    translate:
+      calc(cos(var(--angle)) * -1 * var(--diameter))
+      calc(sin(var(--angle)) * -1 * var(--diameter));
+  }
+}
+
+  @keyframes --fade-in{
+    5%,100%{
+      opacity: 1;
+    }
+  }
+}
+  
+  
+  /* general styling not relevant for this demo */
+@layer base {
+	* {
+		box-sizing: border-box;
+	}
+	:root {
+		color-scheme: light dark;
+		--bg-dark: rgb(16, 24, 40);
+		--bg-light: rgb(248, 244, 238);
+		--txt-light: rgb(10, 10, 10);
+		--txt-dark: rgb(245, 245, 245););
+		--line-light: rgba(0 0 0 / .25);
+		--line-dark: rgba(255 255 255 / .25);
+    
+    --clr-bg: light-dark(var(--bg-light), var(--bg-dark));
+    --clr-txt: light-dark(var(--txt-light), var(--txt-dark));
+    --clr-lines: light-dark(var(--line-light), var(--line-dark));
+	}
+ 
+	body {
+		background-color: var(--clr-bg);
+		color: var(--clr-txt);
+		min-height: 100svh;
+		margin: 0;
+		padding: 2rem;
+		font-family: "Jura", sans-serif;
+		font-size: 1rem;
+		line-height: 1.5;
+    display: grid;
+    place-items: center;
+    gap: 2rem;
+	}
+	}
+}
