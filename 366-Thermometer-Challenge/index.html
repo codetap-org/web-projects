@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Thermometer (CodePen Challenge: Mix or Blend Colors) | CodeTap</title>
+  <link rel="stylesheet" href="./style.css">
+  <!-- 
+		CodeTap
+		https://codetap.org
+		-->
+  <link rel="apple-touch-icon" href="https://codetap.org/assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://codetap.org/assets/img/favicon.png">
+</head>
+
+<body>
+  <main>
+    <label for="thermometer-slider" data-bg="80">0°C</label>
+    <div class="thermometer">
+      <input type="range" class="thermometer-slider" id="thermometer-slider" min="-40" max="50" list="temperatures"
+        value="0">
+      <div class="glass"></div>
+      <datalist id="temperatures">
+        <option value="-40" label="-40°C"></option>
+        <option value="-30" label="-30°C"></option>
+        <option value="-20" label="-20°C"></option>
+        <option value="-10" label="-10°C"></option>
+        <option value="0" label="0°C"></option>
+        <option value="10" label="10°C"></option>
+        <option value="20" label="20°C"></option>
+        <option value="30" label="30°C"></option>
+        <option value="40" label="40°C"></option>
+        <option value="50" label="50°C"></option>
+      </datalist>
+    </div>
+    <div class="desc">
+      <p>color-mix() was used in the hot-to-cold blue/red gradient. mix-blend-mode was used in the meter to give it a
+        glass appearance. Or at least I hope it looks like glass.</p>
+      <p>You can change the temperature by dragging the meter or using your mouse wheel.</p>
+      <p>JavaScript was used to update the label and listen to the mouse wheel.</p>
+    </div>
+  </main>
+  <script src="./script.js"></script>
+
+</body>
+
+</html>

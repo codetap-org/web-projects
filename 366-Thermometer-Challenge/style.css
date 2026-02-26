@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+:root {
+  --hot-cold-gradient: linear-gradient(
+    0deg,
+    oklch(86.21% 0.0806 227),
+    color-mix(
+        in lab,
+        oklch(86.21% 0.0806 227) 50%,
+        oklch(64.29% 0.2431 29.73) 50%
+      )
+      85%,
+    oklch(64.29% 0.2431 29.73)
+  );
+  --thermometer-track: oklch(82.62% 0.01 264.5);
+}
+
+body {
+  background: oklch(23.57% 0.01 274.6);
+  font-family: 'Ubuntu', sans-serif;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  align-items: center;
+  justify-items: center;
+  margin: 5vh;
+}
+
+label {
+  display: block;
+  background: var(--hot-cold-gradient);
+  background-position: 0 attr(data-bg vh);
+  background-size: 180vh 200vh;
+  background-clip: text;
+  color: oklch(0% 0 0 / 0);
+  font-weight: 600;
+  font-size: 10vh;
+}
+
+.thermometer {
+  --thermo-padding: 5vh;
+  --thermo-height: 70vh;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  width: 30vh;
+  height: calc(var(--thermo-height) + 2 * var(--thermo-padding));
+  padding: var(--thermo-padding) 0;
+  border-radius: 10vh;
+  background-image: linear-gradient(
+    45deg,
+    oklch(93.87% 0.0149 277.8),
+    oklch(84.01% 0.0036 219.5)
+  );
+
+  &::after {
+    display: block;
+    z-index: 0;
+    position: absolute;
+    width: 7.5vh;
+    height: var(--thermo-height);
+    background-image: linear-gradient(
+      oklch(73.8% 0 0) 0%,
+      oklch(73.8% 0 0) 5%,
+      oklch(0% 0 0 / 0) 5%,
+      oklch(0% 0 0 / 0) 100%
+    );
+    background-position: 0 1vh;
+    background-size: 7.5vh 8.55vh;
+    content: '';
+  }
+  &::before {
+    display: block;
+    z-index: 0;
+    position: absolute;
+    width: 5vh;
+    height: calc(var(--thermo-height) - 3vh);
+    margin-top: 1vh;
+    background-image: linear-gradient(
+      oklch(73.8% 0 0) 0%,
+      oklch(73.8% 0 0) 10%,
+      oklch(0% 0 0 / 0) 10%,
+      oklch(0% 0 0 / 0) 100%
+    );
+    background-size: 5vh 1vh;
+    content: '';
+  }
+}
+
+.thermometer datalist {
+  display: flex;
+  position: absolute;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  block-size: var(--thermo-height);
+  margin-left: 15vh;
+  text-align: right;
+}
+
+.thermometer option {
+  padding: 0;
+  font-size: calc(min(1rem, 2.5vh));
+}
+
+.thermometer-slider {
+  z-index: 1;
+  inline-size: var(--thermo-height);
+  block-size: 2.5vh;
+  border-radius: 2.5vh;
+  writing-mode: sideways-lr;
+}
+
+/* Thank you deathangel908 https://stackoverflow.com/a/38163892 */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .thermometer-slider {
+    -webkit-appearance: none;
+    overflow: hidden;
+  }
+
+  .thermometer-slider::-webkit-slider-runnable-track {
+    width: 500px;
+    height: 500px;
+    border-radius: 2.5vh;
+    background: var(--hot-cold-gradient);
+  }
+
+  .thermometer-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 0;
+    box-shadow: 0 calc(-1 * calc(var(--thermo-height) + 1vh)) 0
+      var(--thermo-height) var(--thermometer-track);
+  }
+}
+
+.thermometer-slider::-moz-range-progress {
+  background-color: var(--hot-cold-gradient);
+}
+
+.thermometer-slider::-moz-range-track {
+  background-color: var(--thermometer-track);
+}
+
+.thermometer-slider::-ms-fill-lower {
+  background-color: var(--hot-cold-gradient);
+}
+
+.thermometer-slider::-ms-fill-upper {
+  background-color: var(--thermometer-track);
+}
+
+.glass {
+  z-index: 1;
+  position: absolute;
+  width: 2.5vh;
+  height: var(--thermo-height);
+  border-radius: 2.5vh;
+  box-shadow:
+    inset -1.5vh 1px 1px oklch(1 0 0 / 0.5),
+    inset 2px 1px 1px oklch(100% 0 0 / 0.5);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+p {
+  width: 50%;
+  color: white;
+  text-align: center;
+}

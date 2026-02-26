@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Stormy Blues | CodeTap</title>
+  <link rel='stylesheet'
+    href='https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&amp;family=Courier+Prime:wght@400;700&amp;display=swap'>
+  <link rel="stylesheet" href="./style.css">
+  <!-- 
+		CodeTap
+		https://codetap.org
+		-->
+  <link rel="apple-touch-icon" href="https://codetap.org/assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://codetap.org/assets/img/favicon.png">
+</head>
+
+<body>
+  <div id="sky"></div>
+  <div id="clouds">
+    <div class="cloud-band"></div>
+    <div class="cloud-band"></div>
+    <div class="cloud-band"></div>
+  </div>
+  <div id="bg-rain"></div>
+  <div id="lightning-flash"></div>
+
+  <canvas id="c"></canvas>
+
+  <div id="ui">
+    <div id="header">
+      <div id="title">
+        <h1><em>Stormy</em> Blues</h1>
+        <sub>Color Palette Challenge · 2026</sub>
+      </div>
+      <div id="counters">
+        <div class="line">Fallen &nbsp;<strong id="ct-fallen">0</strong></div>
+        <div class="line">Active &nbsp;<strong id="ct-active">0</strong></div>
+        <div class="line">Puddles <strong id="ct-puddles">0</strong></div>
+      </div>
+    </div>
+    <div id="palette-river"></div>
+  </div>
+
+  <div id="hint">click a raindrop to burst it &nbsp;·&nbsp; hover to part the rain</div>
+  <div id="color-tooltip"></div>
+
+  <div id="tags">
+    <span class="cp-tag">cpc-color-palettes</span>
+    <span class="cp-tag">codepenchallenge</span>
+  </div>
+
+  <a href="https://github.com/russell-henderson" target="_blank" class="russell-badge" id="russellBadge">
+    <span class="badge-text">Russell</span>
+    <div class="badge-glow"></div>
+  </a>
+  <script src="./script.js"></script>
+
+</body>
+
+</html>
