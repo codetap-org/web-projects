@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Mix and Blend - Spiral</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div id="gsapWrapper">
+    
+    <svg id="spiralSvg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+        <g id="spiralWrapper">
+            <path id="spiral" fill="none" stroke="red" stroke-width="1" stroke-opacity="0" d="" />
+            <path id="spiral2" fill="none" stroke-width="10" stroke-opacity="1" d="" />
+            <g id="segmentsTemp"></g>
+            <g id="segments"></g>
+        </g>
+				<path id="spiral3" fill="none" stroke-width="20" stroke-opacity="1" filter="url(#shadow)" d="" />
+    </svg>
+
+</div>
+
+<div id="selectWrapper">
+    <select id="mixBlendModeSelect" multiple>
+		<option value="normal">normal</option>
+		<option value="multiply">multiply</option>
+		<option value="difference" selected>difference</option>
+		<option value="saturation">saturation</option>
+		<option value="screen">screen</option>
+		<option value="overlay">overlay</option>
+		<option value="darken">darken</option>
+		<option value="lighten">lighten</option>
+		<option value="color-dodge">color-dodge</option>
+		<option value="color-burn">color-burn</option>
+		<option value="hard-light">hard-light</option>
+		<option value="soft-light">soft-light</option>
+		<option value="exclusion">exclusion</option>
+		<option value="hue">hue</option>
+		<option value="color">color</option>
+		<option value="luminosity">luminosity</option>
+	</select>
+
+        <select id="colorSelect" multiple>
+
+        <optgroup>
+            <option value="IndianRed" selected></option>
+            <option value="LightCoral"></option>
+            <option value="Salmon" selected></option>
+            <option value="DarkSalmon"></option>
+            <option value="LightSalmon" selected></option>
+            <option value="Crimson"></option>
+            <option value="Red" selected></option>
+            <option value="FireBrick"></option>
+            <option value="DarkRed" selected></option>
+        </optgroup>
+        <optgroup>
+            <option value="Pink"></option>
+            <option value="LightPink" selected></option>
+            <option value="HotPink"></option>
+            <option value="DeepPink" selected></option>
+            <option value="MediumVioletRed"></option>
+            <option value="PaleVioletRed" selected></option>
+        </optgroup>
+        <optgroup>
+            <option value="LightSalmon"></option>
+            <option value="Coral" selected></option>
+            <option value="Tomato"></option>
+            <option value="OrangeRed" selected></option>
+            <option value="DarkOrange" ></option>
+            <option value="Orange" selected></option>
+        </optgroup>
+        <optgroup>
+            <option value="Gold" selected></option>
+            <option value="Yellow"></option>
+            <option value="LightYellow" selected></option>
+            <option value="LemonChiffon"></option>
+            <option value="LightGoldenRodYellow" selected></option>
+            <option value="PapayaWhip"</option>
+            <option value="Moccasin" selected></option>
+            <option value="PeachPuff"></option>
+            <option value="PaleGoldenRod" selected></option>
+            <option value="Khaki"></option>
+            <option value="DarkKhaki" selected></option>
+        </optgroup>
+        <optgroup>
+            <option value="Lavender"</option>
+            <option value="Thistle" selected></option>
+            <option value="Plum"></option>
+            <option value="Violet" selected></option>
+            <option value="Orchid"></option>
+            <option value="Fuchsia" selected></option>
+            <option value="Magenta"></option>
+            <option value="MediumOrchid" selected></option>
+            <option value="MediumPurple"></option>
+            <option value="RebeccaPurple" selected></option>
+            <option value="BlueViolet"</option>
+            <option value="DarkViolet" selected></option>
+            <option value="DarkOrchid"></option>
+            <option value="DarkMagenta" selected></option>
+            <option value="Purple"></option>
+            <option value="Indigo" selected></option>
+            <option value="SlateBlue"></option>
+            <option value="DarkSlateBlue" selected></option>
+            <option value="MediumSlateBlue"></option>
+        </optgroup>
+        <optgroup>
+            <option value="GreenYellow" selected></option>
+            <option value="Chartreuse"></option>
+            <option value="LawnGreen" selected></option>
+            <option value="Lime"></option>
+            <option value="LimeGreen" selected></option>
+            <option value="PaleGreen"></option>
+            <option value="LightGreen" selected></option>
+            <option value="MediumSpringGreen"></option>
+            <option value="SpringGreen" selected></option>
+            <option value="MediumSeaGreen"></option>
+            <option value="SeaGreen" selected></option>
+            <option value="ForestGreen"></option>
+            <option value="Green" selected></option>
+            <option value="DarkGreen"></option>
+            <option value="YellowGreen" selected></option>
+            <option value="OliveDrab"d></option>
+            <option value="Olive" selected></option>
+            <option value="DarkOliveGreen"></option>
+            <option value="MediumAquaMarine" selected></option>
+            <option value="DarkSeaGreen"></option>
+            <option value="LightSeaGreen" selected></option>
+            <option value="DarkCyan"></option>
+            <option value="Teal" selected></option>
+        </optgroup>
+        <optgroup>
+            <option value="Aqua" selected></option>
+            <option value="Cyan"></option>
+            <option value="LightCyan" selected></option>
+            <option value="PaleTurquoise"></option>
+            <option value="Aquamarine" selected></option>
+            <option value="Turquoise"></option>
+            <option value="MediumTurquoise" selected></option>
+            <option value="DarkTurquoise"></option>
+            <option value="CadetBlue" selected></option>
+            <option value="SteelBlue"></option>
+            <option value="LightSteelBlue" selected></option>
+            <option value="PowderBlue"></option>
+            <option value="LightBlue" selected></option>
+            <option value="SkyBlue"></option>
+            <option value="LightSkyBlue" selected></option>
+            <option value="DeepSkyBlue"></option>
+            <option value="DodgerBlue" selected></option>
+            <option value="CornflowerBlue"></option>
+            <option value="MediumSlateBlue" selected></option>
+            <option value="RoyalBlue"></option>
+            <option value="Blue" selected></option>
+            <option value="MediumBlue"></option>
+            <option value="DarkBlue" selected></option>
+            <option value="Navy"></option>
+            <option value="MidnightBlue" selected></option>
+        </optgroup>
+        <optgroup>
+            <option value="Cornsilk"></option>
+            <option value="BlanchedAlmond" selected></option>
+            <option value="Bisque"></option>
+            <option value="NavajoWhite" selected></option>
+            <option value="Wheat"></option>
+            <option value="BurlyWood" selected></option>
+            <option value="Tan"></option>
+            <option value="RosyBrown" selected></option>
+            <option value="SandyBrown"></option>
+            <option value="GoldenRod" selected></option>
+            <option value="Peru"></option>
+            <option value="Chocolate" selected></option>
+            <option value="SaddleBrown"></option>
+            <option value="Sienna" selected></option>
+            <option value="Brown"></option>
+            <option value="DarkGoldenRod" selected></option>
+            <option value="Maroon"></option>
+        </optgroup>
+        <optgroup>
+            <option value="White" selected></option>
+            <option value="Snow"></option>
+            <option value="HoneyDew"</option>
+            <option value="MintCream"></option>
+            <option value="Azure"></option>
+            <option value="AliceBlue"></option>
+            <option value="GhostWhite"></option>
+            <option value="WhiteSmoke"></option>
+            <option value="SeaShell"></option>
+            <option value="Beige"></option>
+            <option value="OldLace"></option>
+            <option value="FloralWhite"></option>
+            <option value="Ivory"></option>
+            <option value="AntiqueWhite"></option>
+            <option value="Linen"></option>
+            <option value="LavenderBlush"></option>
+            <option value="MistyRose"></option>
+        </optgroup>
+        <optgroup>
+            <option value="Gainsboro"></option>
+            <option value="LightGray"></option>
+            <option value="LightGrey"></option>
+            <option value="Silver" selected></option>
+            <option value="DarkGray"></option>
+            <option value="DarkGrey"></option>
+            <option value="Gray"></option>
+            <option value="Grey"></option>
+            <option value="DimGray"></option>
+            <option value="DimGrey"></option>
+            <option value="LightSlateGray"></option>
+            <option value="LightSlateGrey"></option>
+            <option value="SlateGray"></option>
+            <option value="SlateGrey"></option>
+            <option value="DarkSlateGray" selected></option>
+            <option value="DarkSlateGrey"></option>
+            <option value="Black"></option>
+        </optgroup>
+
+    </select>
+
+</div>
+
+<div class="bgImg bg1" style="background-image: url(https://picsum.photos/id/56/1000);"></div>
+<div class="bgImg bg2" style="background-image: url(https://picsum.photos/id/1053/1000);"></div>
+<!-- 223 903 692 564 537 360 -->
+
+
+
+<svg xmlns="http://www.w3.org/2000/svg" role="none" width="0" width="0">
+	<defs>
+        <path id="spiralSegment" class="segmentPath" d="" />
+        <path id="spiralPath1" d="M 127,756 C -7,719 -293,599 -318,247 -339,71 -254,-201 33,-221 245,-239 367,-17 272,112 234,161 162,183 106,150 74,134 60,94 69,59 80,23 123,3 152,33 c 17,26 -20,49 -28,25 -5,-9 12,-12 11,-2" />
+        <path id="spiralPath2" d="m 135,56 c 1,-10 -16,-7 -11,2 8,24 45,1 28,-25 C 123,3 80,23 69,59 60,94 74,134 106,150 162,183 234,161 272,112 367,-17 245,-239 33,-221 -254,-201 -339,71 -318,247 -293,599 -7,719 127,756" />
+		<filter id="shadow">
+      <feDropShadow dx="0.2" dy="0.4" stdDeviation="0.2" />
+    </filter>
+            
+	</defs>
+</svg>
+    <script src='https://unpkg.com/gsap@3/dist/gsap.min.js'></script>
+<script src='https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js'></script><script type="module" src="./script.js"></script>
+
+  </body>
+  
+</html>

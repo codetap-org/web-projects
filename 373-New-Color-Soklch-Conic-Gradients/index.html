@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>New Colors - oklch red, green and blue conic-gradients</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <body onload="document.querySelector('body').style.setProperty('--blendMode', 'difference');">
+	
+	<div id="wrapper">
+
+		<div class="colorWheel conicRed"></div>
+		<div class="colorWheel conicGreen"></div>
+		<div class="colorWheel conicBlue"></div>
+
+	</div>
+
+	<label for="mixBlendModeSelect">Mix Blend Mode</label>
+	<select id="mixBlendModeSelect"  onchange="document.querySelector('body').style.setProperty('--blendMode', this.value);">
+		<option value="normal">normal</option>
+		<option value="multiply">multiply</option>
+		<option value="difference" selected>difference</option>
+		<option value="saturation">saturation</option>
+		<option value="screen">screen</option>
+		<option value="overlay">overlay</option>
+		<option value="darken">darken</option>
+		<option value="lighten">lighten</option>
+		<option value="color-dodge">color-dodge</option>
+		<option value="color-burn">color-burn</option>
+		<option value="hard-light">hard-light</option>
+		<option value="soft-light">soft-light</option>
+		<option value="exclusion">exclusion</option>
+		<option value="hue">hue</option>
+		<option value="color">color</option>
+		<option value="luminosity">luminosity</option>
+	</select>
+
+	<svg xmlns="http://www.w3.org/2000/svg" role="none" width="0" width="0" style="position:absolute; z-index:-1;">
+
+		<defs>
+
+			<filter id="shadow" left="-20%" right="-20%" width="140%" height="140%">			 
+				<feTurbulence type="fractalNoise" baseFrequency=".2" NumOctaves="1" seed="6000" />
+				<feComposite result="comp" in="SourceGraphic" in2="noise-lg" operator="arithmetic" k1="0.5" k2="0.6" k4="-.07" />
+				<feDisplacementMap result="map" in="comp" in2="noise-lg" xChannelSelector="G" yChannelSelector="R" scale="4" />
+				<feComposite id="color" result="map" in="map" in2="glow" operator="arithmetic" k1="1.5" k2="0" k3=".3" />
+				<feComposite in2="map" operator="arithmetic" k1="-0.18" k2="0.18" k3="3" />
+			</filter>
+
+					<filter id="mozShadow" left="-20%" right="-20%" width="140%" height="140%">
+				<feComposite result="comp" in="SourceGraphic" in2="noise-lg" operator="arithmetic" k1="0.5" k2="0.6" k4="-.07" />
+				<feDisplacementMap result="map" in="comp" in2="noise-lg" xChannelSelector="G" yChannelSelector="R" scale="4" />
+				<feComposite id="color" result="map" in="map" in2="glow" operator="arithmetic" k1="1.5" k2="0" k3=".3" />
+				<feComposite in2="map" operator="arithmetic" k1="-0.18" k2="0.18" k3="4.4" />
+			</filter>
+
+		</defs>
+	</svg>
+	
+</body>
+    
+  </body>
+  
+</html>

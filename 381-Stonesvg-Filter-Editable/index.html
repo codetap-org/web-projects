@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Stone. - SVG Filter [Editable]</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!-- Change text here or edit directly on result -->
+<div class="text" contenteditable="true">Stone.</div>
+
+<svg id="svg" width="0" height="0" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="f1">
+      <feDropShadow dx="-2" dy="2" stdDeviation="0" flood-color="#000" flood-opacity="1" />
+      <feDropShadow dx="4" dy="4" stdDeviation="0" flood-color="#fff" flood-opacity="1" />
+      <feMorphology id="erode" operator="erode" radius="3" />
+      <feMorphology id="dilate" operator="dilate" radius="3" />
+    </filter>
+  </defs>
+</svg>
+    
+  </body>
+  
+</html>

@@ -1,0 +1,248 @@
+@import url(https://fonts.bunny.net/css?family=jura:300,700);
+@layer base,notes, demo;
+
+@layer demo{
+  :root{
+    --items: 12;
+    --spin-easing: cubic-bezier(0, 0.061, 0, 1.032);
+    /* define angles for wheel background gradient */
+    --slice-angle: calc(360deg / var(--items));
+    --start-angle: calc(var(--slice-angle) / 2);
+
+    --wheel-radius: min(40vw, 300px);
+    --wheel-size: calc(var(--wheel-radius) * 2);
+  	--wheel-padding: 10%;
+  	--item-radius: calc(var(--wheel-radius) - var(--wheel-padding));
+
+    /* bacgkround colors for wheel */
+    --wheel-bg-1: oklch(0.80 0.16 30);
+    --wheel-bg-2: oklch(0.74 0.16 140);
+    --wheel-bg-3: oklch(0.80 0.16 240);
+    --wheel-bg-4: oklch(0.74 0.16 320);
+
+    --marker-bg-color: black;
+    --button-text-color: white;
+
+    --spin-duration: 2s;
+    --random-angle: 4800deg;
+    /* browsers that don't support random() will have a fixed value so that they can at least see the wheel spinning */
+    @supports  (rotate: random(1deg, 10deg)) {
+     /* random values - Safari only */
+			/* duration of the spin to add randomness */
+    	--spin-duration: random(1000ms, 3000ms);
+    
+    	/* The optional 3rd value (step) ensures that it stops at the center of an option */
+    	--random-angle: random(1200deg, 4800deg, by var(--slice-angle));
+
+    }
+  }
+  
+
+  .wrapper {
+    position: relative;
+    inset: 0;
+    margin: auto;
+    width: var(--wheel-size);
+    aspect-ratio: 1;
+    
+    /* hide checkbox */
+    input[type=checkbox]{
+      position: absolute;
+      opacity: 0;
+      width: 1px; 
+      height: 1px;
+      pointer-events: none;
+    }
+    /* checked - udpate vars for wheel and controls */
+    &:has(input[type=checkbox]:checked){
+      --spin-it: 1;
+      --btn-spin-scale: 0;
+      --btn-spin-event: none;
+      --btn-spin-trans-duration:var(--spin-duration);
+      --btn-reset-scale: 1;
+      --btn-reset-event: auto;
+      --btn-reset-trans-delay: var(--spin-duration);
+    }
+  
+    /* center of wheel buttons and marker */
+    .controls{
+      position: absolute;
+      z-index: 2;
+      inset:0;
+      margin: auto;
+      width: min(100px,10vw);
+      aspect-ratio: 1;
+      background: var(--marker-bg-color);
+      border-radius: 9in;
+      transition: scale 150ms ease-in-out;
+      
+      &:has(:hover,:focus-visible) label{
+        scale: 1.2;
+        rotate: 20deg;
+      }
+      /* marker */
+      &::before{
+        content: '';
+        position: absolute;
+        top:0;
+        left: 50%;
+        translate: -50% -50%;
+        width: 20%;
+        aspect-radio: 2/10;
+        background-color: transparent;
+        border:2vw solid var(--marker-bg-color);
+        border-bottom-width: 4vw;
+        border-top: 0;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        z-index: -1;
+      }
+     /* spin & reset buttons */
+      label{
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        width: 100%;
+        aspect-ratio: 1;
+        color: var(--button-text-color);
+        transition: 
+          rotate 150ms ease-in-out, 
+          scale 150ms ease-in-out;
+        svg{
+          grid-area: 1/1;
+          width: 50%;
+          height: 50%;
+          transition-property: scale;
+          transition-timing-function: ease-in-out;
+          &:first-child{
+            transition-duration: var(--btn-spin-trans-duration,150ms); /* slow scale down when spinning */
+            scale: var(--btn-spin-scale,1);
+            pointer-events: var(--btn-spin-event,auto);
+          }
+          &:last-child{
+            transition-duration: 150ms;
+            transition-delay: var(--btn-reset-trans-delay,0ms); /* delay scale up when spinning */
+            scale: var(--btn-reset-scale,0);
+            pointer-events: var(--btn-reset-event,none);
+          }
+        }
+      }
+			
+			
+    }
+		&:has(input[type=checkbox]:checked) > .wheel{
+			animation: --spin-wheel var(--spin-duration,3s) var(--spin-easing,ease-in-out) forwards;
+		}
+     
+    .wheel {
+      position: absolute;
+      inset: 0;
+      border-radius: 99vw;
+      border: 1px solid white;
+      user-select: none;
+      background: repeating-conic-gradient(
+        from var(--start-angle),
+        var(--wheel-bg-1) 0deg var(--slice-angle),
+        var(--wheel-bg-2) var(--slice-angle) calc(var(--slice-angle) * 2),
+        var(--wheel-bg-3) calc(var(--slice-angle) * 2) calc(var(--slice-angle) * 3),
+        var(--wheel-bg-4) calc(var(--slice-angle) * 3) calc(var(--slice-angle) * 4)
+      );
+      /*
+			style query to spin wheel  --spin-it value is toggled by checkbox 
+			I opted to use the simpler :checked and sibling selector as Firefox doesn't yet sypport style queries apparantly
+			*/
+      @container style(--spin-it:1){
+        /*animation: --spin-wheel var(--spin-duration,3s) var(--spin-easing,ease-in-out) forwards;*/
+			
+      }
+
+      /* numbers */
+      > span{
+        --i: sibling-index();
+        @supports not (sibling-index(0)) { 
+    				&:nth-child(1){ --i: 1;}
+    				&:nth-child(2){ --i: 2;}
+    				&:nth-child(3){ --i: 3;}
+    				&:nth-child(4){ --i: 4;}
+    				&:nth-child(5){ --i: 5;}
+    				&:nth-child(6){ --i: 6;}
+    				&:nth-child(7){ --i: 7;}
+    				&:nth-child(8){ --i: 8;}
+    				&:nth-child(9){ --i: 9;}
+    				&:nth-child(10){ --i: 10;}
+    				&:nth-child(11){ --i: 11;}
+    				&:nth-child(12){ --i: 12;}
+    		}
+    		
+        position: absolute;
+    		font-size: clamp(1.2rem, 4.5vw + 0.045rem, 3rem);
+        offset-path: circle(var(--item-radius) at 50% 50%);
+     		offset-distance: calc(var(--i) / var(--items) * 100%);
+        offset-rotate: auto;
+        &::after{
+          content: counter(c);
+          counter-reset: c var(--i);
+        }
+      }
+    }
+  }
+  @keyframes --spin-wheel {
+    to {
+      rotate: var(--random-angle);
+    }
+  }
+}
+
+@layer notes{
+  section.notes{
+    margin: auto;
+    width: min(80vw, 56ch);
+    p{
+      text-wrap:pretty;
+    }
+    > :first-child{
+      color: red;
+      background: rgb(255, 100, 103);
+      padding: .5em;
+      color: white;
+      @supports  (rotate: random(1deg, 10deg)) {
+          display: none;
+      }
+    }
+  }
+}
+
+@layer base{
+  *,::before,::after{
+  	box-sizing: border-box;
+  }
+	:root {
+		color-scheme: light dark;
+		--bg-dark: rgb(21 21 21);
+		--bg-light: rgb(248, 244, 238);
+		--txt-light: rgb(10, 10, 10);
+		--txt-dark: rgb(245, 245, 245););
+		--line-light: rgba(0 0 0 / .75);
+		--line-dark: rgba(255 255 255 / .25);
+
+    --clr-bg: light-dark(var(--bg-light), var(--bg-dark));
+    --clr-txt: light-dark(var(--txt-light), var(--txt-dark));
+    --clr-lines: light-dark(var(--line-light), var(--line-dark));
+	}
+  body {
+		background-color: var(--clr-bg);
+		color: var(--clr-txt);
+		min-height: 100svh;
+		margin: 0;
+		padding: 2rem;
+		font-family: "Jura", sans-serif;
+		font-size: 1rem;
+		line-height: 1.5;
+    display: grid;
+    place-content: center;
+    gap: 2rem;
+  }
+  strong{
+    font-weight: 700;
+  }
+}

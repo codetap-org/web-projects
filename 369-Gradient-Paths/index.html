@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Gradient Paths</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="shell">
+	<div class="topbar">
+		<h1>Gradient Paths</h1>
+		<div class="presets" id="presets"></div>
+		<div class="pickers">
+			<div class="pick-wrap">
+				<input type="color" id="colorA" value="#0066ff" aria-label="Start color">
+			</div>
+			<span>&rarr;</span>
+			<div class="pick-wrap">
+				<input type="color" id="colorB" value="#ff6600" aria-label="End color">
+			</div>
+		</div>
+	</div>
+
+	<div class="tracks" id="tracks"></div>
+
+	<p class="note">
+		Same two colors, different interpolation paths. Gradients in <code>srgb</code> often pass through desaturated midpoints. Perceptual spaces like <code>oklch</code> and <code>oklab</code> maintain chroma through the transition. The <code>in oklch longer hue</code> variant takes the wide arc around the color wheel instead of the short path.
+	</p>
+</div>
+
+<a class="cq" href="https://calculatequick.com" target="_blank" rel="noopener">calculatequick.com</a>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

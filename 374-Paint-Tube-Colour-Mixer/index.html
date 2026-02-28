@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Paint tube colour mixer. Codepen Challenge</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <header>
+	<div class="title"><em>Squeeze</em> Lab</div>
+	<div class="subtitle">Paint tube colour mixer</div>
+	<div class="tag">✦ #cpc-color-palettes · #codepenchallenge ✦</div>
+</header>
+
+<section class="tubes-section" aria-label="Paint tube palette">
+	<div class="tubes-header">
+		<div class="tubes-label">↓ Squeeze a tube to add colour</div>
+		<button class="shuffle-btn" onclick="shuffleTubes()" title="Pick a new palette">
+			<span class="shuffle-icon">⇄</span> New palette
+		</button>
+	</div>
+	<div class="tubes-rack" id="tubesRack" role="list"></div>
+</section>
+
+<section class="mix-zone" aria-label="Mixing area">
+
+	<div class="bowl-wrap">
+		<div class="bowl-label">Mixing bowl</div>
+		<div class="bowl-outer" id="bowlOuter" aria-label="Paint mixing canvas">
+			<canvas id="mixCanvas" width="260" height="260"></canvas>
+			<div class="bowl-empty-msg" id="emptyMsg" aria-hidden="true">
+				<div class="arrow">↑</div>
+				<span>Squeeze tubes above</span>
+			</div>
+		</div>
+		<button class="clear-bowl-btn" id="btnClear" onclick="clearBowl()" aria-label="Clear mixing bowl">
+			<span class="icon">↺</span> Clear bowl
+		</button>
+	</div>
+
+	<aside class="result-panel" aria-label="Mix result">
+
+		<div class="result-swatch" id="resultSwatch" role="img" aria-label="Mixed colour preview"></div>
+
+		<div>
+			<div class="result-hex-label">Mixed Colour</div>
+			<div class="result-hex" id="resultHex" onclick="copyHex()" role="button" tabindex="0" aria-label="Click to copy hex value" onkeydown="if(event.key==='Enter'||event.key===' ')copyHex()">#——</div>
+		</div>
+
+		<div class="colormix-snippet" aria-label="CSS color-mix formula">
+			<div class="snippet-label">CSS color-mix()</div>
+			<div class="snippet-code" id="snippetCode">
+				<span style="color:var(--rule)">// squeeze tubes to see formula</span>
+			</div>
+		</div>
+
+	</aside>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

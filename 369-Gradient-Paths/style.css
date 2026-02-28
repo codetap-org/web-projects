@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "DM Sans", sans-serif;
+	background: #0d0d11;
+	color: #d4d4de;
+	line-height: 1.5;
+	min-height: 100vh;
+	-webkit-font-smoothing: antialiased;
+}
+
+.shell {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 1.5rem 1.5rem 3rem;
+}
+
+.topbar {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	flex-wrap: wrap;
+	margin-bottom: 1.5rem;
+}
+
+.topbar h1 {
+	font-size: 1rem;
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	white-space: nowrap;
+}
+
+.pickers {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-left: auto;
+}
+
+.pickers span {
+	font-family: "JetBrains Mono", monospace;
+	font-size: 0.65rem;
+	color: #5a5a68;
+}
+
+.pick-wrap {
+	position: relative;
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	overflow: hidden;
+	border: 2px solid #2a2a35;
+	cursor: pointer;
+	transition: border-color 0.2s;
+}
+
+.pick-wrap:hover {
+	border-color: #5a5a68;
+}
+
+.pick-wrap input[type="color"] {
+	position: absolute;
+	inset: -6px;
+	width: calc(100% + 12px);
+	height: calc(100% + 12px);
+	border: none;
+	cursor: pointer;
+	background: none;
+}
+
+.pick-wrap input::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+.pick-wrap input::-webkit-color-swatch {
+	border: none;
+}
+.pick-wrap input::-moz-color-swatch {
+	border: none;
+}
+
+.presets {
+	display: flex;
+	gap: 0.35rem;
+}
+
+.preset-btn {
+	display: flex;
+	width: 20px;
+	height: 20px;
+	border-radius: 5px;
+	border: 1.5px solid #2a2a35;
+	cursor: pointer;
+	overflow: hidden;
+	transition: border-color 0.2s;
+	background: none;
+	padding: 0;
+}
+
+.preset-btn:hover {
+	border-color: #5a5a68;
+}
+
+.preset-half {
+	flex: 1;
+	height: 100%;
+}
+
+.tracks {
+	display: grid;
+	gap: 0.625rem;
+}
+
+.track {
+	display: grid;
+	grid-template-columns: 90px 1fr;
+	align-items: center;
+	gap: 0.75rem;
+	cursor: default;
+	transition: opacity 0.25s;
+	border-radius: 8px;
+}
+
+@media (max-width: 500px) {
+	.track {
+		grid-template-columns: 70px 1fr;
+		gap: 0.5rem;
+	}
+}
+
+.track-label {
+	font-family: "JetBrains Mono", monospace;
+	font-size: 0.68rem;
+	font-weight: 500;
+	color: #6a6a78;
+	text-align: right;
+	transition: color 0.25s;
+}
+
+.track-label .highlight {
+	color: oklch(0.78 0.17 145);
+}
+
+.grad {
+	height: 52px;
+	border-radius: 8px;
+	transition: background 0.15s, opacity 0.25s, transform 0.25s;
+}
+
+.tracks:hover .track {
+	opacity: 0.3;
+}
+.tracks:hover .track:hover {
+	opacity: 1;
+}
+.tracks:hover .track:hover .grad {
+	transform: scaleY(1.15);
+}
+.tracks:hover .track:hover .track-label {
+	color: #b0b0be;
+}
+
+.note {
+	margin-top: 1.5rem;
+	font-size: 0.72rem;
+	color: #4a4a58;
+	line-height: 1.6;
+	max-width: 660px;
+}
+
+.note code {
+	font-family: "JetBrains Mono", monospace;
+	font-size: 0.68rem;
+	background: #1a1a24;
+	padding: 0.08rem 0.3rem;
+	border-radius: 3px;
+	color: #8a8a9a;
+}
+
+.cq {
+	position: fixed;
+	bottom: 0.6rem;
+	right: 0.75rem;
+	font-size: 0.58rem;
+	font-family: "JetBrains Mono", monospace;
+	color: #3a3a48;
+	text-decoration: none;
+	opacity: 0.5;
+	transition: opacity 0.2s;
+}
+
+.cq:hover {
+	opacity: 1;
+	color: oklch(0.78 0.17 145);
+}

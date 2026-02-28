@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Peacock oklch</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        :root {
+           
+            --bg-sky: oklch(95% 0.06 200); /* Soft sky blue */
+            --sun-glow: oklch(98% 0.12 95); /* Bright sun yellow */
+            --grass-base: oklch(65% 0.18 145); /* Lush meadow green */
+            
+            /* Peacock Palette */
+            --navy: oklch(35% 0.18 260);
+            --teal: oklch(65% 0.15 185);
+            --barb: oklch(from var(--teal) calc(l - 0.1) calc(c + 0.05) h);
+            --cyan: oklch(80% 0.12 200);
+            --gold: oklch(75% 0.18 70);
+            --eye-dark: oklch(25% 0.15 270);
+            --stem: oklch(from var(--teal) calc(l - 0.2) c h);
+            --shadow: oklch(0% 0 0 / 0.15);
+            --shadow-dark: oklch(0% 0 0 / 0.3);
+
+            /* Garden Colors */
+            --flower-pink: oklch(75% 0.2 350);
+            --flower-yellow: oklch(90% 0.18 90);
+            --flower-orange: oklch(75% 0.2 50);
+            --leaf-green: oklch(55% 0.15 140);
+
+            /* Base Values in OKLCH */
+            --white: oklch(100% 0 0);
+            --black: oklch(0% 0 0);
+            --transparent: oklch(0% 0 0 / 0);
+        }
+
+        body {
+            background: radial-gradient(
+                circle at 50% 30%, 
+                var(--sun-glow) 0%, 
+                var(--bg-sky) 60%,
+                var(--grass-base) 100%
+            );
+            background-attachment: fixed;
+            margin: 0;
+            height: 100vh;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+          overflow-y:auto;
+            font-family: sans-serif;
+        }
+
+        .artboard {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 150px;
+        }
+
+        /* --- MEADOW GENERATOR --- */
+        .meadow {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            top: var(--t, 50px);
+            left: var(--l, 10%);
+            width: 120px;
+            height: 40px;
+            background: var(--white);
+            border-radius: 50px;
+            filter: blur(15px);
+            opacity: 0.6;
+            animation: drift 60s linear infinite;
+        }
+
+        @keyframes drift {
+            from { transform: translateX(-200px); }
+            to { transform: translateX(1000px); }
+        }
+
+        /* --- PEACOCK FEATHER ENGINE --- */
+        .tail-system {
+            position: absolute;
+            bottom: 240px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .feather {
+            position: absolute;
+            bottom: 0;
+            width: 80px;
+            height: 320px;
+            transform-origin: bottom center;
+            transform: 
+                rotate(calc( (var(--i) - (var(--total) / 2)) * var(--spread) )) 
+                scale(var(--row-scale));
+            
+            background: 
+                linear-gradient(90deg, 
+                    var(--transparent) 48%, 
+                    var(--stem) 49%, 
+                    var(--stem) 51%, 
+                    var(--transparent) 52%
+                ),
+                repeating-linear-gradient(
+                    45deg, 
+                    var(--transparent) 0px, 
+                    var(--transparent) 3px, 
+                    var(--barb) 4px, 
+                    var(--transparent) 5px
+                ),
+                repeating-linear-gradient(
+                    -45deg, 
+                    var(--transparent) 0px, 
+                    var(--transparent) 3px, 
+                    var(--barb) 4px, 
+                    var(--transparent) 5px
+                ),
+                var(--teal);
+
+            background-size: 100% 100%, 50% 100%, 50% 100%, 100% 100%;
+            background-position: center, left center, right center, center;
+            background-repeat: no-repeat;
+            border-radius: 40px 40px 10px 10px;
+            border: 1px solid var(--shadow);
+            box-shadow: 4px 4px 12px var(--shadow);
+            animation: featherSway 3s ease-in-out infinite alternate;
+            animation-delay: calc(var(--i) * -0.3s);
+        }
+
+        @keyframes featherSway {
+            0% { transform: rotate(calc( (var(--i) - (var(--total) / 2)) * var(--spread) )) scale(var(--row-scale)); }
+            100% { transform: rotate(calc( ((var(--i) - (var(--total) / 2)) * var(--spread)) + 1.5deg )) scale(calc(var(--row-scale) * 1.02)); }
+        }
+
+        .feather::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 65px;
+            border-radius: 50% 50% 45% 45%;
+            background: radial-gradient(
+                circle at center,
+                var(--eye-dark) 0% 25%,
+                var(--cyan) 26% 45%,
+                var(--gold) 46% 75%,
+                var(--transparent) 76%
+            );
+            box-shadow: 0 4px 10px var(--shadow-dark);
+        }
+
+        .row-back  { --row-scale: 1.1; --spread: 18deg; --total: 10; z-index: 1; }
+        .row-mid   { --row-scale: 0.9; --spread: 22deg; --total: 8;  z-index: 2; }
+        .row-front { --row-scale: 0.7; --spread: 28deg; --total: 6;  z-index: 3; }
+
+        /* --- PEACOCK BODY SECTION --- */
+        .peacock-body {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .neck {
+            width: 30px;
+            height: 90px;
+            background: var(--navy);
+            border-radius: 100% 20% 0 0 / 100% 40% 0 0;
+            transform: rotate(-3deg) skewX(-8deg);
+            position: relative;
+            margin-bottom: -15px;
+            z-index: 2;
+            animation: headMove 4s ease-in-out infinite;
+            box-shadow: inset -6px 0 10px oklch(0% 0 0 / 0.3);
+        }
+
+        @keyframes headMove {
+            0%, 100% { transform: rotate(-3deg) skewX(-8deg); }
+            50% { transform: rotate(1deg) skewX(-4deg) translateY(-2px); }
+        }
+
+        .head {
+            width: 60px;
+            height: 50px;
+            background: var(--navy);
+            border-radius: 50% 50% 50% 50% / 60% 65% 60% 60% ;
+            position: absolute;
+            top: -40px;
+            left: -5px;
+            box-shadow: 2px 3px 6px var(--shadow-dark), inset 4px 4px 8px oklch(100% 0 0 / 0.1);
+        }
+
+        .crest {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4px;
+        }
+
+        .crest-item {
+           width: 2px;
+  height: 25px;
+  background: var(--navy);
+  position: relative;
+  box-shadow: 1px 1px 2px var(--shadow);
+  transform: rotate(-12deg);
+  margin-right: 3px;
+        }
+
+        .crest-item::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -4px;
+            width: 10px;
+            height: 10px;
+            background: var(--eye-dark);
+            border-radius: 50%;
+            box-shadow: 0 2px 3px var(--shadow);
+        }
+
+        .face-detail {
+            position: absolute;
+            width: 25px;
+            height: 29px;
+            background: var(--white);
+            border-radius: 0 50px;
+            top: 11px;
+            right: 3px;
+            transform: rotate(-35deg);
+            box-shadow: inset 1px -1px 3px var(--shadow);
+        }
+
+        .eye-pupil {
+            position: absolute;
+            width: 15px;
+            height: 10px;
+            background: oklch(85% 0.18 90); /* OKLCH Gold variant */
+            border-radius: 50%;
+            top: 10px;
+            right: 5px;
+            transform: rotate(45deg);
+        }
+
+        .eye-pupil::before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--black);
+            border-radius: 50%;
+            top: 2px;
+            right: 1px;
+        }
+
+        .beak {
+            position: absolute;
+  right: -23px;
+  top: 25px;
+  width: 25px;
+  height: 14px;
+  background: oklch(from var(--gold) calc(l - 0.2) c h);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  filter: drop-shadow(1px 2px 2px var(--shadow-dark));
+  transform: rotate(5deg);
+        }
+
+        .torso {
+            width: 90px;
+            height: 140px;
+            background: var(--navy);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            z-index:3;
+            margin-top: -10px;
+            overflow: hidden;
+            position: relative;
+           
+            border: 1px solid var(--shadow);
+            animation: breathe 3s ease-in-out infinite;
+            box-shadow: inset -15px -15px 30px oklch(0% 0 0 / 0.4), inset 10px 10px 20px oklch(100% 0 0 / 0.05), 0 10px 25px var(--shadow-dark);
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+
+        .peacock-petals {
+            width: 170px;
+            aspect-ratio: 1;
+            --g: /13.528% 13.528% radial-gradient(var(--black) calc(71% - 1px), var(--transparent) 71%) no-repeat;
+            mask: 100% 50% var(--g),97.553% 65.451% var(--g),90.451% 79.389% var(--g),79.389% 90.451% var(--g),65.451% 97.553% var(--g),50% 100% var(--g),34.549% 97.553% var(--g),20.611% 90.451% var(--g),9.549% 79.389% var(--g),2.447% 65.451% var(--g),0% 50% var(--g),2.447% 34.549% var(--g),9.549% 20.611% var(--g),20.611% 9.549% var(--g),34.549% 2.447% var(--g),50% 0% var(--g),65.451% 2.447% var(--g),79.389% 9.549% var(--g),90.451% 20.611% var(--g),97.553% 34.549% var(--g),radial-gradient(100% 100%, var(--black) 42.704%, var(--transparent) calc(42.704% + 1px));
+            background-color: oklab(0.8 -0.04 -0.08); 
+            z-index: -1;
+            position: absolute;
+            bottom: 50px;
+            filter: drop-shadow(0 5px 10px var(--shadow-dark));
+        }
+      
+        .legs {
+            display: flex;
+            gap: 40px;
+            margin-top: -10px;
+            z-index:-1
+        }
+
+        .leg {
+            width: 6px;
+            height: 60px;
+            background: oklch(from var(--gold) calc(l - 0.1) 0.05 h);
+            position: relative;
+            box-shadow: inset -1px 0 2px oklch(0% 0 0 / 0.3);
+        }
+
+        .foot {
+            position: absolute;
+            bottom: -18px;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 22px;
+            background-color: oklch(from var(--gold) calc(l - 0.1) 0.05 h);
+            border-radius: 2px;
+            z-index: 11;
+            box-shadow: 1px 1px 2px var(--shadow);
+        }
+        
+        .left-foot{ transform:rotate(15deg); left:-1px }
+        .right-foot{ transform:rotate(-15deg); right:-1px }
+        
+        .foot::before, .foot::after {
+            position: absolute;
+            content: '';    
+            top: 0;
+            width: 4px;
+            height: 18px;
+            background: inherit;
+            border-radius: 2px;
+            transform-origin: top center;
+            box-shadow: inset -1px 0 1px oklch(0% 0 0 / 0.2);
+        }
+        .foot::before { left: 0; transform: rotate(40deg); }
+        .foot::after { left: 0; transform: rotate(-40deg); }
+
+        .ground-shadow {
+            position: absolute;
+            bottom: 140px;
+            width: 450px;
+            height: 60px;
+            background: var(--shadow-dark);
+            border-radius: 50%;
+            filter: blur(15px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="artboard">
+    <div class="meadow">
+        <div class="cloud" style="--t: 40px; --l: 10%"></div>
+        <div class="cloud" style="--t: 80px; --l: 60%; animation-delay: -30s;"></div>
+    </div>
+
+    <div class="ground-shadow"></div>
+
+    <div class="tail-system row-back">
+        <div class="feather" style="--i:0"></div><div class="feather" style="--i:1"></div>
+        <div class="feather" style="--i:2"></div><div class="feather" style="--i:3"></div>
+        <div class="feather" style="--i:4"></div><div class="feather" style="--i:5"></div>
+        <div class="feather" style="--i:6"></div><div class="feather" style="--i:7"></div>
+        <div class="feather" style="--i:8"></div><div class="feather" style="--i:9"></div>
+        <div class="feather" style="--i:10"></div>
+    </div>
+
+    <div class="tail-system row-mid">
+        <div class="feather" style="--i:0"></div><div class="feather" style="--i:1"></div>
+        <div class="feather" style="--i:2"></div><div class="feather" style="--i:3"></div>
+        <div class="feather" style="--i:4"></div><div class="feather" style="--i:5"></div>
+        <div class="feather" style="--i:6"></div><div class="feather" style="--i:7"></div>
+        <div class="feather" style="--i:8"></div>
+    </div>
+
+    <div class="tail-system row-front">
+        <div class="feather" style="--i:0"></div><div class="feather" style="--i:1"></div>
+        <div class="feather" style="--i:2"></div><div class="feather" style="--i:3"></div>
+        <div class="feather" style="--i:4"></div><div class="feather" style="--i:5"></div>
+        <div class="feather" style="--i:6"></div>
+    </div>
+
+    <div class="peacock-body">
+        <div class="neck">
+            <div class="head">
+                <div class="crest">
+                    <div class="crest-item"></div>
+                    <div class="crest-item"></div>
+                    <div class="crest-item"></div>
+                </div>
+                <div class="face-detail">
+                    <div class="eye-pupil"></div>
+                </div>
+                <div class="beak"></div>
+            </div>
+        </div>
+        <div class="torso"></div>
+        <div class="peacock-petals"></div> 
+        <div class="legs">
+            <div class="leg"><div class="foot left-foot"></div></div>
+            <div class="leg"><div class="foot right-foot"></div></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>

@@ -1,0 +1,59 @@
+:root {
+	--firstColor: #eecc22;
+	--secondColor: #2222aa;
+	--interpolationMethod: shorter hue;
+	--defaultColorSpace: hsl;
+	--colorSpace: var(--defaultColorSpace);
+}
+body,
+html {
+	height: 100%;
+}
+
+.panel {
+	padding: 20px;
+}
+
+body {
+	margin: 0px;
+	display: flex;
+	flex-direction: column;
+	font-family: arial, sans-serif;
+}
+
+ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+ul li {
+	margin: 0px;
+	padding: 0px;
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+ul li {
+	background: linear-gradient(
+		90deg in var(--colorSpace),
+		var(--firstColor) 10%,
+		var(--secondColor) 90%
+	);
+}
+
+ul li:has(span.supportIM) {
+	background: linear-gradient(
+		90deg in var(--colorSpace) var(--interpolationMethod),
+		var(--firstColor) 10%,
+		var(--secondColor) 90%
+	);
+}
+
+.supportIM:before {
+	content: " - Supports Interpolation Method";
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Roulette wheel with CSS  random() - Safari / WebKit browsers only</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <section class="wrapper">
+  <input type="checkbox" id="radio-spin">
+  <div class="controls">
+    <label for="radio-spin">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Spin the Wheel" title="Spin the Wheel">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M14 12a2 2 0 1 0 -4 0a2 2 0 0 0 4 0" />
+          <path d="M12 21c-3.314 0 -6 -2.462 -6 -5.5s2.686 -5.5 6 -5.5" />
+          <path d="M21 12c0 3.314 -2.462 6 -5.5 6s-5.5 -2.686 -5.5 -6" />
+          <path d="M12 14c3.314 0 6 -2.462 6 -5.5s-2.686 -5.5 -6 -5.5" />
+          <path d="M14 12c0 -3.314 -2.462 -6 -5.5 -6s-5.5 2.686 -5.5 6" />
+      </svg>
+
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Reset the Wheel" title="Reset the Wheel">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3.06 13a9 9 0 1 0 .49 -4.087" />
+        <path d="M3 4.001v5h5" />
+        <path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+      </svg>
+    </label>
+  </div>
+  
+  <div id="wheel" class="wheel">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</section>
+<section class="notes">
+  <p>Sorry, your browser doesn't support CSS <code>random()</code> so it will default to a non-random value. <br>Please try this on Safari to see the function working.</p>
+  
+  <p>This demo uses the experimental CSS function <code>random()</code>, which is currently supported only in Safari / WebKit browsers.</p>
+
+<p>Because of how <code>random()</code> works, its value is calculated once when the page styles are first evaluated.
+That means the wheel does not generate a new random result on every spin — <strong>the same value is reused until the page is refreshed.</strong>
+<br>
+This is a limitation of the current implementation rather than the concept itself. Future browser updates and specification changes may allow <code>random()</code> to be recalculated dynamically (but I wouldn't count on it).</p>
+</section>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
