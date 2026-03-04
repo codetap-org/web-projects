@@ -1,0 +1,148 @@
+body {
+    
+  color-scheme:   dark;
+  background:     #131417;
+  overflow:       clip;
+  min-block-size: 100vh;
+  margin:         0;
+  padding:        0;
+  display:        grid;
+  place-content:  center;
+}
+
+ul {
+  
+  --dz:         -5;
+  --a:          calc(var(--t) * 90deg);
+  --radius:     2;
+  --stripes:    8;
+  --cos:        calc(cos(var(--a)));
+  --sin:        calc(sin(var(--a)));
+  
+  perspective:  1000px;
+  display:      block;
+  margin:       0;
+  padding:      0;
+  inline-size:  100vw;
+  block-size:   100vh;
+}
+
+li {
+
+  --i:  calc(sibling-index());
+  --n:  calc(sibling-count());
+
+  --x1: calc(180deg * var(--t) + 180deg * var(--i) / var(--n));
+  --x2: calc(2 * var(--x1));
+
+  --r:  calc(var(--radius) * sin(var(--x1)));
+
+  --x:  calc(cos(var(--stripes) * var(--x2)) * var(--r));
+  --y:  calc(sin(var(--stripes) * var(--x2)) * var(--r));
+  --z:  calc(var(--radius) * cos(var(--x1)));
+  
+  --rotated-x:      calc(var(--x) * var(--cos) - var(--z) * var(--sin));
+  --rotated-y:      calc(var(--y));
+  --rotated-z:      calc(var(--x) * var(--sin) + var(--z) * var(--cos));
+
+  --z-translated-x: calc(var(--rotated-x) + var(--dz));
+  --z-translated-y: calc(var(--rotated-y) + var(--dz));
+  --z-translated-z: calc(var(--rotated-z) + var(--dz));
+
+  --projected-x:    calc(var(--z-translated-x) / var(--z-translated-z));
+  --projected-y:    calc(var(--z-translated-y) / var(--z-translated-z));
+    
+  --screen-x:       calc(-10vw + .5 * 100vw * var(--projected-x));
+  --screen-y:       calc(-10vh + .5 * 100vh * var(--projected-y));
+  
+  --vertex-color:   hsl(calc(360deg * var(--i) / var(--n)), 100%, 50%);
+  
+  position:         absolute;
+  display:          block;
+  left:             calc(var(--screen-x));
+  top:              calc(var(--screen-y));
+  width:            1px;
+  height:           1px;
+  color:            var(--vertex-color, lime);
+  background:       currentColor;
+  margin:           0;
+  padding:          0;
+  border-radius:    50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * CSS Boilerplate
+ */
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
+  html {
+    font: clamp(17px, 2vw, 19px) system-ui;
+  }
+}
+
+/**
+ * CSS Boilerplate: Timeline: --t == time
+ */
+@layer base.timeline {
+  @property --t { 
+    syntax: "<number>";
+    initial-value: 0.0;
+    inherits: true;
+  }
+  @keyframes root-sequence { 
+    from { --t: 0.0 } 
+    to   { --t: 1000000.0 }
+  }
+  :root {
+    --t: 0.0;
+    /* Of course I lied. There is one single animation for all the web-app, that drive the timer */
+    animation: root-sequence 1000000s linear infinite;
+  }
+}
