@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Apple Logo Style | CodeTap</title>
+    <link rel='stylesheet' href='https://codepen.io/Cubiq-ish/pen/ZYbPzVG.css'><link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!-- WIP2 -->
+<!-- 
+also due to the tweaking of the effect of this demo, I made it a bit more reactive with js.. 
+either way hope you like the wip state of this one <3
+-->
+
+<main id="card">
+<!--   <svg><use href="#cubiq"/></use></svg> -->
+  <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="logo"/>
+  <aside></aside>
+</main>
+
+<svg defs height="0" width="0" viewBox="0 0 1 1" color-interpolation-filters="sRGB">
+  <filter id="flute" x="-25%" y="-25%" width="150%" height="150%">
+    <feGaussianBlur stdDeviation="4" result="sourceBackground" id=xFrost />
+    <feImage href="#gets-generated-in-js" preserveAspectRatio="xMidYMid slice" id="xPatt" />
+    <feGaussianBlur stdDeviation="4" result="smoothness" id=xSm />
+    
+    <feDisplacementMap id=xR scale="-100" in="sourceBackground" in2="smoothness" xChannelSelector="R" yChannelSelector="G" />
+    <feColorMatrix result="R" type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" />
+    
+    <feDisplacementMap id=xG scale="-80" in="sourceBackground" in2="smoothness" xChannelSelector="R" yChannelSelector="G" />
+    <feColorMatrix result="G" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0" />
+    
+    <feDisplacementMap id=xB scale="-60" in="sourceBackground" in2="smoothness" xChannelSelector="R" yChannelSelector="G" />
+    <feColorMatrix result="B" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" />
+    
+    <feBlend in="R" in2="G" mode="screen" />
+    <feBlend in2="B" mode="screen" result="displaced" />
+    
+    <feColorMatrix in="smoothness" values="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 0" />
+    <feComponentTransfer>
+      <feFuncA id=xFresnel type="linear" slope="0.3" />
+    </feComponentTransfer>
+    
+    <feBlend in2="displaced" mode="hard-light" />
+
+  </filter>
+</svg>
+
+<!-- pregened pattern svg 
+<feImage href="data:image/svg+xml,
+      %3Csvg 
+        xmlns='http://www.w3.org/2000/svg'
+        color-interpolation-filters='sRGB' 
+        viewBox='0 0 500 500' width='500' height='500' 
+      %3E%3Cdefs%3E
+        %3ClinearGradient id='rg' %3E
+          %3Cstop offset='0' stop-color='%23ff8000'/%3E
+          %3Cstop offset='1' stop-color='%23008000'/%3E
+        %3C/linearGradient%3E
+        %3Cpattern 
+          id='flutes' 
+          patternTransform='scale(0.24)' 
+          preserveAspectRatio='xMidYMid slice' 
+          width='100' height='100' viewBox='0 0 100 100' 
+          patternUnits='userSpaceOnUse'%3E
+          %3Crect width='100' height='100' style='fill: url(%23rg);'/%3E
+        %3C/pattern%3E
+      %3C/defs%3E
+      %3Crect id='pattern' fill='url(%23flutes)' width='100%25' height='100%25'/%3E
+    %3C/svg%3E" preserveAspectRatio="xMidYMid slice" />
+-->
+    <script type="module" src="./script.js"></script>
+
+  </body>
+  
+</html>

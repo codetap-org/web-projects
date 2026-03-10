@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Monoton";
+  font-size: 10rem;
+  background-color: #6c3baa;
+  text-align: center;
+}
+body *::selection {
+  color: #6c3baa;
+  background: rgba(162, 196, 196, 0.3);
+}
+body *::-moz-selection {
+  color: #6c3baa;
+  background: rgba(162, 196, 196, 0.3);
+}
+body *::-webkit-selection {
+  color: #6c3baa;
+  background: rgba(162, 196, 196, 0.3);
+}
+
+.text {
+  position: relative;
+  filter: url(#f1);
+  color: #efbf04;
+  line-height: 1;
+  transform-origin: center;
+  animation: water-moving;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-delay: -5s;
+}
