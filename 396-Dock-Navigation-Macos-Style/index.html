@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Dynamic GSAP Dock Navigation (macOS Style)</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="wrapper">
+  <aside class="dock" id="dock">
+    <div class="panel-stack">
+      <section class="panel" data-panel="apps" id="panel-apps">
+        <article class="item">
+          <div class="icon">K</div>
+          <div>
+            <div class="title">Klack</div>
+            <div class="subtitle">Satisfying key sounds</div>
+          </div>
+        </article>
+        <article class="item">
+          <div class="icon light">Q</div>
+          <div>
+            <div class="title">Quill</div>
+            <div class="subtitle">Craft pages, and docs</div>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel" data-panel="components" id="panel-components">
+        <article class="item">
+          <div class="icon-ghost"><i data-lucide="layers"></i></div>
+          <div class="title">Action Bar</div>
+          <div class="tag">Dynamic</div>
+        </article>
+        <article class="item">
+          <div class="icon-ghost"><i data-lucide="layers"></i></div>
+          <div class="title">Image Expand</div>
+          <div class="tag">Overlay</div>
+        </article>
+        <article class="item">
+          <div class="icon-ghost"><i data-lucide="layers"></i></div>
+          <div class="title">Read Time</div>
+          <div class="tag">Scroll</div>
+        </article>
+      </section>
+
+      <section class="panel" data-panel="notes" id="panel-notes">
+        <article class="item">
+          <div class="icon light">N</div>
+          <div>
+            <div class="title">Meeting Notes</div>
+            <div class="subtitle">Roadmap and priorities</div>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <div class="divider"></div>
+
+    <nav class="nav" role="tablist" aria-label="Menu sections">
+      <span class="pill" id="pill" aria-hidden="true"></span>
+      <button class="tab" role="tab" data-panel="apps" aria-selected="false" aria-controls="panel-apps">
+        <i data-lucide="layout-grid"></i>
+        <span>Apps</span>
+      </button>
+      <button class="tab" role="tab" data-panel="components" aria-selected="false" aria-controls="panel-components">
+        <i data-lucide="layers"></i>
+        <span>Components</span>
+      </button>
+      <button class="tab" role="tab" data-panel="notes" aria-selected="false" aria-controls="panel-notes">
+        <i data-lucide="sticky-note"></i>
+        <span>Notes</span>
+      </button>
+    </nav>
+  </aside>
+</div>
+    <script src='https://unpkg.com/lucide@latest'></script><script type="module" src="./script.js"></script>
+
+  </body>
+  
+</html>

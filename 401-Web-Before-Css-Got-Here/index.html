@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Web Before CSS Got Here</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Before & After · CSS</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Special+Elite&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+</head>
+<body>
+
+<div class="window">
+
+  <div class="titlebar">
+    <div class="titlebar-left">
+      <span class="titlebar-icon">🌐</span>
+      <span class="titlebar-text">Netscape — http://www.mysite.com/index.html</span>
+    </div>
+    <div class="titlebar-btns">
+      <button class="win-btn">_</button>
+      <button class="win-btn">□</button>
+      <button class="win-btn">✕</button>
+    </div>
+  </div>
+
+  <div class="menubar">
+    <span class="menu-item">File</span>
+    <span class="menu-item">Edit</span>
+    <span class="menu-item">View</span>
+    <span class="menu-item">Favorites</span>
+    <span class="menu-item">Tools</span>
+    <span class="menu-item">Help</span>
+  </div>
+
+  <div class="toolbar" id="toolbar">
+    <button class="toolbar-btn" disabled>◀ Back</button>
+    <button class="toolbar-btn" disabled>▶ Forward</button>
+    <div class="sep"></div>
+    <button class="toolbar-btn">⟳ Refresh</button>
+    <button class="toolbar-btn">🏠 Home</button>
+    <div class="sep"></div>
+    <button class="toolbar-btn">⭐ Favorites</button>
+  </div>
+
+  <div class="addressrow">
+    <span class="addr-label">Address</span>
+    <div class="addressbar">
+      <input type="text" value="http://www.mysite.com/index.html" readonly tabindex="-1"/>
+    </div>
+    <button class="addr-go">Go</button>
+  </div>
+
+  <div class="screen" id="screen">
+    <div class="page-content" id="pageContent">
+      <h1>Welcome to My Website</h1>
+      <p>This is a paragraph of text. It has a <a href="#">hyperlink</a> and some regular content below.</p>
+      <ul>
+        <li>Item one on the list</li>
+        <li>Item two on the list</li>
+        <li>Item three on the list</li>
+      </ul>
+      <button class="btn-raw">OK</button>
+    </div>
+  </div>
+
+  <div class="statusbar">
+    <div class="status-panel" id="statusText">Done</div>
+    <div class="status-extra" id="statusExtra"></div>
+    <div class="status-dot-wrap">
+      <div class="status-dot" id="statusDot"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toggle-wrap">
+  <button class="toggle-btn" id="toggleBtn">Apply Stylesheet</button>
+</div>
+
+<script>
+  const screen      = document.getElementById('screen');
+  const toggleBtn   = document.getElementById('toggleBtn');
+  const statusText  = document.getElementById('statusText');
+  const statusExtra = document.getElementById('statusExtra');
+  const statusDot   = document.getElementById('statusDot');
+  const pageContent = document.getElementById('pageContent');
+  const toolbar     = document.getElementById('toolbar');
+  let styled = false;
+
+  function cleanup() {
+    document.querySelectorAll('.js-link-tag, .js-console').forEach(el => el.remove());
+  }
+
+  function triggerLoadBar() {
+    toolbar.classList.remove('loading');
+    void toolbar.offsetWidth;
+    toolbar.classList.add('loading');
+    toolbar.addEventListener('animationend', () => toolbar.classList.remove('loading'), { once: true });
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    styled = !styled;
+    cleanup();
+    triggerLoadBar();
+
+    if (styled) {
+      screen.classList.add('styled');
+      toggleBtn.textContent      = 'Remove Stylesheet';
+      statusText.textContent     = 'styles/main.css loaded';
+      statusDot.style.background = 'var(--good)';
+      statusExtra.textContent    = '1 stylesheet · 0 errors';
+      statusExtra.classList.add('visible');
+
+      // JS .before() — <link> tag injected before page content
+      const linkTag = document.createElement('span');
+      linkTag.className = 'js-link-tag';
+      linkTag.innerHTML =
+        '<span class="tag-bracket">&lt;</span>link ' +
+        '<span class="attr-name">rel</span>="<span class="attr-val">stylesheet</span>" ' +
+        '<span class="attr-name">href</span>="<span class="attr-val">styles/main.css</span>"' +
+        '<span class="tag-bracket">/&gt;</span>';
+      pageContent.before(linkTag);
+
+    } else {
+      screen.classList.remove('styled');
+      toggleBtn.textContent      = 'Apply Stylesheet';
+      statusText.textContent     = 'Done';
+      statusDot.style.background = '';
+      statusExtra.textContent    = '';
+      statusExtra.classList.remove('visible');
+
+      // JS .after() — console line injected after page content
+      const consoleLine = document.createElement('div');
+      consoleLine.className = 'js-console';
+      consoleLine.textContent = 'stylesheet removed — 0 rules active';
+      pageContent.after(consoleLine);
+
+      setTimeout(cleanup, 2000);
+    }
+  });
+</script>
+</body>
+</html>
+    
+  </body>
+  
+</html>

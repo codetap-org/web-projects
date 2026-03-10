@@ -1,0 +1,19 @@
+body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #dbe9f4; 
+        }
+        canvas {
+            display: block;
+        }
+        #sound-hint {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: #555555; 
+            font-family: sans-serif;
+            font-size: 14px;
+            pointer-events: none; 
+            transition: opacity 0.5s ease; 
+            user-select: none; 
+        }

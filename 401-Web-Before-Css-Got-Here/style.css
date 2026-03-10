@@ -1,0 +1,424 @@
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --win-bg:    #008080;
+  --chrome:    #c0c0c0;
+  --chrome-lt: #ffffff;
+  --chrome-dk: #808080;
+  --chrome-xdk:#404040;
+  --titlebar:  #000080;
+  --screen:    #ffffff;
+  --good:      #008000;
+  --accent:    #0000ee;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--win-bg);
+  background-image: repeating-linear-gradient(
+    0deg, rgba(0,0,0,.04) 0px, rgba(0,0,0,.04) 1px, transparent 1px, transparent 4px
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem 1rem;
+  font-family: 'VT323', monospace;
+}
+
+.desktop-label {
+  color: rgba(255,255,255,.75);
+  font-size: .85rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.5);
+}
+
+/* ── WINDOW ── */
+.window {
+  width: 100%;
+  max-width: 560px;
+  background: var(--chrome);
+  box-shadow:
+    inset 1px 1px 0 var(--chrome-lt),
+    inset -1px -1px 0 var(--chrome-xdk),
+    inset 2px 2px 0 var(--chrome),
+    inset -2px -2px 0 var(--chrome-dk),
+    4px 4px 10px rgba(0,0,0,.5);
+}
+
+/* ── TITLE BAR ── */
+.titlebar {
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+  padding: 3px 4px 3px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  gap: .4rem;
+}
+.titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+.titlebar-icon {
+  font-size: .75rem;
+  flex-shrink: 0;
+}
+.titlebar-text {
+  font-size: .82rem;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.titlebar-btns { display: flex; gap: 2px; flex-shrink: 0; }
+.win-btn {
+  width: 18px; height: 16px;
+  background: var(--chrome);
+  border: none;
+  font-size: .6rem;
+  cursor: default;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'VT323', monospace;
+  color: #000;
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 0 var(--chrome-xdk),
+    inset 2px 2px 0 var(--chrome),
+    inset -2px -2px 0 var(--chrome-dk);
+}
+.win-btn:active {
+  box-shadow: inset 1px 1px 0 var(--chrome-dk), inset -1px -1px 0 #fff;
+  transform: translate(1px,1px);
+}
+
+/* ── MENU BAR ── */
+.menubar {
+  background: var(--chrome);
+  padding: 1px 4px;
+  display: flex;
+  border-bottom: 1px solid var(--chrome-dk);
+}
+.menu-item {
+  font-size: .78rem;
+  color: #000;
+  padding: 2px 8px;
+  cursor: default;
+}
+.menu-item:hover { background: var(--titlebar); color: #fff; }
+
+/* ── TOOLBAR — loading bar via ::before ── */
+.toolbar {
+  background: var(--chrome);
+  padding: 3px 5px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  border-bottom: 1px solid var(--chrome-dk);
+  position: relative;
+}
+.toolbar::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--titlebar);
+  z-index: 20;
+}
+.toolbar.loading::before {
+  animation: loadbar .8s ease-out forwards;
+}
+@keyframes loadbar {
+  0%   { width: 0%;   opacity: 1; }
+  85%  { width: 100%; opacity: 1; }
+  100% { width: 100%; opacity: 0; }
+}
+
+.toolbar-btn {
+  background: var(--chrome);
+  border: none;
+  font-family: 'VT323', monospace;
+  font-size: .78rem;
+  padding: 1px 8px;
+  cursor: default;
+  color: #000;
+  letter-spacing: .02em;
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 0 var(--chrome-xdk),
+    inset 2px 2px 0 var(--chrome),
+    inset -2px -2px 0 var(--chrome-dk);
+}
+.toolbar-btn:disabled { color: var(--chrome-dk); }
+.toolbar-btn:not(:disabled):active {
+  box-shadow: inset 1px 1px 0 var(--chrome-dk), inset -1px -1px 0 #fff;
+  transform: translate(1px,1px);
+}
+.sep {
+  width: 1px;
+  align-self: stretch;
+  margin: 2px 3px;
+  background: var(--chrome-dk);
+  box-shadow: 1px 0 0 #fff;
+}
+
+/* ── ADDRESS ROW ── */
+.addressrow {
+  background: var(--chrome);
+  padding: 2px 5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 2px solid var(--chrome-dk);
+  box-shadow: inset 0 -1px 0 #fff;
+}
+.addr-label { font-size: .75rem; color: #000; white-space: nowrap; }
+.addressbar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  box-shadow: inset 1px 1px 0 var(--chrome-dk), inset -1px -1px 0 #fff;
+  padding: 1px 4px;
+}
+.addressbar input {
+  border: none; outline: none;
+  font-family: 'VT323', monospace;
+  font-size: .8rem;
+  color: #000;
+  background: transparent;
+  width: 100%;
+}
+.addr-go {
+  font-size: .75rem;
+  background: var(--chrome);
+  border: none;
+  padding: 1px 10px;
+  font-family: 'VT323', monospace;
+  cursor: pointer;
+  color: #000;
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 0 var(--chrome-xdk),
+    inset 2px 2px 0 var(--chrome),
+    inset -2px -2px 0 var(--chrome-dk);
+}
+
+/* ── SCREEN — vignette via ::after ── */
+.screen {
+  background: var(--screen);
+  height: 280px;
+  padding: 1rem 1.2rem;
+  overflow: hidden;
+  position: relative;
+  transition: background .5s ease;
+}
+.screen.styled { background: #12121a; }
+
+.screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 0 rgba(0,0,0,0);
+  pointer-events: none;
+  z-index: 8;
+  transition: box-shadow .6s ease;
+}
+.screen.styled::after {
+  box-shadow: inset 0 0 70px 24px rgba(0,0,0,.65);
+}
+
+/* ── PAGE CONTENT — unstyled ── */
+.page-content h1 {
+  font-family: 'Times New Roman', serif;
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: .6em;
+  padding-bottom: .3em;
+  border-bottom: 3px solid transparent;
+  transition: font-family .45s ease, color .45s ease, border-color .45s ease, letter-spacing .45s ease;
+}
+.page-content p {
+  font-family: 'Times New Roman', serif;
+  font-size: .78em;
+  color: #000;
+  margin-bottom: .5em;
+  line-height: 1.75;
+  transition: font-family .45s ease, color .45s ease;
+}
+.page-content a {
+  color: var(--accent);
+  text-decoration: underline;
+  font-family: 'Times New Roman', serif;
+  border-bottom: 1px solid transparent;
+  transition: color .45s ease, font-family .45s ease, border-color .45s ease, text-decoration .45s ease;
+}
+.page-content ul {
+  font-family: 'Times New Roman', serif;
+  font-size: .78em;
+  color: #000;
+  padding-left: 1.2em;
+  margin-bottom: .5em;
+  line-height: 1.75;
+  transition: font-family .45s ease, color .45s ease;
+}
+.page-content li { margin-bottom: .2em; }
+.page-content .btn-raw {
+  font-family: 'Times New Roman', serif;
+  font-size: .85em;
+  padding: .5em 1.2em;
+  background: var(--chrome);
+  border: 2px solid;
+  border-color: #fff #888 #888 #fff;
+  border-radius: 0;
+  cursor: pointer;
+  color: #000;
+  margin-top: .4em;
+  display: inline-block;
+  letter-spacing: 0;
+  transition: font-family .45s, background .45s, color .45s, border-color .45s, border-radius .45s, letter-spacing .45s;
+}
+
+/* ── PAGE CONTENT — styled ── */
+.screen.styled .page-content h1 {
+  font-family: 'Special Elite', serif;
+  color: #00FF2B;
+  border-bottom-color: #00FF2B;
+  letter-spacing: -.01em;
+}
+.screen.styled .page-content p {
+  font-family: 'DM Mono', monospace;
+  color: #00FF2B;
+}
+.screen.styled .page-content a {
+  color: #00FF2B;
+  text-decoration: none;
+  border-bottom-color: #00FF2B;
+  font-family: 'DM Mono', monospace;
+}
+.screen.styled .page-content ul {
+  font-family: 'DM Mono', monospace;
+  color: #00FF2B;
+  list-style: '→ ';
+}
+.screen.styled .page-content .btn-raw {
+  font-family: 'Special Elite', serif;
+  color: #000;
+  border-color: transparent;
+  border-radius: 3px;
+  letter-spacing: .04em;
+}
+
+/* ── STATUS BAR ── */
+.statusbar {
+  background: var(--chrome);
+  border-top: 1px solid var(--chrome-lt);
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.status-panel {
+  font-size: .72rem;
+  color: #000;
+  padding: 1px 6px;
+  box-shadow: inset 1px 1px 0 var(--chrome-dk), inset -1px -1px 0 #fff;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.status-extra {
+  font-size: .72rem;
+  color: #000;
+  padding: 1px 0;
+  box-shadow: inset 1px 1px 0 var(--chrome-dk), inset -1px -1px 0 #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  transition: max-width .4s ease, opacity .3s ease, padding .3s ease;
+}
+.status-extra.visible {
+  max-width: 180px;
+  opacity: 1;
+  padding: 1px 6px;
+}
+.status-dot-wrap {
+  width: 18px; height: 18px;
+  box-shadow: inset 1px 1px 0 var(--chrome-dk), inset -1px -1px 0 #fff;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--chrome-dk);
+  transition: background .3s;
+}
+
+/* ── INJECTED ELEMENTS ── */
+.js-link-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: .6em;
+  color: #888;
+  display: block;
+  margin-bottom: .6em;
+  animation: fadein .3s ease;
+}
+.js-link-tag .attr-name   { color: #7a7aaa; }
+.js-link-tag .attr-val    { color: #888840; }
+.js-link-tag .tag-bracket { color: #bbb; }
+
+.js-console {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: #0a0a0a;
+  color: #00cc00;
+  font-family: 'DM Mono', monospace;
+  font-size: .62em;
+  padding: .3rem .7rem;
+  letter-spacing: .04em;
+  animation: fadein .2s ease;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  z-index: 9;
+}
+.js-console::before { content: '>'; color: #444; }
+
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── TOGGLE — Win98 dialog button ── */
+.toggle-wrap { display: flex; }
+.toggle-btn {
+  font-family: 'VT323', monospace;
+  font-size: .95rem;
+  letter-spacing: .05em;
+  background: var(--chrome);
+  border: none;
+  padding: 8px 22px;
+  cursor: pointer;
+  color: #000;
+  min-width: 120px;
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 0 var(--chrome-xdk),
+    inset 2px 2px 0 var(--chrome),
+    inset -2px -2px 0 var(--chrome-dk);
+}
+.toggle-btn:active {
+  box-shadow:
+    inset 1px 1px 0 var(--chrome-dk),
+    inset -1px -1px 0 #fff,
+    inset 2px 2px 0 var(--chrome-xdk);
+  transform: translate(1px,1px);
+}
+</style>

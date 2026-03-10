@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Puzzle with Sliding Insertion (after() / before())</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Honk:MORF@15&amp;display=swap'><link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="toggle-controls">
+        <button class="toggle-btn panel-visible" id="togglePanelBtn">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.88 96.32" style="enable-background:new 0 0 122.88 96.32" xml:space="preserve" fill="#fff">
+                <g>
+                    <path d="M104.54,23.28c6.82,6.28,12.8,14.02,17.67,22.87l0.67,1.22l-0.67,1.21c-6.88,12.49-15.96,22.77-26.48,29.86 c-8.84,5.95-18.69,9.67-29.15,10.59l6.73-11.66c5.25-1.42,10.24-3.76,14.89-6.9c8.18-5.51,15.29-13.45,20.79-23.1 c-2.98-5.22-6.43-9.94-10.26-14.05L104.54,23.28L104.54,23.28z M88.02,0l17.84,10.3L56.2,96.32l-17.83-10.3l0.69-1.2 c-4.13-1.69-8.11-3.83-11.9-6.38C16.62,71.35,7.55,61.07,0.67,48.59L0,47.37l0.67-1.22C7.55,33.67,16.62,23.39,27.15,16.3 C37.42,9.38,49.08,5.48,61.44,5.48c7.35,0,14.44,1.38,21.14,3.94L88.02,0L88.02,0L88.02,0z M44.36,75.63l5-8.67 c-5.94-3.78-9.89-10.42-9.89-17.99c0-11.77,9.54-21.31,21.31-21.31c3.56,0,6.92,0.87,9.87,2.42l6.61-11.44 c-5.04-1.85-10.35-2.85-15.83-2.85c-9.61,0-18.71,3.06-26.76,8.48c-8.18,5.51-15.29,13.45-20.8,23.11c5.5,9.66,12.62,17.6,20.8,23.1C37.76,72.55,41,74.28,44.36,75.63L44.36,75.63z M63.93,41.74l6.73-11.66 c-1.82-0.95-3.77-1.64-5.79-2.03c-1.45,2.18-2.31,4.82-2.31,7.67C62.56,37.88,63.06,39.93,63.93,41.74L63.93,41.74L63.93,41.74z" />
+                </g>
+            </svg>
+            <svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.88 83.78" fill="#fff" style="enable-background:new 0 0 122.88 83.78" xml:space="preserve">
+                <g>
+                    <path d="M95.73,10.81c10.53,7.09,19.6,17.37,26.48,29.86l0.67,1.22l-0.67,1.21c-6.88,12.49-15.96,22.77-26.48,29.86 C85.46,79.88,73.8,83.78,61.44,83.78c-12.36,0-24.02-3.9-34.28-10.81C16.62,65.87,7.55,55.59,0.67,43.1L0,41.89l0.67-1.22 c6.88-12.49,15.95-22.77,26.48-29.86C37.42,3.9,49.08,0,61.44,0C73.8,0,85.45,3.9,95.73,10.81L95.73,10.81z M60.79,22.17l4.08,0.39 c-1.45,2.18-2.31,4.82-2.31,7.67c0,7.48,5.86,13.54,13.1,13.54c2.32,0,4.5-0.62,6.39-1.72c0.03,0.47,0.05,0.94,0.05,1.42 c0,11.77-9.54,21.31-21.31,21.31c-11.77,0-21.31-9.54-21.31-21.31C39.48,31.71,49.02,22.17,60.79,22.17L60.79,22.17L60.79,22.17z M109,41.89c-5.5-9.66-12.61-17.6-20.79-23.11c-8.05-5.42-17.15-8.48-26.77-8.48c-9.61,0-18.71,3.06-26.76,8.48 c-8.18,5.51-15.29,13.45-20.8,23.11c5.5,9.66,12.62,17.6,20.8,23.1c8.05,5.42,17.15,8.48,26.76,8.48c9.62,0,18.71-3.06,26.77-8.48 C96.39,59.49,103.5,51.55,109,41.89L109,41.89z" />
+                </g>
+            </svg>
+        </button>
+    </div>
+    
+    <div class="controls-panel" id="controlsPanel">
+        <div class="button-container">
+            <input type="file" id="file-input" accept="image/*">
+            <button class="upload-btn" onclick="document.getElementById('file-input').click()">Upload</button>
+            <button class="unsplash-btn" id="unsplash-btn">Choose ▼</button>
+            <button class="melanger-btn" onclick="melangerPieces()">Shuffle</button>
+            <button class="solution-btn" onclick="afficherSolution()">Solve</button>
+        </div>
+    </div>
+
+    <div id="puzzle-container"></div>
+
+    <div id="context-menu" class="context-menu">
+        <div class="menu-grid" id="menu-grid"></div>
+        <div class="menu-footer">Images by Europeana on Unsplash</div>
+    </div>
+    <button class="help-btn" id="helpBtn" title="Aide / Help" style="left: 307.833px;">?</button>
+    <div class="help-modal" id="helpModal">
+	<div class="help-modal-container">
+		<div class="help-modal-header">
+			<div class="help-modal-title-container">
+				<span class="help-modal-title">Règle du jeu / Game Rules</span>
+				<button class="help-modal-close" onclick="closeHelpModal()">×</button>
+			</div>
+			<div class="language-flags" id="languageFlags">
+				<button class="flag-btn active" onclick='scrollToLanguage("en")'>🇬🇧</button>
+				<button class="flag-btn" onclick='scrollToLanguage("fr")'>🇫🇷</button>
+				<button class="flag-btn" onclick='scrollToLanguage("es")'>🇪🇸</button>
+				<button class="flag-btn" onclick='scrollToLanguage("it")'>🇮🇹</button>
+				<button class="flag-btn" onclick='scrollToLanguage("de")'>🇩🇪</button>
+				<button class="flag-btn" onclick='scrollToLanguage("kr")'>🇰🇷</button>
+				<button class="flag-btn" onclick='scrollToLanguage("jp")'>🇯🇵</button>
+				<button class="flag-btn" onclick='scrollToLanguage("in")'>🇮🇳</button>
+				<button class="flag-btn" onclick='scrollToLanguage("ar")'>🇸🇦</button>
+				<button class="flag-btn" onclick='scrollToLanguage("cn")'>🇨🇳</button>
+				<button class="flag-btn" onclick='scrollToLanguage("pt")'>🇵🇹</button>
+			</div>
+		</div>
+		<div class="help-content" id="helpContent">
+			<!-- English -->
+			<div class="language-section" id="lang-en">
+				<div class="language-title">🇬🇧 Clever Puzzle - Game Rules (English)</div>
+				<div class="game-rules">
+					<h3>Game Presentation</h3>
+					<p>This digital puzzle takes the classic puzzle principle with an original movement mechanic that requires thought and strategy. The goal is to reconstruct the image by placing each piece in the correct order, from position 1 (top left corner) to position 9 (bottom right corner).</p>
+					
+					<h3>Fundamental Rule: Lateral Movement</h3>
+					<p>The uniqueness of this game lies in its movement rule:</p>
+					<ul>
+						<li><strong>If you place a piece on the left side of another piece</strong> — it is placed before that piece in the puzzle order</li>
+						<li><strong>If you place a piece on the right side of another piece</strong> — it is placed after that piece</li>
+					</ul>
+					<p>This mechanic, inspired by sliding puzzles, requires anticipating positions and planning your moves.</p>
+					
+					<h3>How to Play</h3>
+					<ol>
+						<li><strong>Choose an image</strong>
+							<ul>
+								<li>"Upload" button: import your own image (automatically resized)</li>
+								<li>"Choose" button: select an image from a gallery of 10 visuals</li>
+							</ul>
+						</li>
+						<li><strong>Shuffle the pieces</strong>
+							<ul>
+								<li>Click "Shuffle" to randomly mix all pieces and start a new game</li>
+							</ul>
+						</li>
+						<li><strong>Move the pieces</strong>
+							<ul>
+								<li>Click and drag a piece and drop it onto another</li>
+								<li>Carefully observe where you release the mouse (left/right) to control the insertion position</li>
+							</ul>
+						</li>
+						<li><strong>See the solution</strong>
+							<ul>
+								<li>The "Solve" button instantly places all pieces in the correct order (useful for understanding the mechanics or checking your progress)</li>
+							</ul>
+						</li>
+						<li><strong>Control the interface</strong>
+							<ul>
+								<li>The round button with the 'eye' icon at the top right allows you to hide or show the control panel according to your preferences</li>
+							</ul>
+						</li>
+					</ol>
+					<p class="reflection">Good luck and have fun!</p>
+				</div>
+			</div>
+			
+			<div class="language-separator"></div>
+			
+			<!-- Français -->
+			<div class="language-section" id="lang-fr">
+				<div class="language-title">🇫🇷 Puzzle Malin - Règle du Jeu (Français)</div>
+				<div class="game-rules">
+					<h3>Présentation du jeu</h3>
+					<p>Ce casse-tête numérique reprend le principe du puzzle classique avec une mécanique de déplacement originale qui demande réflexion et stratégie. Le but est de reconstituer l'image en replaçant chaque pièce dans le bon ordre, de la position 1 (coin supérieur gauche) à la position 9 (coin inférieur droit).</p>
+					
+					<h3>Règle fondamentale : le déplacement latéral</h3>
+					<p>La particularité de ce jeu réside dans sa règle de déplacement :</p>
+					<ul>
+						<li><strong>Si vous déposez une pièce sur la partie gauche d'une autre pièce</strong> — elle se place avant celle-ci dans l'ordre du puzzle</li>
+						<li><strong>Si vous déposez une pièce sur la partie droite d'une autre pièce</strong> — elle se place après celle-ci</li>
+					</ul>
+					<p>Cette mécanique, inspirée des puzzles à glissement, nécessite d'anticiper les positions et de planifier ses mouvements.</p>
+					
+					<h3>Comment jouer</h3>
+					<ol>
+						<li><strong>Choisir une image</strong>
+							<ul>
+								<li>Bouton "Upload" : importez votre propre image (redimensionnée automatiquement)</li>
+								<li>Bouton "Choose" : sélectionnez une image parmi une galerie de 10 visuels</li>
+							</ul>
+						</li>
+						<li><strong>Mélanger les pièces</strong>
+							<ul>
+								<li>Cliquez sur "Shuffle" pour mélanger aléatoirement toutes les pièces et commencer une nouvelle partie</li>
+							</ul>
+						</li>
+						<li><strong>Déplacer les pièces</strong>
+							<ul>
+								<li>Cliquez-glissez une pièce et déposez-la sur une autre</li>
+								<li>Observez attentivement où vous relâchez la souris (gauche/droite) pour contrôler la position d'insertion</li>
+							</ul>
+						</li>
+						<li><strong>Voir la solution</strong>
+							<ul>
+								<li>Le bouton "Solve" replace instantanément toutes les pièces dans l'ordre correct (utile pour comprendre la mécanique ou vérifier votre progression)</li>
+							</ul>
+						</li>
+						<li><strong>Contrôler l'interface</strong>
+							<ul>
+								<li>Le bouton rond avec l'icône "œil" en haut à droite permet de masquer ou d'afficher le panneau de contrôle selon vos préférences</li>
+							</ul>
+						</li>
+					</ol>
+					<p class="reflection">Bonne réflexion !</p>
+				</div>
+			</div>
+			
+			<div class="language-separator"></div>
+			
+			<!-- Español -->
+			<div class="language-section" id="lang-es">
+				<div class="language-title">🇪🇸 Rompecabezas Ingenioso - Reglas del Juego (Español)</div>
+				<div class="game-rules">
+					<h3>Presentación del juego</h3>
+					<p>Este rompecabezas digital retoma el principio del puzzle clásico con una mecánica de movimiento original que requiere reflexión y estrategia. El objetivo es reconstruir la imagen colocando cada pieza en el orden correcto, de la posición 1 (esquina superior izquierda) a la posición 9 (esquina inferior derecha).</p>
+					
+					<h3>Regla fundamental: movimiento lateral</h3>
+					<p>La particularidad de este juego reside en su regla de movimiento:</p>
+					<ul>
+						<li><strong>Si colocas una pieza en el lado izquierdo de otra pieza</strong> — se coloca antes de esta en el orden del puzzle</li>
+						<li><strong>Si colocas una pieza en el lado derecho de otra pieza</strong> — se coloca después de esta</li>
+					</ul>
+					<p>Esta mecánica, inspirada en los puzzles deslizantes, requiere anticipar posiciones y planificar movimientos.</p>
+					
+					<h3>Cómo jugar</h3>
+					<ol>
+						<li><strong>Elegir una imagen</strong>
+							<ul>
+								<li>Botón "Upload": importa tu propia imagen (redimensionada automáticamente)</li>
+								<li>Botón "Choose": selecciona una imagen de una galería de 10 visuales</li>
+							</ul>
+						</li>
+						<li><strong>Mezclar las piezas</strong>
+							<ul>
+								<li>Haz clic en "Shuffle" para mezclar aleatoriamente todas las piezas y comenzar un nuevo juego</li>
+							</ul>
+						</li>
+						<li><strong>Mover las piezas</strong>
+							<ul>
+								<li>Arrastra y suelta una pieza sobre otra</li>
+								<li>Observa atentamente dónde sueltas el ratón (izquierda/derecha) para controlar la posición de inserción</li>
+							</ul>
+						</li>
+						<li><strong>Ver la solución</strong>
+							<ul>
+								<li>El botón "Solve" coloca instantáneamente todas las piezas en el orden correcto (útil para entender la mecánica o verificar tu progreso)</li>
+							</ul>
+						</li>
+						<li><strong>Controlar la interfaz</strong>
+							<ul>
+								<li>El botón redondo con el icono del 'ojo' en la parte superior derecha permite ocultar o mostrar el panel de control según tus preferencias</li>
+							</ul>
+						</li>
+					</ol>
+					<p class="reflection">¡Buena reflexión!</p>
+				</div>
+			</div>
+			
+			<div class="language-separator"></div>
+			
+			<!-- Italiano -->
+			<div class="language-section" id="lang-it">
+				<div class="language-title">🇮🇹 Puzzle Intelligente - Regole del Gioco (Italiano)</div>
+				<div class="game-rules">
+					<h3>Presentazione del gioco</h3>
+					<p>Questo puzzle digitale riprende il principio del puzzle classico con una meccanica di movimento originale che richiede riflessione e strategia. L'obiettivo è ricostruire l'immagine posizionando ogni pezzo nell'ordine corretto, dalla posizione 1 (angolo in alto a sinistra) alla posizione 9 (angolo in basso a destra).</p>
+					
+					<h3>Regola fondamentale: movimento laterale</h3>
+					<p>La particolarità di questo gioco risiede nella sua regola di movimento:</p>
+					<ul>
+						<li><strong>Se depositi un pezzo sul lato sinistro di un altro pezzo</strong> — viene posizionato prima di questo nell'ordine del puzzle</li>
+						<li><strong>Se depositi un pezzo sul lato destro di un altro pezzo</strong> — viene posizionato dopo questo</li>
+					</ul>
+					<p>Questa meccanica, ispirata ai puzzle scorrevoli, richiede di anticipare le posizioni e pianificare i movimenti.</p>
+					
+					<h3>Come giocare</h3>
+					<ol>
+						<li><strong>Scegliere un'immagine</strong>
+							<ul>
+								<li>Pulsante "Upload": importa la tua immagine (ridimensionata automaticamente)</li>
+								<li>Pulsante "Choose": seleziona un'immagine da una galleria di 10 visual</li>
+							</ul>
+						</li>
+						<li><strong>Mescolare i pezzi</strong>
+							<ul>
+								<li>Clicca su "Shuffle" per mescolare casualmente tutti i pezzi e iniziare una nuova partita</li>
+							</ul>
+						</li>
+						<li><strong>Spostare i pezzi</strong>
+							<ul>
+								<li>Trascina e rilascia un pezzo su un altro</li>
+								<li>Osserva attentamente dove rilasci il mouse (sinistra/destra) per controllare la posizione di inserimento</li>
+							</ul>
+						</li>
+						<li><strong>Vedere la soluzione</strong>
+							<ul>
+								<li>Il pulsante "Solve" posiziona istantaneamente tutti i pezzi nell'ordine corretto (utile per comprendere la meccanica o verificare i progressi)</li>
+							</ul>
+						</li>
+						<li><strong>Controllare l'interfaccia</strong>
+							<ul>
+								<li>Il pulsante rotondo con l'icona 'occhio' in alto a destra permette di nascondere o mostrare il pannello di controllo secondo le tue preferenze</li>
+							</ul>
+						</li>
+					</ol>
+					<p class="reflection">Buona riflessione!</p>
+				</div>
+			</div>
+			
+			<div class="language-separator"></div>
+			
+			<!-- Deutsch -->
+			<div class="language-section" id="lang-de">
+				<div class="language-title">🇩🇪 Cleveres Puzzle - Spielregeln (Deutsch)</div>
+				<div class="game-rules">
+					<h3>Spielvorstellung</h3>
+					<p>Dieses digitale Puzzle greift das Prinzip des klassischen Puzzles mit einer originellen Bewegungsmechanik auf, die Nachdenken und Strategie erfordert. Das Ziel ist es, das Bild zu rekonstruieren, indem jedes Teil in die richtige Reihenfolge gebracht wird, von Position 1 (obere linke Ecke) bis Position 9 (untere rechte Ecke).</p>
+					
+					<h3>Grundregel: Seitliche Bewegung</h3>
+					<p>Die Besonderheit dieses Spiels liegt in seiner Bewegungsregel:</p>
+					<ul>
+						<li><strong>Wenn du ein Teil auf die linke Seite eines anderen Teils legst</strong> — wird es vor diesem in der Puzzle-Reihenfolge platziert</li>
+						<li><strong>Wenn du ein Teil auf die rechte Seite eines anderen Teils legst</strong> — wird es nach diesem platziert</li>
+					</ul>
+					<p>Diese Mechanik, inspiriert von Schiebepuzzles, erfordert, Positionen vorauszusehen und Bewegungen zu planen.</p>
+					
+					<h3>Spielanleitung</h3>
+					<ol>
+						<li><strong>Ein Bild auswählen</strong>
+							<ul>
+								<li>"Upload"-Button: eigenes Bild importieren (automatisch skaliert)</li>
+								<li>"Choose"-Button: ein Bild aus einer Galerie von 10 Bildern auswählen</li>
+							</ul>
+						</li>
+						<li><strong>Teile mischen</strong>
+							<ul>
+								<li>Klicke auf "Shuffle", um alle Teile zufällig zu mischen und ein neues Spiel zu beginnen</li>
+							</ul>
+						</li>
+						<li><strong>Teile bewegen</strong>
+							<ul>
+								<li>Ziehe ein Teil per Drag & Drop auf ein anderes</li>
+								<li>Achte genau darauf, wo du die Maustaste loslässt (links/rechts), um die Einfügeposition zu steuern</li>
+							</ul>
+						</li>
+						<li><strong>Lösung ansehen</strong>
+							<ul>
+								<li>Der "Solve"-Button platziert sofort alle Teile in der richtigen Reihenfolge (nützlich, um die Mechanik zu verstehen oder den Fortschritt zu überprüfen)</li>
+							</ul>
+						</li>
+						<li><strong>Oberfläche steuern</strong>
+							<ul>
+								<li>Der runde Button mit dem 'Auge'-Symbol oben rechts ermöglicht es, das Bedienfeld nach Wunsch auszublenden oder anzuzeigen</li>
+							</ul>
+						</li>
+					</ol>
+					<p class="reflection">Viel Erfolg!</p>
+				</div>
+			</div>
+			
+			<div class="language-separator"></div>
+			
+			<!-- 한국어 -->
+			<div class="language-section" id="lang-kr">
+				<div class="language-title">🇰🇷 똑똑한 퍼즐 - 게임 규칙 (한국어)</div>
+				<div class="game-rules">
+					<h3>게임 소개</h3>
+					<p>이 디지털 퍼즐은 생각과 전략이 필요한 독창적인 이동 메커니즘으로 클래식 퍼즐의 원리를 차용했습니다. 목표는 위치 1(왼쪽 상단 모서리)에서 위치 9(오른쪽 하단 모서리)까지 올바른 순서로 각 조각을 배치하여 이미지를 재구성하는 것입니다.</p>
+					
+					<h3>기본 규칙: 측면 이동</h3>
+					<p>이 게임의 독특함은 이동 규칙에 있습니다:</p>
+					<ul>
+						<li><strong>다른 조각의 왼쪽 부분에 조각을 놓으면</strong> — 퍼즐 순서에서 해당 조각 앞에 배치됩니다</li>
+						<li><strong>다른 조각의 오른쪽 부분에 조각을 놓으면</strong> — 해당 조각 뒤에 배치됩니다</li>
+					</ul>
+					<p>슬라이딩 퍼즐에서 영감을 받은 이 메커니즘은 위치를 예측하고 움직임을 계획해야 합니다.</p>
+					
+					<h3>게임 방법</h3>
+					<ol>
+						<li><strong>이미지 선택</strong>
+							<ul>
+								<li>"Upload" 버튼: 자신의 이미지 가져오기 (자동으로 크기 조정됨)</li>
+								<li>"Choose" 버튼: 10개 이미지 갤러리에서 선택</li>
+							</ul>
+						</li>
+						<li><strong>조각 섞기</strong>
+							<ul>
+								<li>"Shuffle"을 클릭하여 모든 조각을 무작위로 섞고 새 게임 시작</li>
+							</ul>
+						</li>
+						<li><strong>조각 이동</strong>
+							<ul>
+								<li>조각을 클릭하여 끌어다 다른 조각 위에 놓기</li>
+								<li>삽입 위치를 제어하기 위해 마우스를 놓는 위치(왼쪽/오른쪽)를 주의 깊게 관찰</li>
+							</ul>
+						</li>
+						<li><strong>해결 방법 보기</strong>
+							<ul>
+								<li>"Solve" 버튼은 모든 조각을 올바른 순서로 즉시 배치 (메커니즘 이해 또는 진행 상황 확인에 유용)</li>
+							</ul>
+						</li>
+						<li><strong>인터페이스 제어</strong>
+							<ul>
+								<li>오른쪽 상단의 '눈' 아이콘이 있는 둥근 버튼으로 제어판을 숨기거나 표시 가능</li>
+							</ul>
+						</li>
+					</ol>
+					<p class="reflection">좋은 생각하세요!</p>
+				</div>
+			</div>
+			
+			<div class="language-separator"></div>
+			
+			<!-- 日本語 -->
+			<div class="language-section" id="lang-jp">
+				<div class="language-title">🇯🇵 賢いパズル - ゲームルール (日本語)</div>
+				<div class="game-rules">
+					<h3>ゲームの紹介</h3>
+					<p>このデジタルパズルは、思考と戦略を必要とする独自の移動メカニズムで、クラシックパズルの原則を取り入れています。目的は、位置1（左上隅）から位置9（右下隅）まで、正しい順序で各ピースを配置して画像を再構築することです。</p>
+					
+					<h3>基本ルール：横方向の移動</h3>
+					<p>このゲームの特徴は、移動ルールにあります：</p>
+					<ul>
+						<li><strong>別のピースの左側にピースを置いた場合</strong> — パズルの順序でそのピースの前に配置されます</li>
+						<li><strong>別のピースの右側にピースを置いた場合</strong> — そのピースの後に配置されます</li>
+					</ul>
+					<p>スライディングパズルに触発されたこのメカニズムは、位置を予測し、動きを計画する必要があります。</p>
+					
+					<h3>遊び方</h3>
+					<ol>
+						<li><strong>画像を選択</strong>
+							<ul>
+								<li>"Upload"ボタン：自分の画像をインポート（自動的にサイズ変更）</li>
+								<li>"Choose"ボタン：10種類の画像ギャラリーから選択</li>
+							</ul>
+						</li>
+						<li><strong>ピースをシャッフル</strong>
+							<ul>
+								<li>"Shuffle"をクリックしてすべてのピースをランダムに混ぜ、新しいゲームを開始</li>
+							</ul>
+						</li>
+						<li><strong>ピースを移動</strong>
+							<ul>
+								<li>ピースをクリックしてドラッグし、別のピースの上にドロップ</li>
+								<li>挿入位置を制御するために、マウスを離す場所（左/右）を注意深く観察</li>
+							</ul>
+						</li>
+						<li><strong>解決策を見る</strong>
+							<ul>
+								<li>"Solve"ボタンですべてのピースを正しい順序に即座に配置（メカニズムの理解や進行状況の確認に役立ちます）</li>
+							</ul>
+						</li>
+						<li><strong>インターフェースの制御</strong>
+							<ul>
+								<li>右上の「目」アイコンがある丸いボタンで、コントロールパネルを非表示/表示できます</li>
+							</ul>
+						</li>
+					</ol>
+					<p class="reflection">良い反省を！</p>
+				</div>
+			</div>
+			
+			<div class="language-separator"></div>
+			
+			<!-- हिन्दी -->
+			<div class="language-section" id="lang-in">
+				<div class="language-title">🇮🇳 स्मार्ट पहेली - खेल के नियम (हिन्दी)</div>
+				<div class="game-rules">
+					<h3>खेल का परिचय</h3>
+					<p>यह डिजिटल पहेली एक मूल गतिविधि यांत्रिकी के साथ क्लासिक पहेली सिद्धांत को लेती है जिसमें सोच और रणनीति की आवश्यकता होती है। लक्ष्य स्थिति 1 (ऊपरी बाएँ कोने) से स्थिति 9 (निचले दाएँ कोने) तक सही क्रम में प्रत्येक टुकड़े को रखकर छवि का पुनर्निर्माण करना है।</p>
+					
+					<h3>मौलिक नियम: पार्श्व गति</h3>
+					<p>इस खेल की विशिष्टता इसके गति नियम में निहित है:</p>
+					<ul>
+						<li><strong>यदि आप किसी अन्य टुकड़े के बाईं ओर एक टुकड़ा रखते हैं</strong> — यह पहेली क्रम में उस टुकड़े से पहले रखा जाता है</li>
+						<li><strong>यदि आप किसी अन्य टुकड़े के दाईं ओर एक टुकड़ा रखते हैं</strong> — यह उस टुकड़े के बाद रखा जाता है</li>
+					</ul>
+					<p>स्लाइडिंग पहेलियों से प्रेरित यह यांत्रिकी, स्थितियों का अनुमान लगाने और अपनी चालों की योजना बनाने की आवश्यकता होती है।</p>
+					
+					<h3>कैसे खेलें</h3>
+					<ol>
+						<li><strong>एक छवि चुनें</strong>
+							<ul>
+								<li>"Upload" बटन: अपनी खुद की छवि आयात करें (स्वचालित रूप से आकार बदला गया)</li>
+								<li>"Choose" बटन: 10 दृश्यों की गैलरी से एक छवि चुनें</li>
+							</ul>
+						</li>
+						<li><strong>टुकड़ों को फेरें</strong>
+							<ul>
+								<li>सभी टुकड़ों को बेतरतीब ढंग से मिलाने और नया गेम शुरू करने के लिए "Shuffle" पर क्लिक करें</li>
+							</ul>
+						</li>
+						<li><strong>टुकड़ों को हिलाएँ</strong>
+							<ul>
+								<li>एक टुकड़े को क्लिक करके खींचें और दूसरे पर छोड़ें</li>
+								<li>सम्मिलन स्थिति को नियंत्रित करने के लिए आप माउस कहाँ छोड़ते हैं (बाएँ/दाएँ) ध्यान से देखें</li>
+							</ul>
+						</li>
+						<li><strong>समाधान देखें</strong>
+							<ul>
+								<li>"Solve" बटन तुरंत सभी टुकड़ों को सही क्रम में रखता है (यांत्रिकी को समझने या अपनी प्रगति की जाँच करने के लिए उपयोगी)</li>
+							</ul>
+						</li>
+						<li><strong>इंटरफ़ेस को नियंत्रित करें</strong>
+							<ul>
+								<li>शीर्ष दाईं ओर 'आँख' आइकन वाला गोल बटन आपको अपनी प्राथमिकताओं के अनुसार नियंत्रण पैनल को छिपाने या दिखाने की अनुमति देता है</li>
+							</ul>
+						</li>
+					</ol>
+					<p class="reflection">शुभ सोच!</p>
+				</div>
+			</div>
+			
+			<div class="language-separator"></div>
+			
+			<!-- العربية -->
+			<div class="language-section rtl" id="lang-ar">
+				<div class="language-title">🇸🇦 اللغز الذكي - قواعد اللعبة (العربية)</div>
+				<div class="game-rules">
+					<h3>تقديم اللعبة</h3>
+					<p>هذا اللغز الرقمي يأخذ مبدأ اللغز الكلاسيكي مع آلية حركة أصلية تتطلب التفكير والاستراتيجية. الهدف هو إعادة بناء الصورة عن طريق وضع كل قطعة في الترتيب الصحيح، من الموضع 1 (الزاوية العلوية اليسرى) إلى الموضع 9 (الزاوية السفلية اليمنى).</p>
+					
+					<h3>القاعدة الأساسية: الحركة الجانبية</h3>
+					<p>تكمن خصوصية هذه اللعبة في قاعدة حركتها:</p>
+					<ul>
+						<li><strong>إذا وضعت قطعة على الجانب الأيسر من قطعة أخرى</strong> — توضع قبلها في ترتيب اللغز</li>
+						<li><strong>إذا وضعت قطعة على الجانب الأيمن من قطعة أخرى</strong> — توضع بعدها</li>
+					</ul>
+					<p>هذه الآلية، المستوحاة من الألغاز المنزلقة، تتطلب توقع المواقع وتخطيط تحركاتك.</p>
+					
+					<h3>كيفية اللعب</h3>
+					<ol>
+						<li><strong>اختيار صورة</strong>
+							<ul>
+								<li>زر "Upload": استيراد صورتك الخاصة (يتم تغيير حجمها تلقائياً)</li>
+								<li>زر "Choose": تحديد صورة من معرض يضم 10 صور</li>
+							</ul>
+						</li>
+						<li><strong>خلط القطع</strong>
+							<ul>
+								<li>انقر على "Shuffle" لخلط جميع القطع عشوائياً وبدء لعبة جديدة</li>
+							</ul>
+						</li>
+						<li><strong>تحريك القطع</strong>
+							<ul>
+								<li>اسحب وأفلت قطعة على أخرى</li>
+								<li>لاحظ بعناية أين تحرر الماوس (يسار/يمين) للتحكم في موضع الإدراج</li>
+							</ul>
+						</li>
+						<li><strong>رؤية الحل</strong>
+							<ul>
+								<li>زر "Solve" يضع فوراً جميع القطع بالترتيب الصحيح (مفيد لفهم الآلية أو التحقق من تقدمك)</li>
+							</ul>
+						</li>
+						<li><strong>التحكم في الواجهة</strong>
+							<ul>
+								<li>الزر الدائري مع أيقونة 'العين' في أعلى اليمين يسمح لك بإخفاء أو إظهار لوحة التحكم حسب تفضيلاتك</li>
+							</ul>
+						</li>
+					</ol>
+					<p class="reflection">تفكير موفق!</p>
+				</div>
+			</div>
+			
+			<div class="language-separator"></div>
+			
+			<!-- 中文 -->
+			<div class="language-section" id="lang-cn">
+				<div class="language-title">🇨🇳 聪明拼图 - 游戏规则 (中文)</div>
+				<div class="game-rules">
+					<h3>游戏介绍</h3>
+					<p>这款数字拼图采用了经典拼图的原理，但具有独特的移动机制，需要思考和策略。目标是将每块拼图按正确顺序放置，从位置1（左上角）到位置9（右下角），重建图像。</p>
+					
+					<h3>基本规则：横向移动</h3>
+					<p>这个游戏的独特之处在于其移动规则：</p>
+					<ul>
+						<li><strong>如果您将一块拼图放在另一块的左侧</strong> — 它将被放置在拼图顺序中该块之前</li>
+						<li><strong>如果您将一块拼图放在另一块的右侧</strong> — 它将被放置在该块之后</li>
+					</ul>
+					<p>这种受滑动拼图启发的机制需要预测位置并计划您的移动。</p>
+					
+					<h3>如何游戏</h3>
+					<ol>
+						<li><strong>选择图像</strong>
+							<ul>
+								<li>"Upload"按钮：导入您自己的图像（自动调整大小）</li>
+								<li>"Choose"按钮：从10个图像的图库中选择</li>
+							</ul>
+						</li>
+						<li><strong>打乱拼图</strong>
+							<ul>
+								<li>点击"Shuffle"随机混合所有拼图并开始新游戏</li>
+							</ul>
+						</li>
+						<li><strong>移动拼图</strong>
+							<ul>
+								<li>点击并拖拽一块拼图放到另一块上</li>
+								<li>仔细观察释放鼠标的位置（左/右）以控制插入位置</li>
+							</ul>
+						</li>
+						<li><strong>查看解决方案</strong>
+							<ul>
+								<li>"Solve"按钮立即将所有拼图按正确顺序放置（有助于理解机制或检查进度）</li>
+							</ul>
+						</li>
+						<li><strong>控制界面</strong>
+							<ul>
+								<li>右上角带有"眼睛"图标的圆形按钮可根据您的偏好隐藏或显示控制面板</li>
+							</ul>
+						</li>
+					</ol>
+					<p class="reflection">祝您思考愉快！</p>
+				</div>
+			</div>
+			
+			<div class="language-separator"></div>
+			
+			<!-- Português -->
+			<div class="language-section" id="lang-pt">
+				<div class="language-title">🇵🇹 Quebra-Cabeça Inteligente - Regras do Jogo (Português)</div>
+				<div class="game-rules">
+					<h3>Apresentação do jogo</h3>
+					<p>Este quebra-cabeça digital retoma o princípio do puzzle clássico com uma mecânica de movimento original que exige reflexão e estratégia. O objetivo é reconstituir a imagem colocando cada peça na ordem correta, da posição 1 (canto superior esquerdo) à posição 9 (canto inferior direito).</p>
+					
+					<h3>Regra fundamental: movimento lateral</h3>
+					<p>A particularidade deste jogo reside na sua regra de movimento:</p>
+					<ul>
+						<li><strong>Se colocar uma peça no lado esquerdo de outra peça</strong> — ela é colocada antes desta na ordem do puzzle</li>
+						<li><strong>Se colocar uma peça no lado direito de outra peça</strong> — ela é colocada depois desta</li>
+					</ul>
+					<p>Esta mecânica, inspirada nos puzzles deslizantes, requer antecipar posições e planear os movimentos.</p>
+					
+					<h3>Como jogar</h3>
+					<ol>
+						<li><strong>Escolher uma imagem</strong>
+							<ul>
+								<li>Botão "Upload": importe a sua própria imagem (redimensionada automaticamente)</li>
+								<li>Botão "Choose": selecione uma imagem de uma galeria de 10 visuais</li>
+							</ul>
+						</li>
+						<li><strong>Misturar as peças</strong>
+							<ul>
+								<li>Clique em "Shuffle" para misturar aleatoriamente todas as peças e começar um novo jogo</li>
+							</ul>
+						</li>
+						<li><strong>Mover as peças</strong>
+							<ul>
+								<li>Arraste e solte uma peça sobre outra</li>
+								<li>Observe atentamente onde solta o rato (esquerda/direita) para controlar a posição de inserção</li>
+							</ul>
+						</li>
+						<li><strong>Ver a solução</strong>
+							<ul>
+								<li>O botão "Solve" coloca instantaneamente todas as peças na ordem correta (útil para entender a mecânica ou verificar o seu progresso)</li>
+							</ul>
+						</li>
+						<li><strong>Controlar a interface</strong>
+							<ul>
+								<li>O botão redondo com o ícone do 'olho' no canto superior direito permite ocultar ou mostrar o painel de controlo conforme as suas preferências</li>
+							</ul>
+						</li>
+					</ol>
+					<p class="reflection">Boa reflexão!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
