@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>cpc-before-after</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="container" id="container">
+  <div class="side before">
+    <div class="content">
+      <div class="label">BEFORE: SOURCE</div>
+      <pre><code><span class="tag">.apple-btn</span><span class="pun">::after</span> {
+  <span class="prop">content</span>: <span class="val">"→"</span>;
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="side after" id="afterSide">
+    <div class="content">
+      <div class="label">AFTER: RESULT</div>
+      
+      <div class="button-wrapper">
+        <div class="hover-modal">
+          <div class="modal-content">
+            <span class="modal-icon"></span>
+            <div>
+              <strong>Instant Checkout</strong>
+              <p>Apple Pay enabled</p>
+            </div>
+          </div>
+        </div>
+        
+        <button class="apple-btn">Buy Now</button>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="dragger-track" id="dragger">
+    <div class="handle">
+       <span></span>
+    </div>
+  </div>
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

@@ -1,0 +1,115 @@
+:root {
+  --pos: 50%;
+  --apple-blue: #0071e3;
+  --bg-dark: #161617;
+}
+
+body {
+  margin: 0; height: 100vh; display: flex; 
+  align-items: center; justify-content: center;
+  background: #f5f5f7; 
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+}
+
+.container {
+  position: relative; width: 700px; height: 450px;
+  background: var(--bg-dark); border-radius: 32px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+  overflow: hidden; touch-action: none;
+}
+
+.side {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+
+.after {
+  background: white;
+  clip-path: inset(0 0 0 var(--pos));
+}
+
+/* CODE STYLING (Apple Terminal Aesthetic) */
+.before pre {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 30px; border-radius: 20px;
+  font-family: "SF Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 14px; line-height: 1.6;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tag { color: #ff7ab2; }  /* Pinkish */
+.prop { color: #65dfff; } /* Sky Blue */
+.val { color: #abe338; }  /* Lime Green */
+.pun { color: #ffffff; }
+
+.label { 
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em; 
+  opacity: 0.4; position: absolute; top: 40px; 
+}
+
+/* BUTTON & MODAL WRAPPER */
+.button-wrapper { position: relative; }
+
+.apple-btn {
+  all: unset; background: var(--apple-blue); color: white;
+  padding: 14px 32px; border-radius: 980px;
+  cursor: pointer; font-weight: 500; font-size: 17px;
+  transition: transform 0.2s, background 0.2s;
+  position: relative; z-index: 2;
+}
+
+.apple-btn::after {
+  content: "→"; margin-left: 8px;
+  display: inline-block; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* THE POP-UP MODAL */
+.hover-modal {
+  position: absolute;
+  bottom: 120%; left: 50%;
+  width: 200px; padding: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, 20px) scale(0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Curved bouncy fly-out */
+}
+
+.modal-content { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+.modal-icon { font-size: 20px; color: #1d1d1f; }
+.modal-content strong { display: block; color: #1d1d1f; }
+.modal-content p { margin: 0; color: #86868b; }
+
+/* HOVER STATES */
+.button-wrapper:hover .hover-modal {
+  opacity: 1; transform: translate(-50%, 0) scale(1);
+}
+.apple-btn:hover { background: #0077ed; transform: scale(1.02); }
+.apple-btn:hover::after { transform: translateX(5px); }
+
+/* THE DRAGGER BAR */
+.dragger-track {
+  position: absolute; top: 0; bottom: 0; left: var(--pos);
+  width: 60px; transform: translateX(-50%);
+  cursor: col-resize; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.dragger-track::before {
+  content: ""; position: absolute; width: 2px; height: 100%; background: rgba(0,0,0,0.08);
+}
+
+.handle span {
+  width: 44px; height: 44px; background: white;
+  border-radius: 50%; box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s;
+}
+
+.dragger-track:active .handle span { transform: scale(0.9); }
+.handle span::after { content: "⇋"; color: #1d1d1f; font-weight: 600; font-size: 18px; }

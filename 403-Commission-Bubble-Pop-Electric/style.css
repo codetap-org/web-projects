@@ -1,0 +1,341 @@
+body { background:rgba(231,231,231); }
+
+/*************************************
+BUPPLE POP ELECTRIC is a custom template created by MEADOW for MITZI's use only.
+*************************************/
+
+.bpe-wrap {
+  position:relative;
+  margin:112px auto 25px;
+  width:400px;
+  padding:50px;
+  border-radius:25px;
+  font-family:fredoka;
+  font-weight:400;
+  font-size:15.5px;
+  line-height:22px;
+  background:rgba(var(--c1));
+  background:linear-gradient(to bottom, rgba(var(--c1)) 25%, rgba(var(--c2)));
+  color:rgba(var(--black));
+  
+  --black:72,72,72;
+  --white:243,243,243;
+  --gray:231,231,231;
+}
+
+.bpe-wrap:before {
+  content:'';
+  display:block;
+  position:absolute;
+  top:150px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+  background:linear-gradient(to top, rgba(var(--c2)) 10%, rgba(var(--c1), 0));
+  overflow:hidden;
+  border-radius:0px 0px 30px 30px;
+}
+
+.bpe-icon {
+  position:absolute;
+  left:50px;
+  top:-75px;
+  border-radius:100%;
+  width:100px;
+  height:100px;
+  padding:25px;
+  background:rgba(var(--gray));
+}
+
+.bpe-icon span {
+  position:absolute;
+  border-radius:100%;
+  top:25px;
+  left:25px;
+  width:50px;
+  height:50px;
+  padding:25px;
+  text-align:center;
+  line-height:50px;
+  font-size:45px;
+  font-family:starry;
+  color:rgba(var(--white));
+  text-shadow:-1px 0 rgba(var(--black)), 0 1px rgba(var(--black)), 1px 0 rgba(var(--black)), 0 -1px rgba(var(--black));
+}
+
+.bpe-icon:before {
+  content:'';
+  border-radius:100%;
+  background:rgba(var(--c1));
+  background:linear-gradient(to top left, rgba(var(--black)), rgba(var(--black), 0.75));
+  display:block;
+  width:100px;
+  height:100px;
+  text-align:center;
+  line-height:100px;
+  font-size:45px;
+}
+
+.bpe-arc {
+  --b: 15px; /* the boder thickness */
+  --a: 75deg; /* control the progression */
+  
+  position:absolute;
+  top:-5px;
+  left:0px;
+  transform:rotate(-70deg);
+  width: 100px;
+  aspect-ratio: 1;
+  padding: var(--b);
+  border-radius: 50%;
+  background: linear-gradient(to bottom, rgba(var(--c2)), rgba(var(--c1)));
+  --_g:/var(--b) var(--b) no-repeat
+    radial-gradient(50% 50%,#000 97%,#0000);
+  mask: top var(--_g),
+    calc(50% + 50%*sin(var(--a))) 
+    calc(50% - 50%*cos(var(--a))) var(--_g),
+    linear-gradient(#0000 0 0) content-box intersect,
+    conic-gradient(#000 var(--a),#0000 0);}
+
+.bpe-dw {
+  display:block;
+  height:50px;
+  position:relative;
+  top:-25px;
+}
+
+.bpe-date {
+  display:inline-block;
+  float:right;
+  border-radius:25px;
+  height:50px;
+  background:rgba(var(--white));
+  width:150px;
+  text-align:center;
+  text-transform:uppercase;
+  line-height:50px;
+  font-weight:400;
+  font-size:14px;
+  letter-spacing:1px;
+  text-shadow:-1px 0 rgba(var(--gray)), 0 1px rgba(var(--gray)), 1px 0 rgba(var(--gray)), 0 -1px rgba(var(--gray));
+  color:rgba(var(--black), 0.85);
+}
+
+.bpe-date b {
+  font-weight:600;
+  margin-right:3px;
+  color: rgba(var(--c1));
+  background: -webkit-linear-gradient(bottom left, rgba(var(--c1)), rgba(var(--c2)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  text-shadow:none;
+}
+
+.bpe-dc {
+  position:absolute;
+  right:47px;
+  top:50px;
+  height:25px;
+  width:50px;
+  background:rgba(var(--white));
+}
+
+.bpe-dc:before {
+  content:'';
+  display:block;
+  position:absolute;
+  left:-12px;
+  top:0px;
+  background:rgba(var(--c1));
+  border-radius:100%;
+  width:25px;
+  height:25px;
+}
+
+.bpe-dc:after {
+  content:'';
+  display:block;
+  position:absolute;
+  right:-12px;
+  top:0px;
+  background:rgba(var(--c1));
+  border-radius:100%;
+  width:25px;
+  height:25px;
+}
+
+.bpe-body {
+  display:block;
+  position:relative;
+  background:rgba(var(--white));
+  padding:35px 35px 40px 35px;
+  border-radius:25px;
+  text-align:justify;
+}
+
+.bpe-body b {
+  font-weight:600;
+  color: rgba(var(--c1));
+  background: -webkit-linear-gradient(bottom left, rgba(var(--c1)), rgba(var(--c2)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.bpe-body b i {
+  opacity:1;
+}
+
+.bpe-body i {
+  opacity:0.75;
+}
+
+.bpe-body u {
+  text-decoration:none;
+  border-bottom:1px solid rgba(var(--c1), 0.75);
+  font-weight:500;
+  color:rgba(var(--black), 0.85);
+}
+
+.bpe-body a {
+  color:rgba(var(--c2));
+  font-weight:500;
+  opacity:0.9;
+  transition:ease-in-out;
+  transition-duration:0.5s;
+}
+
+.bpe-body a:hover {
+  cursor:crosshair;
+  opacity:1;
+}
+
+.bpe-body a:before {
+  content:'';
+  position:relative;
+  top:-1px;
+  margin-right:3px;
+  display:inline-block;
+  width:5px;
+  height:5px;
+  background:rgba(var(--black));
+  border-radius:100%;
+}
+
+.bpe-body hr {
+  margin:35px 75px;
+  border:none;
+  height:5px;
+  border-radius:5px;
+  background:rgba(var(--c1));
+  background:linear-gradient(to right, rgba(var(--c1)), rgba(var(--c2)));
+}
+
+.bpe-body span.dice-roll {
+  display:block;
+  font-size:14px;
+  text-transform:uppercase;
+  font-weight:500;
+  line-height:25px;
+  color:rgba(var(--black), 0.85);
+}
+
+.bpe-body span.dice-roll b {
+  display:none;
+}
+
+.bpe-body span.dice-roll:before {
+  content:'\e93c';
+  font-family:starry;
+  font-size:25px;
+  float:left;
+  margin-right:5px;
+  color: rgba(var(--c1));
+  background: -webkit-linear-gradient(bottom left, rgba(var(--c1)), rgba(var(--c2)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.bpe-tag {
+  position:relative;
+  display:inline-block;
+  background:rgba(var(--c2));
+  top:40px;
+  left:0px;
+  padding:9px 12px 7px;
+  font-size:12.5px;
+  min-height:12px;
+  line-height:12px;
+  border-radius:15px 15px 0px 0px;
+  max-width:62%;
+  text-align:left;
+  font-weight:500;
+}
+
+.bpe-tag a.user-tagged {
+  opacity:1;
+  font-weight:600;
+  text-transform:uppercase;
+  line-height:12px;
+  position:relative;
+  display:inline-block;
+  color:rgba(var(--white));
+  font-size:11px;
+  text-shadow:-1px 0 rgba(var(--c1)), 0 1px rgba(var(--c1)), 1px 0 rgba(var(--c1)), 0 -1px rgba(var(--c1));
+  letter-spacing:1px;
+  padding:2px;
+}
+
+.bpe-tag a.user-tagged:before {
+  content:'';
+  position:relative;
+  top:-1px;
+  margin-right:3px;
+  display:inline-block;
+  width:5px;
+  height:5px;
+  background:rgba(var(--black));
+  border-radius:100%;
+}
+
+.bpe-ti {
+  position:absolute;
+  bottom:12px;
+  right:87px;
+  width:50px;
+  height:50px;
+  padding:12px;
+  background:rgba(var(--c2));
+  border-radius:100%;
+}
+
+.bpe-ti:before {
+  content:'\e92b';
+  display:block;
+  font-family:starry;
+  font-size:25px;
+  text-align:center;
+  line-height:50px;
+  background:rgba(var(--black));
+  border-radius:100%;
+  width:50px;
+  height:50px;
+  color:rgba(var(--white));
+}
+
+/********************************
+COLOR CUSTOMIZATION
+
+Give each character a new ID name, i.e. peter, wendy, etc. and choose RGBA versions of their colors—I like finding them on color-hex.com.
+
+At the top of the template, next to <div class="bpe-wrap">, you'll see "id=default". Change "default" to the character name to change colors.
+********************************/
+
+#default {
+  --c1: 161,190,174;
+  --c2: 163,190,161;
+}
+
+#liam {
+ --c1: 60,90,106;
+ --c2: 100,151,177;
+}
