@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  color: #222;
+  background-color: #ececec;
+  font-size: 24px;
+  font-family: "Space Grotesk", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div {
+  --line-width: 120px;
+  width: calc(var(--line-width) * 4);
+  aspect-ratio: 4/3;
+  --image-bg: url(https://images.unsplash.com/photo-1523368749929-6b2bf370dbf8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzI2NDg3MTd8&ixlib=rb-4.1.0&q=80&w=800) no-repeat center / cover;
+  --line-1: linear-gradient(#bcdcec var(--progress-1), #fff0 0%) no-repeat calc(var(--line-width) * (1 - 1)) 0 / 25% 100%;
+  --line-2: linear-gradient(#bcdcec var(--progress-2), #fff0 0%) no-repeat calc(var(--line-width) * (2 - 1)) 0 / 25% 100%;
+  --line-3: linear-gradient(#bcdcec var(--progress-3), #fff0 0%) no-repeat calc(var(--line-width) * (3 - 1)) 0 / 25% 100%;
+  --line-4: linear-gradient(#bcdcec var(--progress-4), #fff0 0%) no-repeat calc(var(--line-width) * (4 - 1)) 0 / 25% 100%;
+  background: var(--line-1), var(--line-2), var(--line-3), var(--line-4), var(--image-bg);
+  --duration: 0.5s;
+  --delay: 0.2s;
+  --timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: --progress-1 var(--duration) calc(var(--delay) * 1) var(--timing-function), --progress-2 var(--duration) calc(var(--delay) * 2) var(--timing-function), --progress-3 var(--duration) calc(var(--delay) * 3) var(--timing-function), --progress-4 var(--duration) calc(var(--delay) * 4) var(--timing-function);
+}
+@starting-style {
+  div {
+    --progress-1: 100%;
+    --progress-2: 100%;
+    --progress-3: 100%;
+    --progress-4: 100%;
+  }
+}
+
+@property --progress-1 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --progress-2 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --progress-3 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --progress-4 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}

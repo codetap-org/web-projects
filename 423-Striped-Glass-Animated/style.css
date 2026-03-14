@@ -1,0 +1,6 @@
+body { margin: 0; overflow: hidden; background-color: #000; }
+        canvas { display: block; }
+        /* Style the GUI to be bottom-right */
+        .lil-gui.root { position: absolute; bottom: 20px; right: 20px; top: auto; }
+        /* Hide the file input */
+        #fileInput { display: none; }

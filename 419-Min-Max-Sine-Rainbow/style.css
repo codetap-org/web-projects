@@ -1,0 +1,207 @@
+html {
+  background-color: #000;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+  min-width: 100dvw;
+  overflow: clip;
+}
+
+@property --sine-1 {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+@property --sine-2 {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+@property --sine-3 {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+.wave {
+  display: flex;
+  clear: both;
+  justify-content: space-around;
+  width: 100dvw;
+  opacity: 0;
+}
+
+.all-sine {
+  --amplitude: 50dvh;
+  display: flex;
+  position: relative;
+  width: 100dvw;
+}
+.all-sine .wave {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  left: 0;
+}
+
+i {
+  --sine-1: 0;
+  --sine-2: 0;
+  --sine-3: 0;
+  --min: min(var(--sine-1), var(--sine-2), var(--sine-3));
+  --max: max(var(--sine-1), var(--sine-2), var(--sine-3));
+  --sum: calc(var(--sine-1) + var(--sine-2) + var(--sine-3));
+  --avg: calc(var(--sum) / 3);
+  --sibling-index: sibling-index();
+  --sibling-count: sibling-count();
+  --hue: calc(var(--sibling-index) / var(--sibling-count) * 360deg);
+  --delay: calc(var(--sibling-index) * -0.1s);
+  --progress: var(--sine-1);
+  --offset-y: calc(var(--amplitude) * var(--progress) - var(--amplitude) / 2);
+  transform: translateY(var(--offset-y));
+  display: block;
+  border-radius: 999px;
+  width: 2%;
+  aspect-ratio: 1;
+  border: 1px solid;
+  border-color: lch(70 100 var(--hue));
+  animation: sine-1 2.3s ease-in-out alternate infinite, sine-2 2.7s ease-in-out alternate infinite, sine-3 4.1s ease-in-out alternate infinite;
+  animation-delay: var(--delay);
+}
+
+.sine-1 i {
+  border-color: #f00;
+  --progress: var(--sine-1);
+}
+
+.sine-2 i {
+  border-color: #0f0;
+  --progress: var(--sine-2);
+}
+
+.sine-3 i {
+  border-color: #00f;
+  --progress: var(--sine-3);
+}
+
+.min-view i {
+  background-color: lch(70 100 var(--hue));
+  --progress: var(--min);
+}
+
+.max-view i {
+  background-color: lch(70 100 var(--hue));
+  --progress: var(--max);
+}
+
+.sum-view i {
+  background-color: lch(70 100 var(--hue));
+  --progress: calc(var(--sum));
+}
+
+.avg-view i {
+  border: 0;
+  background-color: rgb(calc(var(--sine-1) * 255), calc(var(--sine-2) * 255), calc(var(--sine-3) * 255));
+  width: 1%;
+  --progress: var(--avg);
+}
+
+.area-view i {
+  opacity: 0.25;
+  flex: 1 0 auto;
+  border: 0;
+  aspect-ratio: unset;
+  width: auto;
+  background-color: rgb(calc(var(--sine-1) * 255), calc(var(--sine-2) * 255), calc(var(--sine-3) * 255));
+  height: calc(var(--amplitude) * (var(--max) - var(--min)) + 2dvw);
+  transform: translateY(calc(var(--amplitude) * var(--min) - var(--amplitude) / 2));
+}
+
+@keyframes sine-1 {
+  from {
+    --sine-1: 0;
+  }
+  to {
+    --sine-1: 1;
+  }
+}
+@keyframes sine-2 {
+  from {
+    --sine-2: 0;
+  }
+  to {
+    --sine-2: 1;
+  }
+}
+@keyframes sine-3 {
+  from {
+    --sine-3: 0;
+  }
+  to {
+    --sine-3: 1;
+  }
+}
+.control-bar {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1rem;
+}
+.control-bar label {
+  opacity: 0.5;
+  padding: 0.5rem 1rem;
+  border: 1px solid #000;
+}
+
+#red:checked ~ .control-bar [for=red],
+#green:checked ~ .control-bar [for=green],
+#blue:checked ~ .control-bar [for=blue],
+#min:checked ~ .control-bar [for=min],
+#max:checked ~ .control-bar [for=max],
+#sum:checked ~ .control-bar [for=sum],
+#avg:checked ~ .control-bar [for=avg],
+#area:checked ~ .control-bar [for=area] {
+  border: 1px solid #fff;
+  opacity: 1;
+}
+
+#red:checked ~ .all-sine .sine-1 {
+  opacity: 1;
+}
+
+#green:checked ~ .all-sine .sine-2 {
+  opacity: 1;
+}
+
+#blue:checked ~ .all-sine .sine-3 {
+  opacity: 1;
+}
+
+#min:checked ~ .all-sine .min-view {
+  opacity: 1;
+}
+
+#max:checked ~ .all-sine .max-view {
+  opacity: 1;
+}
+
+#sum:checked ~ .all-sine .sum-view {
+  opacity: 1;
+}
+
+#avg:checked ~ .all-sine .avg-view {
+  opacity: 1;
+}
+
+#area:checked ~ .all-sine .area-view {
+  opacity: 1;
+}
