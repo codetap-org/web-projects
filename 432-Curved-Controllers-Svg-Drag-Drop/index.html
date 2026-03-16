@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Curved controllers · SVG Drag &amp; Drop</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="card">
+	<div class="instructions-card">
+		<div class="instructions-content">
+			<div class="instruction">
+				<span class="dot dot-0">
+				</span>
+				<span>
+					Hue
+				</span>
+			</div>
+			<div class="instruction">
+				<span class="dot dot-1">
+				</span>
+				<span>
+					Rotate
+				</span>
+			</div>
+			<div class="drag-hint">
+				<span style="color:black; font-size:14px;">
+					Drag cursor
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="svg-container" id="svgContainer">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 225.356 163.535" id="interactiveSvg" preserveAspectRatio="xMidYMid meet">
+			<path id="path0" d="M0.247 99.66c-0.46-0.291-0.158-2.03 1.2-6.9 7.542-27.04 23.888-49.598 47.446-65.472 10.76-7 24.443-13.031 35.994-15.904 7.35-1.9 15.246-2.854 22.093-3.318 4.656-0.302 6.15-0.289 12.435 0.115 3.93 0.253 7.74 0.57 8.467 0.704 10.112 1.672 20.562 4.135 29.718 8.236 8.289 3.495 16.769 8.652 22.662 12.772 7.926 5.936 15.33 12.747 21.61 20.405 10.328 12.827 17.375 26.39 21.767 41.901 1.696 5.988 1.925 7.161 1.458 7.457-0.909 0.575-1.2 0.11-2.09-3.33-2.48-9.6-4.925-16.11-9.143-24.337-5.923-11.553-12.633-20.624-22.119-29.902-11.984-11.422-25.86-20.17-40.183-25.512-4.284-1.55-8.66-2.946-13.097-3.969-10.43-2.345-14.637-2.794-26.194-2.794-9.586 0-10.221 0.047-18.23 1.349-18.89 3.07-36.826 11.135-52.413 23.567-4.514 3.6-12.385 11.233-15.778 15.3-8.17 9.796-14.005 19.437-18.819 31.09-1.333 4.914-5.078 11.968-5.223 17.04 0 0.58-0.676 1.748-1.007 1.74-0.101-0.001-0.35-0.109-0.554-0.238" fill="none" />
+			<path id="path1" d="M225.3 145.847c0.299 0.778-0.565 1.142-4.013 1.691-26.084 3.96-54.366 6.36-78.449 7.688-30.626 0.84-61.306 0.51-91.678-1.982-14.888-1.225-26.288-2.79-39.423-4.49-1.343-0.322-11.897-1.236-11.724-2.612 0.12-0.837 0.904-0.847 5.7-0.071 47.818 7.144 96.3 9.462 143.078 7.167 28.06-2.139 47.825-2.98 72.628-7.396 2.889-0.517 3.681-0.516 3.881 0.005z" fill="none" />
+			<use href="#path0" class="path-0" />
+			<use href="#path1" class="path-1" />
+		</svg>
+		<div class="html-cursor cursor-0" id="cursor0">
+			0
+		</div>
+		<div class="html-cursor cursor-1" id="cursor1">
+			0
+		</div>
+	</div>
+	<div class="image-container">
+		<div class="circle-image" id="interactiveImage">
+			<img src="https://images.unsplash.com/photo-1559070081-648fb00b2ed1?&w=500&q=80" alt="Image Unsplash" id="mainImage">
+		</div>
+	</div>
+</div>
+<div class="image-credit">
+	Photo de
+	<a href="https://unsplash.com/fr/@apostolosv?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener">
+		Apostolos Vamvouras
+	</a>
+	sur
+	<a href="https://unsplash.com/fr/photos/deux-lunettes-de-soleil-de-style-wayfarer-a-monture-en-ecaille-de-tortue-avec-boite-Pp_nVOuJMTU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener">
+		Unsplash
+	</a>
+</div>
+<div class="copy">&Toc</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

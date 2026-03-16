@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Dragon Rage Meter - CodePen Challenge</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <canvas id="c"></canvas>
+
+<div class="status">
+  <div class="status-title">The dragon is</div>
+  <div class="status-value-wrap">
+    <div id="moodText" class="status-value mood-mad">Mad</div>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="percent"><span id="intensityValue">20</span>%</div>
+  <div class="range-row">
+    <input id="intensity" type="range" min="0" max="100" step="1" value="20" />
+  </div>
+  <div class="ends">
+    <span>Min</span>
+    <span>Max</span>
+  </div>
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

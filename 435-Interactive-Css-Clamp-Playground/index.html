@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Interactive CSS Clamp Playground</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="app">
+
+  <h1>Clamp Playground</h1>
+
+  <div class="controls">
+
+    <div class="control">
+      <label>Min (px)</label>
+      <input type="range" id="min" min="10" max="80" value="20">
+    </div>
+
+    <div class="control">
+      <label>Preferred (vw)</label>
+      <input type="range" id="pref" min="1" max="10" step="0.1" value="5">
+    </div>
+
+    <div class="control">
+      <label>Max (px)</label>
+      <input type="range" id="max" min="40" max="160" value="80">
+    </div>
+
+    <div class="control">
+      <label>Viewport Width</label>
+      <input type="range" id="vw" min="320" max="1600" value="900">
+    </div>
+
+  </div>
+
+  <div class="preview">
+    <div class="previewText" id="text">Fluid Typography</div>
+  </div>
+
+  <div class="graph">
+
+    <svg viewBox="0 0 100 100">
+
+      <rect class="zoneMin" x="0" y="0" width="20" height="100"></rect>
+      <rect class="zoneMax" x="80" y="0" width="20" height="100"></rect>
+
+      <line class="line minLine" x1="20" y1="0" x2="20" y2="100"></line>
+      <line class="line prefLine" x1="50" y1="0" x2="50" y2="100"></line>
+      <line class="line maxLine" x1="80" y1="0" x2="80" y2="100"></line>
+
+      <path class="curve" id="curve"></path>
+
+    </svg>
+
+  </div>
+
+  <div class="compare">
+
+    <div class="card" id="cssCode"></div>
+    <div class="card" id="jsCode"></div>
+    <div class="card" id="values"></div>
+
+  </div>
+
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

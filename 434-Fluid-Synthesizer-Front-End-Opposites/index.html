@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Fluid Synthesizer - #CodePenChallenge : Front-End Opposites</title>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluid Art Synthesizer | Min & Max Challenge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head><link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="app-container">
+	<!-- SVG Filter for Gooey Effect -->
+	<svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
+		<defs>
+			<filter id="gooey">
+				<!-- The stdDeviation is updated via CSS variable/JS for min/max demonstration -->
+				<feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" id="svg-blur" />
+				<!-- The multiplier in the alpha channel matrix defines the 'tension' -->
+				<feColorMatrix in="blur" mode="matrix" values="
+                        1 0 0 0 0  
+                        0 1 0 0 0  
+                        0 0 1 0 0  
+                        0 0 0 25 -10" result="gooey-matrix" id="svg-matrix" />
+				<feBlend in="SourceGraphic" in2="gooey-matrix" operator="atop" />
+			</filter>
+		</defs>
+	</svg>
+
+	<header class="header">
+		<h1>Fluid Synthesizer</h1>
+	</header>
+
+	<main class="main-content">
+		<!-- Artboard -->
+		<section class="artboard-wrapper" id="artboard-wrapper">
+			<button class="fullscreen-btn" id="fullscreen-btn" aria-label="Toggle Fullscreen">
+				<svg id="fs-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3">
+					</path>
+				</svg>
+			</button>
+			<div class="artboard" id="artboard">
+				<div class="blob main-blob"></div>
+				<div class="blob interactive-blob" id="cursor-blob"></div>
+			</div>
+		</section>
+
+		<!-- Control Panel -->
+		<section class="control-panel">
+			<div class="panel-header">
+				<h2>Parameters</h2>
+				<div style="display: flex; gap: 1rem; align-items: center;">
+					<span id="audio-status" style="font-size: 0.8rem; color: var(--accent); opacity: 0.7;">*Audio
+						will start upon interaction</span>
+					<div class="value-display" id="fps-display">60 FPS</div>
+				</div>
+			</div>
+
+			<div class="controls-grid">
+				<!-- Control 1: HTML min/max inputs -->
+				<div class="control-group">
+					<div class="control-header">
+						<label for="hue-ctrl">Hue Shift</label>
+						<span class="val-out" id="hue-out">280</span>
+					</div>
+					<input type="range" id="hue-ctrl" min="0" max="360" value="280" step="1">
+					<div class="range-labels">
+						<span>Min: 0</span>
+						<span>Max: 360</span>
+					</div>
+				</div>
+
+				<!-- Control 2 -->
+				<div class="control-group">
+					<div class="control-header">
+						<label for="size-ctrl">Blob Min/Max Size</label>
+						<span class="val-out" id="size-out">150px</span>
+					</div>
+					<input type="range" id="size-ctrl" min="50" max="250" value="150" step="10">
+					<div class="range-labels">
+						<span>Min: 50</span>
+						<span>Max: 250</span>
+					</div>
+				</div>
+
+				<!-- Control 3 -->
+				<div class="control-group">
+					<div class="control-header">
+						<label for="blur-ctrl">Viscosity (Blur)</label>
+						<span class="val-out" id="blur-out">15</span>
+					</div>
+					<input type="range" id="blur-ctrl" min="5" max="30" value="15" step="1">
+					<div class="range-labels">
+						<span>Min: 5</span>
+						<span>Max: 30</span>
+					</div>
+				</div>
+
+				<!-- Control 4 -->
+				<div class="control-group">
+					<div class="control-header">
+						<label for="speed-ctrl">Animation Speed</label>
+						<span class="val-out" id="speed-out">1x</span>
+					</div>
+					<input type="range" id="speed-ctrl" min="0.1" max="3" value="1" step="0.1">
+					<div class="range-labels">
+						<span>Min: 0.1</span>
+						<span>Max: 3.0</span>
+					</div>
+				</div>
+
+				<!-- Input type number with min/max -->
+				<div class="control-group span-full">
+					<div class="control-header">
+						<label for="orb-count">Generate Orbs</label>
+					</div>
+					<div class="input-with-button">
+						<input type="number" id="orb-count" min="1" max="15" value="5">
+						<button id="generate-btn">Spawn (Min 1, Max 15)</button>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
