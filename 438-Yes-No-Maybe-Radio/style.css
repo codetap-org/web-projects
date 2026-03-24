@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+* { position: relative; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0px;
+}
+
+
+body {
+
+    --bodyColor: oklab(82.544% -0.15565 0.01498);
+    --bd1: oklab(45.244% 0.04763 -0.26963);
+    --bd2: oklab(58.274% 0.21437 0.09905);
+    --bd3: oklab(84.265% -0.14398 0.17364);
+
+    &[data-type="no"] {
+        --bodyColor: oklab(68.735% 0.2013 0.04559);
+        --bd1: oklab(93.318% -0.11461 0.16455);
+        --bd2: oklab(90.446% -0.14675 0.00843);
+        --bd3: oklab(59.77% 0.08607 -0.22294);
+    }
+    &[data-type="maybe"] {
+        --bodyColor: oklab(67.336% -0.03183 -0.0064); 
+        --bd1: oklab(62.061% 0.02519 -0.03753);
+        --bd2: oklab(62.769% 0.03488 0.00829);
+        --bd3: oklab(67.831% -0.02554 0.03527);
+    }
+
+    background-color: color-mix(in oklab, var(--bodyColor) 50%, oklab(100% 0 -0.00011) 50%);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	font-size: 28px;
+	font-family: roboto;
+  font-weight: 800;
+	overflow: clip;
+
+}
+
+fieldsetWrapper {
+
+    display: block;
+    width: 500px;
+    height: 500px;
+    padding: 50px;
+    position: absolute;
+    overflow: visible;
+
+    &:first-of-type { z-index: 9; }
+    &:last-of-type { z-index: 10; }
+
+    &[data-type="yes"], &[data-type="maybe"]:first-of-type {
+        --bgColor: oklab(82.544% -0.15565 0.01498);
+        --fgColor: oklab(58.274% 0.21437 0.09905);
+        --bgX: -30px;
+        --shadowX: -10px;
+    }
+    &[data-type="no"], &[data-type="maybe"]:last-of-type {
+        --bgColor: lch(60.7% 69.11 15.24);
+        --fgColor: oklab(82.544% -0.15565 0.01498);
+        --bgX: 30px;
+        --shadowX: 10px;
+    }
+    &[data-type="maybe"]:last-of-type {
+        mask-image: linear-gradient( -45deg, oklab(0% 0 0) calc(50% - 0.001%), transparent 50% );
+    }
+
+    fieldset {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 400px;
+        height: 400px;
+        border: solid 6px var(--fgColor);
+        border-radius: 20px;
+        position: relative;
+        overflow: visible;
+        background: var(--bgColor);
+        color: var(--fgColor);
+        box-shadow: 0 20px 40px rgba(57, 76, 96, 0.15);
+
+        legend {
+            padding: 10px;
+            padding-left: 25px;
+            border: solid 6px var(--fgColor);
+            border-radius: 20px;
+            overflow: visible;
+            background: var(--bgColor);
+						color: var(--fgColor);
+
+        }
+
+        .card-radio {
+
+            cursor: pointer;
+
+            input[type="radio"] {
+                display: none;
+            }
+
+            label {
+                display: block;
+                width: 150px;
+                padding: 15px;
+                padding-left: 50px;
+                position: relative;
+                cursor: pointer;
+
+                &:before {
+                    display: block;
+                    content: " ";
+                    position: absolute;
+                    left: 0px;
+                    top: 8px;
+                    width: 30px;
+                    height: 30px;
+                    border: solid 5px var(--fgColor);
+                    border-radius: 10px;
+                }
+                &:after {
+                    display: block;
+                    position: absolute;
+                    left: 8px;
+                    top: -6px;
+                    width: 30px;
+                    height: 30px;
+										color: var(--fgColor);
+										text-shadow: -3px -3px 2px var(--bgColor),
+											-3px 3px 2px var(--bgColor),
+											3px -3px 2px var(--bgColor),
+											3px 0px 2px var(--bgColor),
+											0px 3px 2px var(--bgColor),
+											3px 3px 2px var(--bgColor);
+										font-size: 45px;
+                }
+            }
+            label:has(input[value="yes"]):has(input[type="radio"]:checked):after { content: "\2714";  font-weight: bold; left: 9px; top: -15px; color: var(--fgColor); }
+            label:has(input[value="no"]):has(input[type="radio"]:checked):after { content: "X"; color: var(--fgColor); }
+            label:has(input[value="maybe"]):has([type="radio"]:checked):after { content: "?"; left: 12px; color: var(--fgColor); }
+
+        }
+
+    }
+
+}
+
+
+
+#bgDivWrapper {
+    display: block;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--selectColor);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    #bgDivRelative {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        transform-origin: 50% 50%;
+        overflow: clip;
+        z-index: -1;
+
+        #treyMix {
+
+            --a0b: 0deg;
+            --a1b: 40deg;
+            --a2b: 80deg;
+            --a3b: 120deg;
+            --a4b: 160deg;
+            --a5b: 200deg;
+            --a6b: 240deg;
+            --a7b: 280deg;
+            --a8b: 320deg;
+
+            position: absolute;
+            z-index: -1;
+            width: 500px;
+            height: 500px;
+            transform-origin: 50% 50%;
+            background-image:
+						linear-gradient( 0deg, var(--bd1), transparent 40%),
+            linear-gradient( 120deg, var(--bd2), transparent 70%),
+            linear-gradient( 240deg, var(--bd3), transparent 100%);
+
+            animation: rotateBg 10s cubic-bezier(0.6, 0.4, 0.4, 0.6) alternate infinite;
+            border-radius: 45% 55% 55% 45%/45% 45% 55% 55%;
+
+        }
+
+        #treyBlend {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            z-index: 0;
+            background: var(--bodyColor);
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+
+    }
+
+}
+
+        
+#bgBlur {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(60px);
+}
+
+@keyframes rotateBg { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }

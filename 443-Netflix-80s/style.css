@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@150,700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --blind-offset: calc(var(--blind-speed) / var(--blinds));
+  --blind-speed: 10s;
+  --blinds: 7;
+  --logo-background: #ff411f;
+  --page-background: #111;
+  --retro-blur: calc(0.005 * var(--size));
+  --screen-door-size: max(calc(0.01 * var(--size)), 3px);
+  --size: min(50vmin, 200px);
+  --total-duration: 10s;
+}
+
+.page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--page-background);
+  color: var(--page-background);
+}
+
+/* The screen effects: screen door lines and a slight red/blue color wash */
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(8, 8, 8, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.2) 0%,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(255, 255, 255, 0) 70%,
+      rgba(0, 0, 255, 0.2) 100%
+    );
+  z-index: 2;
+  background-size: 100% var(--screen-door-size);
+  filter: blur(0.5px);
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.container {
+  background: white;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  padding: calc(0.07 * var(--size));
+  opacity: 0;
+  -webkit-animation-name: intro;
+          animation-name: intro;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+/*  slight underglow to emulate color bleed outside the container  */
+  box-shadow: 0px 0px calc(0.3 * var(--size)) 0px rgba(255, 65, 31, 0.4),
+    0 0 calc(0.1 * var(--size)) 0 rgba(255, 255, 255, 0.3);
+  margin: 60px;
+}
+
+.logo-wrapper {
+  padding: calc(0.1 * var(--size)) 0 calc(0.06 * var(--size));
+  background: var(--logo-background);
+}
+
+.logo {
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1.2;
+  position: relative;
+  display: flex;
+}
+
+.svg {
+  height: 100%;
+  color: #fff;
+}
+
+.name {
+  font-family: "Anybody", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  flex: 0 0 auto;
+  font-size: calc(0.2 * var(--size));
+  line-height: 1;
+  text-align: center;
+  display: flex;
+  padding-top: calc(0.05 * var(--size));
+}
+
+.letter {
+  margin: calc(-0.02 * var(--size)) 0 calc(-0.05 * var(--size))
+    calc(-0.01 * var(--size));
+}
+
+.sliders {
+  position: absolute;
+  inset: 0;
+}
+
+.slider {
+  position: absolute;
+  width: 100%;
+  background: var(--logo-background);
+  bottom: 0;
+  -webkit-animation: var(--blind-speed) infinite linear slider;
+          animation: var(--blind-speed) infinite linear slider;
+}
+
+.slider:nth-child(2) {
+  -webkit-animation-delay: calc(var(--blind-offset) * -1);
+          animation-delay: calc(var(--blind-offset) * -1);
+}
+.slider:nth-child(3) {
+  -webkit-animation-delay: calc(var(--blind-offset) * -2);
+          animation-delay: calc(var(--blind-offset) * -2);
+}
+.slider:nth-child(4) {
+  -webkit-animation-delay: calc(var(--blind-offset) * -3);
+          animation-delay: calc(var(--blind-offset) * -3);
+}
+.slider:nth-child(5) {
+  -webkit-animation-delay: calc(var(--blind-offset) * -4);
+          animation-delay: calc(var(--blind-offset) * -4);
+}
+.slider:nth-child(6) {
+  -webkit-animation-delay: calc(var(--blind-offset) * -5);
+          animation-delay: calc(var(--blind-offset) * -5);
+}
+.slider:nth-child(7) {
+  -webkit-animation-delay: calc(var(--blind-offset) * -6);
+          animation-delay: calc(var(--blind-offset) * -6);
+}
+
+/* Handles the bars raising/growing up the N */
+@-webkit-keyframes slider {
+  0% {
+    height: 0;
+    bottom: 0;
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    height: calc(0.04 * var(--size));
+    bottom: 100%;
+  }
+}
+@keyframes slider {
+  0% {
+    height: 0;
+    bottom: 0;
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    height: calc(0.04 * var(--size));
+    bottom: 100%;
+  }
+}
+
+@-webkit-keyframes intro {
+  0% {
+    filter: blur(4px) brightness(1);
+    opacity: 0;
+  }
+  20% {
+    filter: blur(7px) brightness(2);
+    opacity: 1;
+  }
+  100% {
+    filter: blur(var(--retro-blur)) brightness(1);
+    opacity: 1;
+  }
+}
+
+@keyframes intro {
+  0% {
+    filter: blur(4px) brightness(1);
+    opacity: 0;
+  }
+  20% {
+    filter: blur(7px) brightness(2);
+    opacity: 1;
+  }
+  100% {
+    filter: blur(var(--retro-blur)) brightness(1);
+    opacity: 1;
+  }
+}

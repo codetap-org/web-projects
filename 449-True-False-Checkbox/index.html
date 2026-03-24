@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>True False</title>
+    
+
+  </head>
+    
+  <body>
+  <style>
+	body {
+		margin: 0;
+		padding: 0;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #111;
+		color: #fff;
+		font-family: Arial, sans-serif;
+	}
+
+	div {
+		position: relative;
+		display: flex;
+		flex-wrap: wrap;
+		width: 660px;
+		height: 660px;
+	}
+
+	input {
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		margin: 5px;
+		cursor: pointer;
+		border: 2px solid #fff;
+		border-radius: 50%;
+		background-color: transparent;
+		transition: transform 0.3s ease;
+		box-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.7);
+	}
+
+	input:checked {
+		background-color: #39ff14;
+		/* Neon green */
+		box-shadow: 0 0 20px #39ff14, 0 0 30px #39ff14, 0 0 50px #39ff14;
+	}
+
+	input.grow {
+		animation: grow 0.8s ease-out forwards;
+	}
+
+	@keyframes grow {
+		0% {
+			transform: scale(1);
+		}
+
+		20% {
+			transform: scale(1.5);
+		}
+
+		100% {
+			transform: scale(1);
+		}
+	}
+
+	@keyframes pulse {
+		0% {
+			transform: scale(1);
+		}
+
+		50% {
+			transform: scale(1.8);
+		}
+
+		100% {
+			transform: scale(1);
+		}
+	}
+
+	.pulse {
+		animation: pulse 1s ease-in-out forwards;
+	}
+</style>
+
+<div id="wrapper"></div>
+
+<script>
+	const RES_X = 10;
+	const RES_Y = 10;
+	const SIZE = 60;
+	const entities = [];
+	const wrapper = document.getElementById('wrapper');
+	wrapper.style.width = `${RES_X * SIZE}px`;
+	wrapper.style.height = `${RES_Y * SIZE}px`;
+	for (let x = 0; x < RES_X; x++) {
+		for (let y = 0; y < RES_Y; y++) {
+			const el = document.createElement('input');
+			el.setAttribute('type', 'checkbox');
+			wrapper.appendChild(el);
+			const entity = {
+				element: el,
+				x: x * SIZE,
+				y: y * SIZE,
+			};
+			el.style.left = `${entity.x}px`;
+			el.style.top = `${entity.y}px`;
+			el.addEventListener('change', () => toggle(entity));
+			entities.push(entity);
+		}
+	}
+
+	function toggle(targetEntity) {
+		const checked = targetEntity.element.checked;
+		entities.forEach(entity => {
+			const dx = targetEntity.x - entity.x;
+			const dy = targetEntity.y - entity.y;
+			const distance = Math.sqrt(dx * dx + dy * dy);
+			setTimeout(() => {
+				entity.element.checked = checked;
+				// Add pulse effect on toggle
+				if (checked) {
+					entity.element.classList.add('pulse');
+					setTimeout(() => {
+						entity.element.classList.remove('pulse');
+					}, 1000);
+				}
+				// Trigger grow animation
+				entity.element.classList.add('grow');
+				entity.element.offsetWidth; // force reflow
+				entity.element.classList.remove('grow');
+			}, Math.round(distance * 1.8));
+		});
+	}
+	setTimeout(() => {
+		entities[0].element.checked = true;
+		toggle(entities[0]);
+	}, 500);
+</script>
+    
+  </body>
+  
+</html>

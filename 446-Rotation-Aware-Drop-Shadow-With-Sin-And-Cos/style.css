@@ -1,0 +1,193 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --accent: #639;
+  --surface: color-mix(in oklab, var(--accent) 6%, white);
+  --panel-bg: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--accent) 4%, white),
+    color-mix(in oklab, var(--accent) 14%, white)
+  );
+  --panel-border: color-mix(in oklab, var(--accent) 22%, transparent);
+  --panel-shadow: 0 18px 40px
+    color-mix(in oklab, var(--accent) 20%, transparent);
+  --text-color: color-mix(in oklab, var(--accent) 42%, black);
+  --accent-strong: color-mix(in oklab, var(--accent) 80%, black);
+  --track-color: color-mix(in oklab, var(--accent) 20%, white);
+  --track-fill-color: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--accent) 90%, black),
+    color-mix(in oklab, var(--accent) 80%, white)
+  );
+  --drop-shadow-color: color-mix(in oklab, var(--text-color) 16%, transparent);
+  --track-height: 2px;
+  --track-radius: 999px;
+  --thumb-size: 1.25rem;
+  --thumb-border: 2px solid color-mix(in oklab, var(--accent) 3%, white);
+  --thumb-shadow: 0 6px 16px color-mix(in oklab, var(--accent) 24%, transparent);
+  --control-width: min(32rem, 100%);
+  --control-gap: 0.9rem;
+  --control-padding: 1rem 1.1rem 1.15rem;
+}
+
+body {
+  padding: 2rem;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 2rem;
+  background-color: var(--surface);
+  color: var(--text-color);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  /* font-family: sans-serif; */
+  /* monospaced font stack */
+  font-family:
+    SF Mono,
+    SF Mono Regular,
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    Courier,
+    monospace;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.css {
+  --angle: 0deg;
+  --shadow-x-distance: 15px;
+  --shadow-y-distance: 30px;
+  --shadow-x: calc(
+    cos(var(--angle)) * var(--shadow-x-distance) + sin(var(--angle)) *
+      var(--shadow-y-distance)
+  );
+  --shadow-y: calc(
+    cos(var(--angle)) * var(--shadow-y-distance) - sin(var(--angle)) *
+      var(--shadow-x-distance)
+  );
+  rotate: var(--angle);
+  filter: drop-shadow(
+    var(--shadow-x) var(--shadow-y) 3px var(--drop-shadow-color)
+  );
+}
+
+.css__path {
+  fill: var(--accent);
+}
+
+.shadow-readout {
+  width: var(--control-width);
+  display: grid;
+  color: var(--accent-strong);
+}
+
+.shadow-readout__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.controls {
+  width: var(--control-width);
+  display: grid;
+  gap: var(--control-gap);
+}
+
+.controls__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.controls__label output {
+  color: var(--accent-strong);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.controls__range {
+  --range-progress: 0%;
+  appearance: none;
+  width: 100%;
+  height: var(--thumb-size);
+  border-radius: var(--track-radius);
+  background: transparent;
+  cursor: pointer;
+}
+
+.controls__range:focus-visible {
+  outline: none;
+}
+
+.controls__range::-webkit-slider-runnable-track {
+  height: var(--track-height);
+  border-radius: var(--track-radius);
+  background:
+    var(--track-fill-color) 0 0 / var(--range-progress) 100% no-repeat,
+    var(--track-color);
+}
+
+.controls__range::-webkit-slider-thumb {
+  appearance: none;
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  margin-top: calc((var(--track-height) - var(--thumb-size)) / 2);
+  border: var(--thumb-border);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: var(--thumb-shadow);
+  transition:
+    transform 120ms ease,
+    background-color 120ms ease;
+}
+
+.controls__range:hover::-webkit-slider-thumb,
+.controls__range:focus-visible::-webkit-slider-thumb {
+  transform: scale(1.08);
+  background: var(--accent-strong);
+}
+
+.controls__range::-moz-range-track {
+  height: var(--track-height);
+  border: 0;
+  border-radius: var(--track-radius);
+  background: var(--track-color);
+}
+
+.controls__range::-moz-range-progress {
+  height: var(--track-height);
+  border-radius: var(--track-radius);
+  background: var(--track-fill-color);
+}
+
+.controls__range::-moz-range-thumb {
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  border: var(--thumb-border);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: var(--thumb-shadow);
+  transition:
+    transform 120ms ease,
+    background-color 120ms ease;
+}
+
+.controls__range:hover::-moz-range-thumb,
+.controls__range:focus-visible::-moz-range-thumb {
+  transform: scale(1.08);
+  background: var(--accent-strong);
+}
