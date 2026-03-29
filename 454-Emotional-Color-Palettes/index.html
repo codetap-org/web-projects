@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>My emotional Palette - #CodePenChallenge : Color Palettes</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!-- Canvas for the fluid simulation -->
+<canvas id="liquidCanvas"></canvas>
+
+<!-- UI Overlay -->
+<main class="ui-overlay">
+	<header>
+		<h1 class="title">Liquid Emotion</h1>
+		<p class="subtitle">Select a mood to generate a palette</p>
+	</header>
+
+	<div class="palette-display" id="paletteDisplay">
+		<!-- Palette colors will be injected here -->
+		<div class="swatch" style="--color: #ffffff;"><span>#FFFFFF</span></div>
+		<div class="swatch" style="--color: #ffffff;"><span>#FFFFFF</span></div>
+		<div class="swatch" style="--color: #ffffff;"><span>#FFFFFF</span></div>
+		<div class="swatch" style="--color: #ffffff;"><span>#FFFFFF</span></div>
+		<div class="swatch" style="--color: #ffffff;"><span>#FFFFFF</span></div>
+	</div>
+
+	<div class="mood-selector">
+		<button class="mood-btn" data-mood="joy">Joy</button>
+		<button class="mood-btn" data-mood="serenity">Serenity</button>
+		<button class="mood-btn" data-mood="energy">Energy</button>
+		<button class="mood-btn" data-mood="melancholy">Melancholy</button>
+		<button class="mood-btn" data-mood="mystery">Mystery</button>
+	</div>
+</main>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

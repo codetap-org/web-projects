@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  padding: 24px;
+  color: #222;
+  background-color: #ececec;
+  font-family: "Space Grotesk", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+}
+@media (max-width: 992px) {
+  body {
+    flex-direction: column;
+  }
+}
+
+.img-box {
+  width: 240px;
+  aspect-ratio: 1/1;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 5px 12px #0005;
+  cursor: crosshair;
+}
+.img-box:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(1px) brightness(1.2) contrast(0.8);
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.img-box:hover:before {
+  opacity: 0;
+}
+
+.dots1 {
+  background: url("https://images.unsplash.com/photo-1711439108172-e8e3b116226c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzQ1NDkxMTJ8&ixlib=rb-4.1.0&q=80&w=400") no-repeat center/cover;
+}
+.dots1:before {
+  background: radial-gradient(circle, #fff5 10%, #fff0 0) repeat center/15px 15px;
+}
+
+.dots2 {
+  background: url("https://images.unsplash.com/photo-1584419396237-bc30832ba310?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzQ1NTAxOTd8&ixlib=rb-4.1.0&q=80&w=400") no-repeat center/cover;
+}
+.dots2:before {
+  background: radial-gradient(circle, #fff5 7%, #fff0 0) repeat 10px 10px/20px 20px, radial-gradient(circle, #fff5 7%, #fff0 0) repeat 0 0/20px 20px;
+}
+
+.dots3 {
+  background: url("https://images.unsplash.com/photo-1534179523731-b2922018150a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzQ1NTEwMTJ8&ixlib=rb-4.1.0&q=80&w=400") no-repeat center/cover;
+}
+.dots3:before {
+  --size: 16px;
+  background: radial-gradient(circle, #fff3 15%, #fff0 0) repeat calc(50% - var(--size) / 2 - 0.5px) calc(50% - var(--size) / 2 - 0.5px)/var(--size) var(--size), conic-gradient(from 270deg at bottom 1px right 1px, transparent 25%, #fff1 0) repeat center/var(--size) var(--size);
+}

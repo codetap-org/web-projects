@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Crossroad — Opposite Directions</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crossroad — Opposite Directions</title>
+<style>
+/* ── Variables ─────────────────────────────────────────────── */
+:root {
+  --road-w: 160px;
+  --asphalt: #16213e;
+  --lane-dash: #f0c040;
+  --white-line: #e8e8e0;
+  --grass: #0d1f0f;
+  --b1: #0f3460;
+  --b2: #162447;
+  --b3: #1b1b2f;
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #06060f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Courier New', monospace;
+  overflow: hidden;
+}
+
+.page-title {
+  color: #ffffff1a;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  white-space: nowrap;
+}
+
+/* ── Scene ─────────────────────────────────────────────────── */
+.scene {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+/* ── City Quadrants ────────────────────────────────────────── */
+.quad {
+  position: absolute;
+  background: var(--grass);
+  overflow: hidden;
+}
+.quad::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 70%, #1a3a1a, transparent 60%),
+    radial-gradient(circle at 80% 20%, #122a12, transparent 50%);
+}
+.quad-tl { top:0;    left:0;   width:calc(50% - var(--road-w)/2); height:calc(50% - var(--road-w)/2); }
+.quad-tr { top:0;    right:0;  width:calc(50% - var(--road-w)/2); height:calc(50% - var(--road-w)/2); }
+.quad-bl { bottom:0; left:0;   width:calc(50% - var(--road-w)/2); height:calc(50% - var(--road-w)/2); }
+.quad-br { bottom:0; right:0;  width:calc(50% - var(--road-w)/2); height:calc(50% - var(--road-w)/2); }
+
+/* ── Buildings ─────────────────────────────────────────────── */
+.building {
+  position: absolute;
+  border-radius: 2px;
+  box-shadow: 0 0 12px #00aaff11;
+}
+.building::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  background:
+    repeating-linear-gradient(0deg,  transparent 0, transparent 6px, #fff1 6px, #fff1 7px),
+    repeating-linear-gradient(90deg, transparent 0, transparent 8px, #fff1 8px, #fff1 9px);
+}
+.building::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  background:
+    radial-gradient(circle at 20% 30%, #ffcc0033 0, transparent 8px),
+    radial-gradient(circle at 70% 20%, #ffcc0055 0, transparent 6px),
+    radial-gradient(circle at 40% 70%, #ffcc0044 0, transparent 7px),
+    radial-gradient(circle at 80% 60%, #00aaff33 0, transparent 6px);
+  animation: winBlink 3.5s ease-in-out infinite alternate;
+}
+@keyframes winBlink { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+.quad-tl .b1{background:var(--b1);bottom:10px;right:14px;width:65px;height:90px}
+.quad-tl .b2{background:var(--b2);bottom:14px;left:10px;width:45px;height:65px}
+.quad-tl .b3{background:var(--b3);top:10px;right:8px;width:38px;height:50px}
+.quad-tr .b1{background:var(--b2);bottom:10px;left:14px;width:60px;height:80px}
+.quad-tr .b2{background:var(--b1);top:12px;left:10px;width:42px;height:55px}
+.quad-tr .b3{background:var(--b3);bottom:12px;right:10px;width:35px;height:48px}
+.quad-bl .b1{background:var(--b3);top:10px;right:14px;width:58px;height:75px}
+.quad-bl .b2{background:var(--b1);top:14px;left:8px;width:44px;height:60px}
+.quad-bl .b3{background:var(--b2);bottom:10px;right:8px;width:36px;height:46px}
+.quad-br .b1{background:var(--b1);top:10px;left:14px;width:62px;height:82px}
+.quad-br .b2{background:var(--b2);top:12px;right:10px;width:40px;height:58px}
+.quad-br .b3{background:var(--b3);bottom:10px;left:10px;width:38px;height:50px}
+
+/* ── Roads ─────────────────────────────────────────────────── */
+.road-h,.road-v{position:absolute;background:var(--asphalt)}
+.road-h{top:50%;left:0;width:100%;height:var(--road-w);transform:translateY(-50%)}
+.road-v{left:50%;top:0;height:100%;width:var(--road-w);transform:translateX(-50%)}
+.road-h::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(180deg,#0005,transparent)}
+.road-h::after {content:'';position:absolute;bottom:0;left:0;right:0;height:6px;background:linear-gradient(0deg,#0005,transparent)}
+.road-v::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(90deg,#0005,transparent)}
+.road-v::after {content:'';position:absolute;right:0;top:0;bottom:0;width:6px;background:linear-gradient(270deg,#0005,transparent)}
+
+.intersection{
+  position:absolute;top:50%;left:50%;
+  width:var(--road-w);height:var(--road-w);
+  transform:translate(-50%,-50%);
+  background:#1c1c32;z-index:5
+}
+
+/* ── Lane Markings ─────────────────────────────────────────── */
+.lm{
+  position:absolute;
+  background:repeating-linear-gradient(
+    var(--lm-dir,90deg),
+    var(--lane-dash) 0,var(--lane-dash) 18px,
+    transparent 18px,transparent 32px
+  );
+  z-index:6;
+  animation:var(--lm-anim,dashH) 1.2s linear infinite;
+}
+.lm-hl{--lm-dir:90deg;--lm-anim:dashH;top:50%;height:2px;transform:translateY(-50%);left:0;width:calc(50% - var(--road-w)/2)}
+.lm-hr{--lm-dir:90deg;--lm-anim:dashH;top:50%;height:2px;transform:translateY(-50%);left:calc(50% + var(--road-w)/2);width:calc(50% - var(--road-w)/2)}
+.lm-vt{--lm-dir:180deg;--lm-anim:dashV;left:50%;width:2px;transform:translateX(-50%);top:0;height:calc(50% - var(--road-w)/2)}
+.lm-vb{--lm-dir:180deg;--lm-anim:dashV;left:50%;width:2px;transform:translateX(-50%);top:calc(50% + var(--road-w)/2);height:calc(50% - var(--road-w)/2)}
+@keyframes dashH{from{background-position:0 0}to{background-position:50px 0}}
+@keyframes dashV{from{background-position:0 0}to{background-position:0 50px}}
+
+/* ── Zebra Crossings ───────────────────────────────────────── */
+.zebra{position:absolute;z-index:7;opacity:.55}
+.zebra-top   {top:calc(50% - var(--road-w)/2 - 18px);left:calc(50% - var(--road-w)/2);width:var(--road-w);height:18px;background:repeating-linear-gradient(90deg,var(--white-line) 0,var(--white-line) 9px,transparent 9px,transparent 18px)}
+.zebra-bottom{bottom:calc(50% - var(--road-w)/2 - 18px);left:calc(50% - var(--road-w)/2);width:var(--road-w);height:18px;background:repeating-linear-gradient(90deg,var(--white-line) 0,var(--white-line) 9px,transparent 9px,transparent 18px)}
+.zebra-left  {left:calc(50% - var(--road-w)/2 - 18px);top:calc(50% - var(--road-w)/2);width:18px;height:var(--road-w);background:repeating-linear-gradient(180deg,var(--white-line) 0,var(--white-line) 9px,transparent 9px,transparent 18px)}
+.zebra-right {right:calc(50% - var(--road-w)/2 - 18px);top:calc(50% - var(--road-w)/2);width:18px;height:var(--road-w);background:repeating-linear-gradient(180deg,var(--white-line) 0,var(--white-line) 9px,transparent 9px,transparent 18px)}
+
+/* ── Traffic Lights (JS-driven) ────────────────────────────── */
+.tl-wrap{position:absolute;z-index:20}
+.tl-ne{top:calc(50% - var(--road-w)/2 - 30px);right:calc(50% - var(--road-w)/2 - 28px)}
+.tl-sw{bottom:calc(50% - var(--road-w)/2 - 30px);left:calc(50% - var(--road-w)/2 - 28px)}
+.tl-nw{top:calc(50% - var(--road-w)/2 - 30px);left:calc(50% - var(--road-w)/2 - 28px)}
+.tl-se{bottom:calc(50% - var(--road-w)/2 - 30px);right:calc(50% - var(--road-w)/2 - 28px)}
+
+.tl-box{
+  width:14px;background:#0e0e0e;border-radius:7px;
+  padding:3px;display:flex;flex-direction:column;gap:3px;
+  box-shadow:0 0 6px #000a,inset 0 0 3px #fff1
+}
+.tl-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#1a1a1a;
+  transition:background .25s,box-shadow .25s
+}
+.tl-dot.on-red  {background:#ff3355;box-shadow:0 0 8px #ff3355,0 0 18px #ff335555}
+.tl-dot.on-amber{background:#ffaa00;box-shadow:0 0 8px #ffaa00,0 0 18px #ffaa0055}
+.tl-dot.on-green{background:#00ff88;box-shadow:0 0 8px #00ff88,0 0 18px #00ff8855}
+
+/* ── Cars ──────────────────────────────────────────────────── */
+/* All positioned entirely by JS via transform:translate(x,y)  */
+.car{
+  position:absolute;top:0;left:0;
+  border-radius:3px;z-index:15;
+  filter:drop-shadow(0 3px 8px #000c);
+  will-change:transform
+}
+.car-lr,.car-rl{width:36px;height:22px}
+.car-tb,.car-bt{width:22px;height:36px}
+
+/* Car body colours */
+#carA1{background:linear-gradient(180deg,#e63950,#991a2c)}
+#carA2{background:linear-gradient(180deg,#e68c39,#995015)}
+#carB1{background:linear-gradient(180deg,#39a0e6,#155499)}
+#carB2{background:linear-gradient(180deg,#a439e6,#5a1599)}
+#carC1{background:linear-gradient(90deg,#39e67a,#158840)}
+#carC2{background:linear-gradient(90deg,#e6d639,#998a15)}
+#carD1{background:linear-gradient(90deg,#e63982,#991545)}
+#carD2{background:linear-gradient(90deg,#39e6e6,#159999)}
+
+/* ── TWO Headlights ────────────────────────────────────────── */
+.hl{
+  position:absolute;
+  width:5px;height:5px;border-radius:50%;
+  background:#fffde8;
+  box-shadow:0 0 7px 3px #fffde8aa,0 0 14px 5px #ffffff44;
+  z-index:2
+}
+/* LR → front = right edge */
+.car-lr .hl-a{right:2px;top:3px}
+.car-lr .hl-b{right:2px;bottom:3px}
+/* RL → front = left edge */
+.car-rl .hl-a{left:2px;top:3px}
+.car-rl .hl-b{left:2px;bottom:3px}
+/* TB → front = bottom edge */
+.car-tb .hl-a{bottom:2px;left:3px}
+.car-tb .hl-b{bottom:2px;right:3px}
+/* BT → front = top edge */
+.car-bt .hl-a{top:2px;left:3px}
+.car-bt .hl-b{top:2px;right:3px}
+
+/* ── Tail-lights ───────────────────────────────────────────── */
+.tail{
+  position:absolute;
+  width:4px;height:5px;border-radius:1px;
+  background:#ff3355;
+  box-shadow:0 0 5px #ff335577;
+  z-index:2;
+  transition:box-shadow .12s,background .12s
+}
+/* Braking → vivid red glow */
+.car.braking .tail{
+  background:#ff0033;
+  box-shadow:0 0 10px 3px #ff0033cc
+}
+/* LR: tails on left */
+.car-lr .tail-a{left:2px;top:3px}
+.car-lr .tail-b{left:2px;bottom:3px}
+/* RL: tails on right */
+.car-rl .tail-a{right:2px;top:3px}
+.car-rl .tail-b{right:2px;bottom:3px}
+/* TB: tails on top */
+.car-tb .tail-a{top:2px;left:3px}
+.car-tb .tail-b{top:2px;right:3px}
+/* BT: tails on bottom */
+.car-bt .tail-a{bottom:2px;left:3px}
+.car-bt .tail-b{bottom:2px;right:3px}
+
+/* ── Headlight Cone ────────────────────────────────────────── */
+.cone{position:absolute;pointer-events:none;z-index:1;opacity:.45}
+.car-lr .cone{right:-30px;top:0;width:32px;height:22px;background:linear-gradient(90deg,#fffde0,transparent);clip-path:polygon(0 18%,100% 0%,100% 100%,0 82%)}
+.car-rl .cone{left:-30px;top:0;width:32px;height:22px;background:linear-gradient(270deg,#fffde0,transparent);clip-path:polygon(100% 18%,0% 0%,0% 100%,100% 82%)}
+.car-tb .cone{bottom:-30px;left:0;width:22px;height:32px;background:linear-gradient(180deg,#fffde0,transparent);clip-path:polygon(18% 0%,82% 0%,100% 100%,0% 100%)}
+.car-bt .cone{top:-30px;left:0;width:22px;height:32px;background:linear-gradient(0deg,#fffde0,transparent);clip-path:polygon(0% 0%,100% 0%,82% 100%,18% 100%)}
+
+/* ── Street Lamps ──────────────────────────────────────────── */
+.lamp{position:absolute;width:4px;height:20px;background:#444;border-radius:2px 2px 0 0;z-index:18}
+.lamp::before{
+  content:'';position:absolute;top:-3px;left:50%;transform:translateX(-50%);
+  width:10px;height:10px;border-radius:50%;
+  background:radial-gradient(circle,#fff8c0 20%,#ffdd0066 60%,transparent 80%);
+  box-shadow:0 0 20px 8px #ffdd0033,0 0 40px 16px #ffdd0011;
+  animation:lampFlicker 5s ease-in-out infinite
+}
+@keyframes lampFlicker{0%,95%,100%{opacity:1}96%{opacity:.7}97%{opacity:1}98%{opacity:.5}99%{opacity:1}}
+.lamp-1{top:calc(50% - var(--road-w)/2 - 22px);left:calc(50% - var(--road-w)/2 - 6px)}
+.lamp-2{top:calc(50% - var(--road-w)/2 - 22px);left:calc(50% + var(--road-w)/2 + 2px)}
+.lamp-3{top:calc(50% + var(--road-w)/2 + 2px); left:calc(50% - var(--road-w)/2 - 6px)}
+.lamp-4{top:calc(50% + var(--road-w)/2 + 2px); left:calc(50% + var(--road-w)/2 + 2px)}
+
+/* ── Atmosphere & Stars ────────────────────────────────────── */
+.atmosphere{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,#06060f99 100%);pointer-events:none;z-index:25}
+.stars{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    radial-gradient(circle,#fff 1px,transparent 1px),
+    radial-gradient(circle,#fff 1px,transparent 1px),
+    radial-gradient(circle,#fff8 1px,transparent 1px);
+  background-size:200px 200px,350px 350px,150px 150px;
+  background-position:40px 30px,100px 80px,20px 160px;
+  opacity:.22
+}
+
+/* ── Legend ────────────────────────────────────────────────── */
+.legend{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:20px;z-index:100}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:9px;color:#ffffff44;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.legend-dot{width:8px;height:8px;border-radius:1px;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="page-title">Crossroad &mdash; Opposite Directions</div>
+
+<div class="scene">
+
+  <!-- Quadrant city blocks -->
+  <div class="quad quad-tl"><div class="building b1"></div><div class="building b2"></div><div class="building b3"></div></div>
+  <div class="quad quad-tr"><div class="building b1"></div><div class="building b2"></div><div class="building b3"></div></div>
+  <div class="quad quad-bl"><div class="building b1"></div><div class="building b2"></div><div class="building b3"></div></div>
+  <div class="quad quad-br"><div class="building b1"></div><div class="building b2"></div><div class="building b3"></div></div>
+
+  <!-- Roads -->
+  <div class="road-h"></div>
+  <div class="road-v"></div>
+  <div class="intersection"></div>
+
+  <!-- Lane markings -->
+  <div class="lm lm-hl"></div>
+  <div class="lm lm-hr"></div>
+  <div class="lm lm-vt"></div>
+  <div class="lm lm-vb"></div>
+
+  <!-- Zebra crossings -->
+  <div class="zebra zebra-top"></div>
+  <div class="zebra zebra-bottom"></div>
+  <div class="zebra zebra-left"></div>
+  <div class="zebra zebra-right"></div>
+
+  <!--
+    Traffic lights
+    NE + SW = NS axis  →  governs TB (top→bottom) and BT (bottom→top) cars
+    NW + SE = EW axis  →  governs LR (left→right) and RL (right→left) cars
+  -->
+  <div class="tl-wrap tl-ne" id="tl-ne">
+    <div class="tl-box">
+      <div class="tl-dot" data-c="red"></div>
+      <div class="tl-dot" data-c="amber"></div>
+      <div class="tl-dot" data-c="green"></div>
+    </div>
+  </div>
+  <div class="tl-wrap tl-sw" id="tl-sw">
+    <div class="tl-box">
+      <div class="tl-dot" data-c="red"></div>
+      <div class="tl-dot" data-c="amber"></div>
+      <div class="tl-dot" data-c="green"></div>
+    </div>
+  </div>
+  <div class="tl-wrap tl-nw" id="tl-nw">
+    <div class="tl-box">
+      <div class="tl-dot" data-c="red"></div>
+      <div class="tl-dot" data-c="amber"></div>
+      <div class="tl-dot" data-c="green"></div>
+    </div>
+  </div>
+  <div class="tl-wrap tl-se" id="tl-se">
+    <div class="tl-box">
+      <div class="tl-dot" data-c="red"></div>
+      <div class="tl-dot" data-c="amber"></div>
+      <div class="tl-dot" data-c="green"></div>
+    </div>
+  </div>
+
+  <!-- Street lamps -->
+  <div class="lamp lamp-1"></div>
+  <div class="lamp lamp-2"></div>
+  <div class="lamp lamp-3"></div>
+  <div class="lamp lamp-4"></div>
+
+  <!--
+    CARS
+    Each car contains:
+      .cone     – headlight beam in travel direction
+      .hl-a/b   – TWO headlights on the front face
+      .tail-a/b – TWO tail-lights on the rear face
+    JS sets transform:translate(x,y) every frame.
+  -->
+
+  <!-- Left → Right  (EW axis) -->
+  <div class="car car-lr" id="carA1">
+    <div class="cone"></div>
+    <div class="hl hl-a"></div><div class="hl hl-b"></div>
+    <div class="tail tail-a"></div><div class="tail tail-b"></div>
+  </div>
+  <div class="car car-lr" id="carA2">
+    <div class="cone"></div>
+    <div class="hl hl-a"></div><div class="hl hl-b"></div>
+    <div class="tail tail-a"></div><div class="tail tail-b"></div>
+  </div>
+
+  <!-- Right → Left  (EW axis) -->
+  <div class="car car-rl" id="carB1">
+    <div class="cone"></div>
+    <div class="hl hl-a"></div><div class="hl hl-b"></div>
+    <div class="tail tail-a"></div><div class="tail tail-b"></div>
+  </div>
+  <div class="car car-rl" id="carB2">
+    <div class="cone"></div>
+    <div class="hl hl-a"></div><div class="hl hl-b"></div>
+    <div class="tail tail-a"></div><div class="tail tail-b"></div>
+  </div>
+
+  <!-- Top → Bottom  (NS axis) -->
+  <div class="car car-tb" id="carC1">
+    <div class="cone"></div>
+    <div class="hl hl-a"></div><div class="hl hl-b"></div>
+    <div class="tail tail-a"></div><div class="tail tail-b"></div>
+  </div>
+  <div class="car car-tb" id="carC2">
+    <div class="cone"></div>
+    <div class="hl hl-a"></div><div class="hl hl-b"></div>
+    <div class="tail tail-a"></div><div class="tail tail-b"></div>
+  </div>
+
+  <!-- Bottom → Top  (NS axis) -->
+  <div class="car car-bt" id="carD1">
+    <div class="cone"></div>
+    <div class="hl hl-a"></div><div class="hl hl-b"></div>
+    <div class="tail tail-a"></div><div class="tail tail-b"></div>
+  </div>
+  <div class="car car-bt" id="carD2">
+    <div class="cone"></div>
+    <div class="hl hl-a"></div><div class="hl hl-b"></div>
+    <div class="tail tail-a"></div><div class="tail tail-b"></div>
+  </div>
+
+  <div class="atmosphere"></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#e63950"></div>L &rarr; R</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#39a0e6"></div>R &rarr; L</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#39e67a"></div>T &rarr; B</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#e63982"></div>B &rarr; T</div>
+</div>
+
+<script>
+'use strict';
+
+/* ═══════════════════════════════════════════════════════════
+   GEOMETRY
+   Scene 600×600 px · Road width 160 px
+   Intersection occupies x[220..380] × y[220..380]
+═══════════════════════════════════════════════════════════ */
+const SW = 600, SH = 600;
+const RW = 160;
+const IL = (SW - RW) / 2;   // 220  intersection left
+const IR = (SW + RW) / 2;   // 380  intersection right
+const IT = (SH - RW) / 2;   // 220  intersection top
+const IB = (SH + RW) / 2;   // 380  intersection bottom
+
+const CW = 36, CH = 22;     // horizontal car W×H
+const VW = 22, VH = 36;     // vertical   car W×H
+
+// Pixels between car front and intersection edge when waiting
+const PAD = 5;
+
+// Stop positions — car's top-left corner when held at red
+const SX_LR = IL - CW - PAD;  // 179   LR car waits here
+const SX_RL = IR + PAD;        // 385   RL car waits here
+const SY_TB = IT - VH - PAD;  // 179   TB car waits here
+const SY_BT = IB + PAD;        // 385   BT car waits here
+
+/* ═══════════════════════════════════════════════════════════
+   TRAFFIC LIGHT STATE MACHINE
+   ─────────────────────────────────────────────────────────
+   Axes:
+     NS (NE + SW boxes) → governs TB and BT cars
+     EW (NW + SE boxes) → governs LR and RL cars
+
+   9-second cycle:
+     0 ms … 4000   NS green  /  EW red
+     4000  … 4500  NS amber  /  EW red      ← NS clearing
+     4500  … 8500  NS red    /  EW green
+     8500  … 9000  NS red    /  EW amber     ← EW clearing
+═══════════════════════════════════════════════════════════ */
+const CYCLE  = 9000;
+const PHASES = [
+  { t:    0, ns: 'green', ew: 'red'   },
+  { t: 4000, ns: 'amber', ew: 'red'   },
+  { t: 4500, ns: 'red',   ew: 'green' },
+  { t: 8500, ns: 'red',   ew: 'amber' },
+];
+
+let nsState      = '';
+let ewState      = '';
+let lastPhaseIdx = -1;
+
+const tlGroups = {
+  ns: [document.getElementById('tl-ne'), document.getElementById('tl-sw')],
+  ew: [document.getElementById('tl-nw'), document.getElementById('tl-se')],
+};
+
+function lightBox(boxEl, color) {
+  boxEl.querySelectorAll('.tl-dot').forEach(dot => {
+    dot.classList.remove('on-red', 'on-amber', 'on-green');
+    if (dot.dataset.c === color) dot.classList.add('on-' + color);
+  });
+}
+
+function applyPhase(p) {
+  tlGroups.ns.forEach(el => lightBox(el, p.ns));
+  tlGroups.ew.forEach(el => lightBox(el, p.ew));
+  nsState = p.ns;
+  ewState = p.ew;
+}
+
+applyPhase(PHASES[0]);   // initialise
+
+/* ═══════════════════════════════════════════════════════════
+   CAR DEFINITIONS
+   ─────────────────────────────────────────────────────────
+   Lane positions (road centre = 300, RW = 160):
+     LR lane 1 → y = 312  (bottom half · inner lane)
+     LR lane 2 → y = 346  (bottom half · outer lane)
+     RL lane 1 → y = 232  (top half · inner lane)
+     RL lane 2 → y = 266  (top half · outer lane)
+     TB lane 1 → x = 312
+     TB lane 2 → x = 346
+     BT lane 1 → x = 232
+     BT lane 2 → x = 266
+═══════════════════════════════════════════════════════════ */
+const CAR_DEFS = [
+  { id:'carA1', axis:'EW', dir:'LR', x: -50, y: 312, spd: 150 },
+  { id:'carA2', axis:'EW', dir:'LR', x:-290, y: 346, spd:  90 },
+  { id:'carB1', axis:'EW', dir:'RL', x: 640, y: 232, spd: 124 },
+  { id:'carB2', axis:'EW', dir:'RL', x: 870, y: 266, spd: 100 },
+  { id:'carC1', axis:'NS', dir:'TB', x: 312, y: -50, spd: 132 },
+  { id:'carC2', axis:'NS', dir:'TB', x: 346, y:-290, spd:  93 },
+  { id:'carD1', axis:'NS', dir:'BT', x: 232, y: 640, spd: 115 },
+  { id:'carD2', axis:'NS', dir:'BT', x: 266, y: 870, spd:  79 },
+];
+
+const cars = CAR_DEFS.map(d => ({
+  ...d,
+  el: document.getElementById(d.id),
+  braking: false,
+}));
+
+/* ═══════════════════════════════════════════════════════════
+   SMOOTH APPROACH HELPER
+   Within 55 px of the stop line the car decelerates so it
+   eases to a halt rather than snapping to the position.
+   Returns the px to advance this frame.
+═══════════════════════════════════════════════════════════ */
+function approach(dist, maxSpd) {
+  if (dist <= 0) return 0;
+  const factor = dist < 55 ? (dist / 55) * 0.95 + 0.05 : 1;
+  return Math.min(maxSpd * factor, dist);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CAR MOVEMENT
+   Stop rule: a car stops only if its light is red/amber AND
+   it has not yet reached (or passed) the stop line.
+   Once a car commits past the stop line it ignores the light
+   and clears the intersection — same as real traffic.
+═══════════════════════════════════════════════════════════ */
+function moveCar(car, dt) {
+  const state  = car.axis === 'NS' ? nsState : ewState;
+  const isRed  = state === 'red' || state === 'amber';
+  const spd    = car.spd * dt;   // px to move this frame
+
+  switch (car.dir) {
+
+    /* ── Left → Right ─────────────────────────────────── */
+    case 'LR': {
+      if (isRed && car.x <= SX_LR) {
+        // Approaching or at stop line while red → ease to halt
+        car.x += approach(SX_LR - car.x, spd);
+      } else {
+        // Green, or already past stop line (committed) → go
+        car.x += spd;
+      }
+      car.braking = isRed && car.x >= SX_LR - 1;
+      if (car.x > SW + 55) { car.x = -(CW + 10); car.braking = false; }
+      break;
+    }
+
+    /* ── Right → Left ─────────────────────────────────── */
+    case 'RL': {
+      if (isRed && car.x >= SX_RL) {
+        car.x -= approach(car.x - SX_RL, spd);
+      } else {
+        car.x -= spd;
+      }
+      car.braking = isRed && car.x <= SX_RL + 1;
+      if (car.x < -(CW + 55)) { car.x = SW + 55; car.braking = false; }
+      break;
+    }
+
+    /* ── Top → Bottom ─────────────────────────────────── */
+    case 'TB': {
+      if (isRed && car.y <= SY_TB) {
+        car.y += approach(SY_TB - car.y, spd);
+      } else {
+        car.y += spd;
+      }
+      car.braking = isRed && car.y >= SY_TB - 1;
+      if (car.y > SH + 55) { car.y = -(VH + 10); car.braking = false; }
+      break;
+    }
+
+    /* ── Bottom → Top ─────────────────────────────────── */
+    case 'BT': {
+      if (isRed && car.y >= SY_BT) {
+        car.y -= approach(car.y - SY_BT, spd);
+      } else {
+        car.y -= spd;
+      }
+      car.braking = isRed && car.y <= SY_BT + 1;
+      if (car.y < -(VH + 55)) { car.y = SH + 55; car.braking = false; }
+      break;
+    }
+  }
+
+  // GPU-accelerated position + brake indicator
+  car.el.style.transform = `translate(${car.x}px,${car.y}px)`;
+  car.el.classList.toggle('braking', car.braking);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MAIN LOOP
+═══════════════════════════════════════════════════════════ */
+const startTs = performance.now();
+let   lastTs  = null;
+
+function tick(ts) {
+  if (!lastTs) lastTs = ts;
+  const dt = Math.min((ts - lastTs) / 1000, 0.05);  // seconds; capped at 50 ms
+  lastTs = ts;
+
+  // ─ Traffic light phase ─
+  const elapsed  = (ts - startTs) % CYCLE;
+  let   phaseIdx = 0;
+  for (let i = PHASES.length - 1; i >= 0; i--) {
+    if (elapsed >= PHASES[i].t) { phaseIdx = i; break; }
+  }
+  if (phaseIdx !== lastPhaseIdx) {
+    lastPhaseIdx = phaseIdx;
+    applyPhase(PHASES[phaseIdx]);
+  }
+
+  // ─ Move every car ─
+  for (const car of cars) moveCar(car, dt);
+
+  requestAnimationFrame(tick);
+}
+
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
