@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>CSS Only - Morph Effect | CodeTap</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create-Design-Develop | CSS Only</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="noise"></div>
+
+  <!-- Threshold Filter for Morph Effect -->
+  <svg class="filters">
+    <defs>
+      <filter id="threshold">
+        <!-- Alpha thresholding -->
+        <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
+                    0 1 0 0 0
+                    0 0 1 0 0
+                    0 0 0 25 -9" result="goo" />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+      </filter>
+    </defs>
+  </svg>
+
+  <section class="hero">
+    <div class="morph-container">
+      <div class="word-rotator">
+        <div class="word">CREATE</div>
+        <div class="word">DESIGN</div>
+        <div class="word">DEVELOP</div>
+      </div>
+    </div>
+    <p class="subtext">The Art of Code</p>
+
+    <div class="scroll-indicator">
+      <div class="mouse">
+        <div class="wheel"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="content-text">
+      <h2>We Build Digital<br />Legacies.</h2>
+      <p>
+        In a world of noise, we create clarity. Our studio merges strategic
+        foresight with impeccable design to forge digital products that
+        stand the test of time and define the future of interaction.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Visionary Craft</h3>
+      <br />
+      <p style="margin-bottom: 0">
+        We don't chase trends; we set them. By deconstructing complex problems
+        into elegant solutions, we empower brands to connect with their
+        audience in meaningful, lasting ways.
+      </p>
+    </div>
+  </section>
+</body>
+    
+  </body>
+  
+</html>

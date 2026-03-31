@@ -1,0 +1,5 @@
+/* Body background is set to a dark gray just to demonstrate transparency, 
+           but the canvas itself is transparent. */
+        body { margin: 0; overflow: hidden; background-color: #1a1a1a; font-family: sans-serif; }
+        canvas { display: block; }
+        .lil-gui.root { position: absolute; bottom: 20px; right: 20px; top: auto !important; }

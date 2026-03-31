@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>RobotsOnly Dating - Reverse Captcha | CodeTap</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="shell">
+	<div class="logo" aria-label="RobotsOnly logo">
+		<div class="logo-icons">🤖❤️🤖</div>
+		<div class="logo-text">RobotsOnly</div>
+	</div>
+
+	<div class="card">
+		<button class="captcha-row checked" id="captchaRow" type="button" aria-label="I am not a human.">
+			<div class="check" id="checkMark">✓</div>
+			<div class="captcha-label">I am not a human.</div>
+		</button>
+
+		<button class="register-btn" id="registerBtn" type="button">Register</button>
+
+		<div class="message" id="pageMessage"></div>
+	</div>
+</div>
+
+<div class="overlay" id="overlay">
+	<div class="modal" role="dialog" aria-modal="true" aria-labelledby="captchaTitle">
+		<div class="modal-top">
+			<div>
+				<h2 class="modal-title" id="captchaTitle">Don't select squares containing red balloons</h2>
+			</div>
+			<button class="close-btn" id="closeBtn" aria-label="Close">×</button>
+		</div>
+
+		<div class="grid" id="grid">
+			<button class="tile" type="button" aria-label="tile 1"></button>
+			<button class="tile" type="button" aria-label="tile 2"></button>
+			<button class="tile" type="button" aria-label="tile 3"></button>
+			<button class="tile" type="button" aria-label="tile 4"></button>
+			<button class="tile" type="button" aria-label="tile 5"></button>
+			<button class="tile" type="button" aria-label="tile 6"></button>
+			<button class="tile" type="button" aria-label="tile 7"></button>
+			<button class="tile" type="button" aria-label="tile 8"></button>
+			<button class="tile" type="button" aria-label="tile 9"></button>
+		</div>
+
+		<div class="modal-actions">
+			<button class="btn secondary" id="clearBtn" type="button">Clear</button>
+			<button class="btn primary" id="confirmBtn" type="button">Confirm</button>
+		</div>
+	</div>
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

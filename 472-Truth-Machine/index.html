@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Truth Machine | CodeTap</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!-- ============================================================
+     THE TRUTH MACHINE — CodePen Challenge: True & False
+     Tags: cpc-true-false · codepenchallenge
+     ============================================================ -->
+<main class="truth-machine" id="truthMachine" aria-label="The Truth Machine">
+
+	<!-- SCANLINE OVERLAY (CSS atmospheric effect) -->
+	<div class="scanlines" aria-hidden="true"></div>
+	<div class="noise" aria-hidden="true"></div>
+
+	<!-- HEADER -->
+	<header class="tm-header">
+		<div class="tm-header__eyebrow">
+			<span class="tm-tag">CODEPEN CHALLENGE</span>
+			<span class="tm-tag tm-tag--week">WEEK 3 · MARCH 2026</span>
+		</div>
+		<h1 class="tm-title">
+			<span class="tm-title__the">THE</span>
+			<span class="tm-title__main">TRUTH<br>MACHINE</span>
+		</h1>
+		<p class="tm-subtitle">
+			A front-end laboratory for JavaScript's boolean universe —
+			where truthy and falsy collide, and <em>nothing is simply true or false</em>.
+		</p>
+		<!-- ARIA live region for screen readers -->
+		<div aria-live="polite" aria-atomic="true" class="sr-only" id="liveAnnounce"></div>
+	</header>
+
+	<!-- MAIN LAYOUT: Meter + Questions -->
+	<div class="tm-layout">
+
+		<!-- TRUTH METER (left rail) -->
+		<aside class="tm-meter" aria-label="Truth Meter">
+			<div class="tm-meter__label tm-meter__label--top">TRUE</div>
+			<div class="tm-meter__track" role="meter" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Truth level">
+				<div class="tm-meter__fill" id="meterFill"></div>
+				<div class="tm-meter__score" id="meterScore">0%</div>
+				<div class="tm-meter__ticks" aria-hidden="true">
+					<span></span><span></span><span></span><span></span><span></span>
+					<span></span><span></span><span></span><span></span><span></span>
+				</div>
+			</div>
+			<div class="tm-meter__label tm-meter__label--bottom">FALSE</div>
+			<div class="tm-meter__verdict" id="meterVerdict">
+				<span class="tm-meter__verdict-text">AWAITING<br>INPUT</span>
+			</div>
+		</aside>
+
+		<!-- QUESTIONS PANEL -->
+		<section class="tm-questions" aria-label="Boolean Questions">
+
+			<!-- Q1: Classic boolean — Radio -->
+			<fieldset class="tm-card" id="card-q1" data-qid="q1">
+				<legend class="tm-card__legend">
+					<span class="tm-card__num">01</span>
+					<span class="tm-card__type">BOOLEAN</span>
+				</legend>
+				<p class="tm-card__prompt">Is the sky blue on a clear day?</p>
+				<div class="tm-card__controls">
+					<label class="tm-radio">
+						<input type="radio" name="q1" value="true" class="tm-radio__input">
+						<span class="tm-radio__mark"></span>
+						<span class="tm-radio__text">True</span>
+					</label>
+					<label class="tm-radio">
+						<input type="radio" name="q1" value="false" class="tm-radio__input">
+						<span class="tm-radio__mark"></span>
+						<span class="tm-radio__text">False</span>
+					</label>
+				</div>
+				<div class="tm-card__verdict" aria-live="polite">
+					<span class="tm-verdict-badge" id="badge-q1">—</span>
+				</div>
+			</fieldset>
+
+			<!-- Q2: Truthy/Falsy — Type a value -->
+			<fieldset class="tm-card" id="card-q2" data-qid="q2">
+				<legend class="tm-card__legend">
+					<span class="tm-card__num">02</span>
+					<span class="tm-card__type">TRUTHY / FALSY</span>
+				</legend>
+				<p class="tm-card__prompt">
+					Type <em>any</em> JavaScript value. Watch how JS interprets it.
+				</p>
+				<div class="tm-card__controls tm-card__controls--text">
+					<input type="text" class="tm-input" id="q2input" placeholder='try: 0, "", "false", "0", " ", null…' autocomplete="off" spellcheck="false">
+					<div class="tm-input-analysis" id="q2analysis" aria-live="polite">
+						<span class="tm-analysis__raw" id="q2raw"></span>
+						<span class="tm-analysis__arrow">→</span>
+						<span class="tm-analysis__result" id="q2result"></span>
+					</div>
+				</div>
+				<!-- Quick-fire edge-case buttons -->
+				<div class="tm-card__edgecases" aria-label="Edge case presets">
+					<button class="tm-edge" data-val="0" title="The number zero">0</button>
+					<button class="tm-edge" data-val="" title="Empty string">&quot;&quot;</button>
+					<button class="tm-edge" data-val="0str" title="String zero">&quot;0&quot;</button>
+					<button class="tm-edge" data-val="false_str" title="String false">&quot;false&quot;</button>
+					<button class="tm-edge" data-val="space" title="Whitespace string">&quot; &quot;</button>
+					<button class="tm-edge" data-val="null" title="null">null</button>
+					<button class="tm-edge" data-val="NaN" title="Not a Number">NaN</button>
+					<button class="tm-edge" data-val="1" title="Number one">1</button>
+				</div>
+				<div class="tm-card__verdict" aria-live="polite">
+					<span class="tm-verdict-badge" id="badge-q2">—</span>
+				</div>
+			</fieldset>
+
+			<!-- Q3: Checkbox — Multiple truths -->
+			<fieldset class="tm-card" id="card-q3" data-qid="q3">
+				<legend class="tm-card__legend">
+					<span class="tm-card__num">03</span>
+					<span class="tm-card__type">CHECKED STATE</span>
+				</legend>
+				<p class="tm-card__prompt">
+					Select all that are truthy in JavaScript:
+				</p>
+				<div class="tm-card__controls tm-card__controls--checks">
+					<label class="tm-check">
+						<input type="checkbox" class="tm-check__input" data-truthy="true" value="zero">
+						<span class="tm-check__box"></span>
+						<span class="tm-check__text"><code>0</code></span>
+					</label>
+					<label class="tm-check">
+						<input type="checkbox" class="tm-check__input" data-truthy="true" value="one">
+						<span class="tm-check__box"></span>
+						<span class="tm-check__text"><code>1</code></span>
+					</label>
+					<label class="tm-check">
+						<input type="checkbox" class="tm-check__input" data-truthy="false" value="emptyStr">
+						<span class="tm-check__box"></span>
+						<span class="tm-check__text"><code>""</code></span>
+					</label>
+					<label class="tm-check">
+						<input type="checkbox" class="tm-check__input" data-truthy="true" value="zeroStr">
+						<span class="tm-check__box"></span>
+						<span class="tm-check__text"><code>"0"</code></span>
+					</label>
+					<label class="tm-check">
+						<input type="checkbox" class="tm-check__input" data-truthy="true" value="arr">
+						<span class="tm-check__box"></span>
+						<span class="tm-check__text"><code>[]</code></span>
+					</label>
+					<label class="tm-check">
+						<input type="checkbox" class="tm-check__input" data-truthy="false" value="nullVal">
+						<span class="tm-check__box"></span>
+						<span class="tm-check__text"><code>null</code></span>
+					</label>
+				</div>
+				<p class="tm-card__hint" id="q3hint" aria-live="polite"></p>
+				<div class="tm-card__verdict" aria-live="polite">
+					<span class="tm-verdict-badge" id="badge-q3">—</span>
+				</div>
+			</fieldset>
+
+			<!-- Q4: Numeric input — falsy at 0 -->
+			<fieldset class="tm-card" id="card-q4" data-qid="q4">
+				<legend class="tm-card__legend">
+					<span class="tm-card__num">04</span>
+					<span class="tm-card__type">NUMBER → BOOLEAN</span>
+				</legend>
+				<p class="tm-card__prompt">
+					Drag the slider. Only <strong>zero</strong> is falsy — everything else is true.
+				</p>
+				<div class="tm-card__controls tm-card__controls--slider">
+					<input type="range" class="tm-slider" id="q4slider" min="-5" max="5" value="0" step="1">
+					<output class="tm-slider__output" id="q4output" for="q4slider">0</output>
+				</div>
+				<div class="tm-card__verdict" aria-live="polite">
+					<span class="tm-verdict-badge" id="badge-q4">—</span>
+				</div>
+			</fieldset>
+
+			<!-- Q5: The trick question -->
+			<fieldset class="tm-card tm-card--trick" id="card-q5" data-qid="q5">
+				<legend class="tm-card__legend">
+					<span class="tm-card__num">05</span>
+					<span class="tm-card__type">⚠ TRICK QUESTION</span>
+				</legend>
+				<p class="tm-card__prompt">
+					<code>"false"</code> — the string — is it falsy?
+				</p>
+				<div class="tm-card__controls">
+					<label class="tm-radio">
+						<input type="radio" name="q5" value="true" class="tm-radio__input">
+						<span class="tm-radio__mark"></span>
+						<span class="tm-radio__text">Yes, it's falsy</span>
+					</label>
+					<label class="tm-radio">
+						<input type="radio" name="q5" value="false" class="tm-radio__input">
+						<span class="tm-radio__mark"></span>
+						<span class="tm-radio__text">No, it's truthy</span>
+					</label>
+				</div>
+				<p class="tm-card__reveal" id="q5reveal" aria-live="polite"></p>
+				<div class="tm-card__verdict" aria-live="polite">
+					<span class="tm-verdict-badge" id="badge-q5">—</span>
+				</div>
+			</fieldset>
+
+		</section>
+	</div>
+
+	<!-- CONTROLS BAR -->
+	<div class="tm-controls">
+		<button class="tm-btn tm-btn--randomize" id="btnRandomize" type="button">
+			<span class="tm-btn__icon" aria-hidden="true">⚡</span> Randomize
+		</button>
+		<button class="tm-btn tm-btn--reset" id="btnReset" type="button">
+			<span class="tm-btn__icon" aria-hidden="true">↺</span> Reset
+		</button>
+	</div>
+
+	<!-- LEGEND / FOOTER -->
+	<footer class="tm-footer">
+		<div class="tm-legend">
+			<h2 class="tm-legend__title">Truthy &amp; Falsy — The Short Version</h2>
+			<ul class="tm-legend__list">
+				<li><strong>Falsy values</strong> — only 7 in JS: <code>false</code>, <code>0</code>, <code>-0</code>, <code>0n</code>, <code>""</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code></li>
+				<li><strong>Truthy</strong> — everything else, including <code>"0"</code>, <code>"false"</code>, <code>[]</code>, <code>{}</code></li>
+				<li><code>!!value</code> — the double-bang trick to force any value into a real boolean</li>
+				<li>CSS has no booleans, but <code>:has()</code>, <code>:checked</code>, and <code>:not()</code> fake it beautifully</li>
+			</ul>
+		</div>
+		<p class="tm-credits">
+			Built for the <strong>CodePen Front-End Opposites Challenge, March 2026</strong>
+		</p>
+	</footer>
+
+</main>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

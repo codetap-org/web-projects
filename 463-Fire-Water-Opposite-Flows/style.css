@@ -1,0 +1,81 @@
+body {
+	margin: 0;
+	overflow: hidden;
+	font-family: "Cinema", "Segoe UI", "Poppins", sans-serif;
+}
+#title-card {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	z-index: 100;
+	background: rgba(0, 0, 0, 0.55);
+	backdrop-filter: blur(12px);
+	padding: 12px 28px;
+	border-radius: 60px;
+	color: white;
+	pointer-events: none;
+	border-bottom: 2px solid #ff8844;
+	border-top: 2px solid #44aaff;
+	letter-spacing: 2px;
+	font-weight: 500;
+	font-family: monospace;
+}
+#title-card h1 {
+	margin: 0;
+	font-size: 1.1rem;
+	display: inline-block;
+}
+#title-card p {
+	margin: 5px 0 0;
+	font-size: 0.7rem;
+	opacity: 0.8;
+}
+.legend {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	z-index: 100;
+	background: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(8px);
+	padding: 8px 16px;
+	border-radius: 20px;
+	color: #ddd;
+	font-size: 11px;
+	font-family: monospace;
+	pointer-events: none;
+	display: flex;
+	gap: 20px;
+}
+.legend span {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+.fire-badge {
+	color: #ff7744;
+}
+.water-badge {
+	color: #44aaff;
+}
+.controls {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	background: rgba(0, 0, 0, 0.5);
+	padding: 6px 12px;
+	border-radius: 16px;
+	font-size: 10px;
+	color: #aaa;
+	font-family: monospace;
+	pointer-events: none;
+	z-index: 100;
+}
+@media (max-width: 700px) {
+	.legend {
+		font-size: 9px;
+		padding: 6px 12px;
+	}
+	#title-card {
+		padding: 8px 18px;
+	}
+}

@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+	--duration:  2000ms;
+    --strokeWidth: 40;
+    --arch: 10;
+}
+
+* { box-sizing: border-box; }
+::selection { color: none; background: none; }
+::-moz-selection { color: none; background: none; }
+
+html, body {
+  font-family: Avenir, sans-serif;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0px;
+}
+
+body {
+    background: #FFF;
+    background-image: url(https://picsum.photos/id/322/100/100); /*  360   469 498 618 766 811*/
+    background-position: center;
+    background-size: cover;
+    color: #000;
+    width: 100vw;
+    height: 100vh;
+    overflow: clip;
+}
+
+blurFilter {
+    display: block;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    background-color: oklab(17.39% 0.06 0.03 / 0.79);
+    backdrop-filter: blur(80px);
+}
+
+
+#container {
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+    position: relative;
+    height: 100%;
+    width: 100%;
+    
+    opacity: 0;
+
+    .mPole {
+        display: block;
+        position: absolute;
+        z-index: 10;
+        text-align: center;
+        width: 76px;
+        height: 76px;
+        outline: 9px solid #FFF4;
+        border-radius: 50%;
+        font-size: 30px;
+        line-height: 76px;
+        cursor: grab;
+        filter: drop-shadow(0 0 5px #000);
+        &#mP1 { left: 50vw; top:50vh; background-color: DeepPink; }
+        &#mP2 { right: 50vw; bottom: 50vh; background-color: Aqua; }
+        &:active { cursor: grabbing; }
+    }
+
+    svg {
+
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        z-index: 0;
+        overflow: visible;
+
+        .magneticLines {
+        
+            path {
+
+                stroke-dashoffset: 0;
+                stroke-width: var(--strokeWidth);
+                animation: dash var(--duration) linear infinite;
+                @supports (-webkit-touch-callout: none) { filter: url(#dShadow); }
+                @supports not (-webkit-touch-callout: none) { filter: drop-shadow(#000 0px 0px 15px); }
+                &:nth-child(odd) { stroke: DeepPink; }
+                &:nth-child(even) { stroke: Aqua; }
+
+            }
+
+		}
+
+    }
+
+    #startBox {
+        display: block;
+        position: absolute;
+        z-index: 0;
+        width: 90%;
+        height: 90%;
+        max-width: 440px;
+        max-height: 440px;
+        border: solid 1px #FFF;
+        opacity: 0;
+    }
+
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: 210; }
+}
