@@ -1,0 +1,252 @@
+:root {
+  --size: 70vmin;
+  --color-1: #fe3424;
+  --color-2: #fdbf36;
+  --color-3: #1e69aa;
+  --color-4: #000;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+div {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+span {
+  display: grid;
+  height: calc(var(--size) / 3);
+  aspect-ratio: 1;
+}
+
+span:before,
+span:after {
+  content: "";
+  grid-row: 1;
+  grid-column: 1;
+}
+
+div[data-digit="0"] span:nth-child(1) {
+  border-radius: 100% 0 0 0;
+  background: currentcolor;
+}
+div[data-digit="0"] span:nth-child(2) {
+  background: repeating-radial-gradient(circle at 0% 100%, currentcolor, currentcolor 5.42%, transparent 5.42%, transparent 10.85%);
+  border-radius: 0 100% 0 0;
+}
+div[data-digit="0"] span:nth-child(3) {
+  background-image: repeating-linear-gradient(90deg, currentcolor 0%, currentcolor 50%, transparent 50%, transparent 100%);
+  background-position: 0 0;
+  background-size: 15.42% 15.42%;
+}
+div[data-digit="0"] span:nth-child(4) {
+  background: var(--color-2);
+}
+div[data-digit="0"] span:nth-child(5) {
+  background: var(--color-1);
+  border-radius: 0 0 0 100%;
+}
+div[data-digit="0"] span:nth-child(6) {
+  background: var(--color-3);
+  border-radius: 0 0 100% 0;
+}
+
+div[data-digit="1"] span:nth-child(1) {
+  border-radius: 100% 0 0 0;
+  background: currentcolor;
+}
+div[data-digit="1"] span:nth-child(2) {
+  background: var(--color-1);
+}
+div[data-digit="1"] span:nth-child(4) {
+  background: var(--color-3);
+}
+div[data-digit="1"] span:nth-child(6) {
+  background: var(--color-2);
+}
+
+div[data-digit="2"] span:nth-child(1) {
+  border-radius: 100% 0 0 0;
+  background: var(--color-1);
+}
+div[data-digit="2"] span:nth-child(2) {
+  background: repeating-radial-gradient(circle at 0% 100%, currentcolor, currentcolor 5.42%, transparent 5.42%, transparent 10.85%);
+  border-radius: 0 100% 0 0;
+}
+div[data-digit="2"] span:nth-child(4) {
+  background: var(--color-2);
+  border-radius: 0 0 100% 0;
+}
+div[data-digit="2"] span:nth-child(5) {
+  background: var(--color-3);
+}
+div[data-digit="2"] span:nth-child(6) {
+  background-image: repeating-linear-gradient(180deg, currentcolor 0%, currentcolor 50%, transparent 50%, transparent 100%);
+  background-position: 0 0;
+  background-size: 15.42% 15.42%;
+}
+
+div[data-digit="3"] span:nth-child(1) {
+  border-radius: 100% 0 0 0;
+  background: var(--color-2);
+}
+div[data-digit="3"] span:nth-child(2) {
+  background: currentcolor;
+  border-radius: 0 100% 0 0;
+}
+div[data-digit="3"] span:nth-child(4):before {
+  background: repeating-radial-gradient(circle at 0% 100%, currentcolor, currentcolor 5.42%, transparent 5.42%, transparent 10.85%);
+  border-radius: 0 100% 0 0;
+}
+div[data-digit="3"] span:nth-child(4):after {
+  background: repeating-radial-gradient(circle at 0% 0%, currentcolor, currentcolor 5.42%, transparent 5.42%, transparent 10.85%);
+  border-radius: 0 0 100% 0;
+}
+div[data-digit="3"] span:nth-child(5) {
+  background: var(--color-3);
+  border-radius: 0 0 0 100%;
+}
+div[data-digit="3"] span:nth-child(6) {
+  background: var(--color-1);
+  border-radius: 0 0 100% 0;
+}
+
+div[data-digit="4"] span:nth-child(1) {
+  border-radius: 0 100% 0 0;
+  background: var(--color-2);
+}
+div[data-digit="4"] span:nth-child(2) {
+  background-image: repeating-linear-gradient(90deg, currentcolor 0%, currentcolor 50%, transparent 50%, transparent 100%);
+  background-position: 0 0;
+  background-size: 15.42% 15.42%;
+}
+div[data-digit="4"] span:nth-child(3) {
+  border-radius: 0 0 0 100%;
+  background: currentcolor;
+}
+div[data-digit="4"] span:nth-child(4) {
+  background: var(--color-3);
+}
+div[data-digit="4"] span:nth-child(6) {
+  background: var(--color-1);
+}
+
+div[data-digit="5"] span:nth-child(1) {
+  background: var(--color-3);
+}
+div[data-digit="5"] span:nth-child(2) {
+  border-radius: 0 0 100% 0;
+  background: currentcolor;
+}
+div[data-digit="5"] span:nth-child(4) {
+  background: repeating-radial-gradient(circle at 0% 100%, currentcolor, currentcolor 5.42%, transparent 5.42%, transparent 10.85%);
+  border-radius: 0 100% 0 0;
+}
+div[data-digit="5"] span:nth-child(5) {
+  border-radius: 0 0 0 100%;
+  background: var(--color-2);
+}
+div[data-digit="5"] span:nth-child(6) {
+  border-radius: 0 0 100% 0;
+  background: var(--color-1);
+}
+
+div[data-digit="6"] span:nth-child(1) {
+  border-radius: 100% 0 0 0;
+  background: currentcolor;
+}
+div[data-digit="6"] span:nth-child(2) {
+  border-radius: 0 100% 0 0;
+  background: var(--color-2);
+}
+div[data-digit="6"] span:nth-child(3) {
+  background: var(--color-3);
+}
+div[data-digit="6"] span:nth-child(4) {
+  background: repeating-radial-gradient(circle at 0% 100%, currentcolor, currentcolor 5.42%, transparent 5.42%, transparent 10.85%);
+  border-radius: 0 100% 0 0;
+}
+div[data-digit="6"] span:nth-child(5) {
+  border-radius: 0 0 0 100%;
+  background: var(--color-2);
+}
+div[data-digit="6"] span:nth-child(6) {
+  border-radius: 0 0 100% 0;
+  background: var(--color-1);
+}
+
+div[data-digit="7"] span:nth-child(1) {
+  background: var(--color-2);
+}
+div[data-digit="7"] span:nth-child(2) {
+  border-radius: 0 100% 0 0;
+  background: var(--color-1);
+}
+div[data-digit="7"] span:nth-child(4) {
+  background: var(--color-3);
+}
+div[data-digit="7"] span:nth-child(6) {
+  background: currentcolor;
+}
+
+div[data-digit="8"] span:nth-child(1) {
+  border-radius: 100% 0 0 0;
+  background: var(--color-2);
+}
+div[data-digit="8"] span:nth-child(2) {
+  border-radius: 0 100% 0 0;
+  background: var(--color-3);
+}
+div[data-digit="8"] span:nth-child(3):before {
+  border-radius: 100% 0 0 0;
+  background: var(--color-3);
+}
+div[data-digit="8"] span:nth-child(3):after {
+  background: repeating-radial-gradient(circle at 100% 0%, currentcolor, currentcolor 5.42%, transparent 5.42%, transparent 10.85%);
+  border-radius: 0 0 0 100%;
+}
+div[data-digit="8"] span:nth-child(4):before {
+  border-radius: 0 0 100% 0;
+  background: var(--color-2);
+}
+div[data-digit="8"] span:nth-child(4):after {
+  background: repeating-radial-gradient(circle at 0% 100%, currentcolor, currentcolor 5.42%, transparent 5.42%, transparent 10.85%);
+  border-radius: 0 100% 0 0;
+}
+div[data-digit="8"] span:nth-child(5) {
+  background: var(--color-1);
+  border-radius: 0 0 0 100%;
+}
+div[data-digit="8"] span:nth-child(6) {
+  background: currentcolor;
+  border-radius: 0 0 100% 0;
+}
+
+div[data-digit="9"] span:nth-child(1) {
+  background: repeating-radial-gradient(circle at 100% 100%, currentcolor, currentcolor 5.42%, transparent 5.42%, transparent 10.85%);
+  border-radius: 100% 0 0 0;
+}
+div[data-digit="9"] span:nth-child(2) {
+  background: var(--color-2);
+  border-radius: 0 100% 0 0;
+}
+div[data-digit="9"] span:nth-child(3) {
+  background: var(--color-1);
+  border-radius: 0 0 0 100%;
+}
+div[data-digit="9"] span:nth-child(4) {
+  background: repeating-radial-gradient(circle at 0% 0%, currentcolor, currentcolor 5.42%, transparent 5.42%, transparent 10.85%);
+}
+div[data-digit="9"] span:nth-child(5) {
+  background: var(--color-3);
+  border-radius: 0 0 0 100%;
+}
+div[data-digit="9"] span:nth-child(6) {
+  background: currentcolor;
+  border-radius: 0 0 100% 0;
+}

@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', 'Montserrat', system-ui, -apple-system, sans-serif
+}
+
+.dg.ac {
+    z-index: 200 !important;
+    transition: opacity 0.3s ease, transform 0.3s ease
+}
+
+.lil-gui.hidden {
+    opacity: 0;
+    transform: translateX(100%);
+    pointer-events: none
+}
+
+.dg.main .c .slider-fg {
+    background: #ff8c42
+}
+
+@media (max-width:800px) {
+    .dg.ac {
+        top: 60px !important;
+        right: 10px !important
+    }
+}
+
+a {
+    color: tomato;
+    text-decoration: none
+}
+
+a:hover {
+    color: #fff
+}
+
+.hint {
+    position: fixed;
+    left: 12px;
+    bottom: 12px;
+    z-index: 10;
+    background: rgb(0 0 0 / .35);
+    padding: 8px;
+    border-radius: 8px;
+    opacity: .85;
+    font-size: 13px;
+    color: #fff
+}
+
+.copy {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    color: #000;
+    background: rgb(255 255 255 / .9);
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px
+}
+
+.export-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0 0 0 / .85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-family: monospace;
+    animation: fadeIn 0.3s ease
+}
+
+.export-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgb(255 255 255 / .3);
+    border-top: 4px solid #ff8c42;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.export-message {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px
+}
+
+.export-submessage {
+    font-size: 14px;
+    opacity: .8
+}
+
+.dblclick-hint {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgb(0 0 0 / .6);
+    backdrop-filter: blur(4px);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    color: #fff;
+    font-family: monospace;
+    pointer-events: none;
+    z-index: 100;
+    transition: opacity 0.3s ease
+}
+
+canvas {
+    display: block;
+    cursor: pointer
+}
+
+.export-temp-container {
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    visibility: hidden
+}

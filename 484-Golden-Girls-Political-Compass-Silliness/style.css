@@ -1,0 +1,226 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+#roseQuotes {
+position:absolute;
+	font-size: .8rem;
+	text-transform:uppercase;
+	letter-spacing:2px;
+	width:200px;
+	height:150px;
+	background-color:white;
+	padding:5px;
+	z-index:9999999999999;
+	display:flex;
+		justify-content:center;
+		vertical-align:middle;
+	align-items:center;
+	align-content:center;
+	padding:10px;
+	border-radius:10px;
+	
+	
+}
+body,
+html {
+	height: 100%;
+	width: 100%;
+	font-family: sans-serif;
+	overflow: hidden;
+}
+.container:after {
+	content:'';
+	position:absolute;
+	width:100vw;
+	height:100vh;
+		background-image:url('https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/rockcms/2021-12/betty-white-golden-girls-rose-te-main-211229-be1685.jpg');
+	background-size:cover;
+	opacity:.05;
+}
+.container {
+	position: relative; 
+	width: 100vw;
+	height: 100vh; 
+
+}
+.marker {
+	width:50px; height: 50px;
+	background-color:black;
+	border-radius:100%;
+	position:absolute;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	z-index:999999999;
+	transition:all .15s;
+}
+
+.blanche {
+		top:75%; left:75%;
+}
+.dorothy {
+		top:25%; left:25%;
+}
+
+.sophia {
+		top:calc(50% + -25px); left:calc(50% - 25px);
+}
+.marker:after {
+		content:' ';
+	position:relative;
+	display:flex;
+		justify-content:center;
+		vertical-align:middle;
+	align-items:center;
+	align-content:center;
+	height:50px;
+	
+}
+.marker.blanche:hover:after  {
+	content: 'Blanche Devereaux';
+}
+.marker.dorothy:hover:after {
+	content: 'Dorothy Zbornak';
+}
+
+.marker.sophia:hover:after {
+	content: 'Sophia Petrillo';
+	
+}
+.marker.dorothy .quote {
+	position:absolute;
+ top:-200%;
+	opacity:0;
+}
+.marker.dorothy:hover .quote {
+	opacity:1;
+}
+
+.marker.sophia .quote {
+	position:absolute;
+ top:-200%;
+	opacity:0;
+}
+.marker.sophia:hover .quote {
+	opacity:1;
+}
+
+.marker.blanche .quote {
+	position:absolute;
+ top:-200%;
+	opacity:0;
+}
+.marker.blanche:hover .quote {
+	opacity:1;
+}
+
+.quote {
+	pointer-events:none;
+}
+
+
+.marker.sophia:hover {
+	top:calc(50% + -25px); left:calc(50% - 125px);
+}
+.marker.dorothy:hover {
+		top:25%; left:calc(25% - 100px);
+}
+.marker.blanche:hover {
+		top:75%; left:calc(75% - 100px);
+}
+
+
+.marker:hover {
+	background-color:white;
+	width:250px;
+	border-radius:10px;
+}
+p {
+	position: absolute; 
+	font-weight: bold; 
+	font-size: 1.15rem;
+	text-transform:uppercase;
+	letter-spacing:2px;
+	
+}
+
+.top, .bottom, .left, .right {
+mix-blend-mode:multiply;
+}
+.top {
+width:100vw;
+	height:50vh;
+	position:absolute;
+	left:0%;
+	text-align:right;
+	background-color:#F78D7955;
+	display:flex;
+	text-align:center;
+	margin: 0 auto;
+	justify-content:center;
+		vertical-align:middle;
+	align-items:center;
+	align-content:center;
+
+	
+}
+
+.bottom {
+	bottom:0px;
+	width:100vw;
+	height:50vh;
+	position:absolute;
+	text-align:right;
+	background-color:#79F7F755;
+	display:flex;
+	text-align:center;
+	margin: 0 auto;
+	justify-content:center;
+		vertical-align:middle;
+	align-items:center;
+	align-content:center;
+
+	
+}
+
+.left {
+
+	width:50vw;
+	height:100vh;
+	position:absolute;
+
+	left:0%;
+	text-align:right;
+	transform translateY(-50%);
+	background-color:#ABF77955;
+	display:flex;
+	text-align:center;
+	margin: 0 auto;
+	justify-content:center;
+		vertical-align:middle;
+	align-items:center;
+	align-content:center;
+
+}
+
+.right {
+width:50vw;
+	height:100vh;
+	position:absolute;
+
+
+	right:0%;
+	text-align:left;
+	transform translateY(-50%);
+	background-color:#79B0F755;
+
+	display:flex;
+	text-align:center;
+	margin: 0 auto;
+	justify-content:center;
+		vertical-align:middle;
+	align-items:center;
+	align-content:center;
+
+}

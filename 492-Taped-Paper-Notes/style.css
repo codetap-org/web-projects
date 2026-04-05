@@ -1,0 +1,158 @@
+@charset "UTF-8";
+
+*:not(head, head *, style, script, svg, svg *),
+*:not(head, head *, style, script, svg, svg *)::before,
+*:not(head, head *, style, script, svg, svg *)::after {
+  all: unset;
+  appearance: none;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: gray black;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  font: normal normal 400 16px / 1.45cap "Gloria Hallelujah", cursive;
+  color: #bbb;
+}
+
+.sectionWrapper {
+  background-color: #874600;
+  background-image: url("https://www.transparenttextures.com/patterns/wine-cork.png");
+  background-attachment: scroll;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.sectionWrapper > section {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+article {
+  position: relative;
+  width: 11%;
+  height: 33vh;
+  position: relative;
+  background-color: #fff;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(12, 76, 145, 0.7) 0px,
+    rgba(0, 0, 0, 0) 1px,
+    rgba(0, 0, 0, 0) 20px
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 1.5% 0 1.5%;
+  gap: 1.1rem;
+}
+
+article::before {
+  position: absolute;
+  left: 6%;
+  height: 100%;
+  width: 1px;
+  content: "";
+  background-color: salmon;
+}
+
+article::after {
+  position: absolute;
+  right: 91%;
+  bottom: -2%;
+  width: 28px;
+  height: 13px;
+  background-color: rgba(200, 200, 200, 0.7);
+  transform: rotateZ(45deg);
+  content: "";
+  z-index: 2;
+}
+
+article blockquote {
+  position: relative;
+  font-size: 0.75rem;
+  color: #555;
+  text-wrap: balance;
+}
+
+article blockquote::after {
+  position: absolute;
+  left: 106%;
+  top: -5%;
+  width: 28px;
+  height: 13px;
+  background-color: rgba(200, 200, 200, 0.7);
+  transform: rotateZ(45deg);
+  content: "";
+}
+
+article cite {
+  font-size: 0.75rem;
+  color: #555;
+  text-decoration: underline;
+}
+
+@media (max-width: 1400px) {
+  article::after {
+    right: 89%;
+  }
+}
+
+@media (max-width: 1250px) {
+  article blockquote::after {
+    left: 100%;
+  }
+}
+
+@media (max-width: 980px) {
+  article {
+    width: 22%;
+    padding: 0 2.2% 0 2.2%;
+  }
+}
+
+@media (max-width: 600px) {
+  article::after {
+    right: 85%;
+  }
+}
+
+@media (max-width: 560px) {
+  article {
+    width: 44%;
+    padding: 0 4.5% 0 4.5%;
+  }
+  article blockquote::after {
+    left: 105%;
+  }
+  article::after {
+    right: 91%;
+  }
+}

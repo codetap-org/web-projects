@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Dithering Studio</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="fullscreen-canvas">
+    <canvas id="mainCanvas"></canvas>
+</div>
+
+<div class="gui-wrapper" id="guiPalette">
+    <div id="gui-container"></div>
+</div>
+<div class="dblclick-hint">Double-click → Toggle controls</div>
+<div id="ui" class="hint">Photo by <a href="https://unsplash.com/fr/@creationsofrb?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener nofollow">Rony Baddour</a> on <a href="https://unsplash.com/fr/@creationsofrb?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener nofollow">Unsplash</a></div>
+<div class="copy">&Toc</div>
+
+<script type="importmap">
+        {
+            "imports": {
+                "lil-gui": "https://unpkg.com/lil-gui@0.16.0/dist/lil-gui.esm.min.js"
+            }
+        }
+    </script>
+<script>
+document.body.addEventListener("dblclick", function (event) {
+    const gui = document.getElementById("guiPalette");
+    if (gui && gui.contains(event.target)) {
+        return;
+    }
+
+    if (gui) {
+        gui.classList.toggle("hidden");
+    }
+});
+</script>
+    <script type="module" src="./script.js"></script>
+
+  </body>
+  
+</html>

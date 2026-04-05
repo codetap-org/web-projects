@@ -1,0 +1,14 @@
+body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            font-family: sans-serif;
+        }
+        canvas {
+            display: block;
+        }
+        /* Hidden file input for local image loading */
+        #file-input {
+            display: none;
+        }
